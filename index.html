@@ -90,6 +90,10 @@ textarea{height:90px}
 }
 
 .active{color:white}
+
+.instagram{
+  color:#9bbcff;
+}
 </style>
 </head>
 <body>
@@ -101,7 +105,7 @@ textarea{height:90px}
 </div>
 
 <div class="sub">
-Премиальный дневник мастера
+Премиальная CRM для тату-мастера
 </div>
 
 <div class="card">
@@ -111,7 +115,7 @@ textarea{height:90px}
 </h2>
 
 <p>
-Клиенты, записи и финансы всегда под рукой
+Клиенты, Instagram, записи и финансы в одном месте
 </p>
 
 <button onclick="openPage('clients')">
@@ -141,24 +145,47 @@ textarea{height:90px}
 <div class="card">
 
 <h2>
-Новый клиент
+🔎 Поиск клиента
 </h2>
 
-<input id="name" placeholder="Имя клиента">
+<input id="search"
+placeholder="Имя, телефон, Instagram, эскиз..."
+oninput="renderClients()">
 
-<input id="phone" placeholder="Телефон">
+</div>
 
-<input id="style" placeholder="Эскиз / стиль">
 
-<input id="price" placeholder="Полная стоимость $">
+<div class="card">
 
-<input id="paid" placeholder="Внесено $">
+<h2>
+➕ Новый клиент
+</h2>
+
+
+<input id="name"
+placeholder="Имя клиента">
+
+<input id="instagram"
+placeholder="Instagram @username">
+
+<input id="phone"
+placeholder="Телефон">
+
+<input id="style"
+placeholder="Эскиз / стиль">
+
+<input id="price"
+placeholder="Полная стоимость $">
+
+<input id="paid"
+placeholder="Внесено $">
 
 <textarea id="notes"
 placeholder="Заметки о клиенте"></textarea>
 
+
 <button onclick="addClient()">
-➕ Сохранить клиента
+💾 Сохранить клиента
 </button>
 
 </div>
@@ -167,10 +194,11 @@ placeholder="Заметки о клиенте"></textarea>
 <div class="card">
 
 <h2>
-Список клиентов
+📋 База клиентов
 </h2>
 
-<div id="clientList"></div>
+<div id="clientList">
+</div>
 
 </div>
 
@@ -178,18 +206,58 @@ placeholder="Заметки о клиенте"></textarea>
 
   <div id="profile" class="page">
 
-<h1 id="profileName">Клиент</h1>
+<h1 id="profileName">
+Клиент
+</h1>
 
 <div class="card">
-<p id="profilePhone"></p>
-<p id="profileStyle"></p>
-<p id="profileMoney"></p>
-<p id="profileNotes"></p>
 
-<button class="green" onclick="addPayment()">💵 Добавить оплату</button>
-<button class="gray" onclick="editClient()">✏️ Редактировать</button>
-<button class="red" onclick="deleteCurrentClient()">🗑 Удалить клиента</button>
-<button class="gray" onclick="openPage('clients')">← Назад</button>
+<p id="profileInstagram"
+class="instagram">
+</p>
+
+<p id="profilePhone">
+</p>
+
+<p id="profileStyle">
+</p>
+
+<p id="profileMoney">
+</p>
+
+<p id="profileNotes">
+</p>
+
+
+<button class="green"
+onclick="openInstagram()">
+📸 Открыть Instagram
+</button>
+
+
+<button class="green"
+onclick="addPayment()">
+💵 Добавить оплату
+</button>
+
+
+<button class="gray"
+onclick="editClient()">
+✏️ Редактировать
+</button>
+
+
+<button class="red"
+onclick="deleteCurrentClient()">
+🗑 Удалить клиента
+</button>
+
+
+<button class="gray"
+onclick="openPage('clients')">
+← Назад
+</button>
+
 </div>
 
 </div>
@@ -197,41 +265,88 @@ placeholder="Заметки о клиенте"></textarea>
 
 <div id="sessions" class="page">
 
-<h1>📅 Записи</h1>
+<h1>
+📅 Записи
+</h1>
+
 
 <div class="card">
-<h2>Новая запись</h2>
 
-<select id="sessionClient"></select>
-<input id="sessionDate" type="date">
-<input id="sessionTime" type="time">
-<input id="sessionHours" placeholder="Длительность (часов)">
-<textarea id="sessionIdea" placeholder="Что делаем, эскиз, место"></textarea>
+<h2>
+Новая запись
+</h2>
 
-<button onclick="addSession()">➕ Сохранить запись</button>
+<select id="sessionClient">
+</select>
+
+
+<input id="sessionDate"
+type="date">
+
+
+<input id="sessionTime"
+type="time">
+
+
+<input id="sessionHours"
+placeholder="Длительность (часов)">
+
+
+<textarea id="sessionIdea"
+placeholder="Что делаем, эскиз, место">
+</textarea>
+
+
+<button onclick="addSession()">
+➕ Сохранить запись
+</button>
+
 </div>
 
+
 <div class="card">
-<h2>Ближайшие записи</h2>
-<div id="sessionList"></div>
+
+<h2>
+📌 Ближайшие записи
+</h2>
+
+<div id="sessionList">
+</div>
+
 </div>
 
 </div>
 
   <div id="edit" class="page">
 
-<h1>✏️ Редактировать</h1>
+<h1>
+✏️ Редактировать
+</h1>
 
 <div class="card">
+
 <input id="editName" placeholder="Имя клиента">
+
+<input id="editInstagram" placeholder="Instagram @username">
+
 <input id="editPhone" placeholder="Телефон">
+
 <input id="editStyle" placeholder="Эскиз / стиль">
+
 <input id="editPrice" placeholder="Полная стоимость $">
+
 <input id="editPaid" placeholder="Внесено $">
+
 <textarea id="editNotes" placeholder="Заметки"></textarea>
 
-<button onclick="saveEdit()">✅ Сохранить изменения</button>
-<button class="gray" onclick="openPage('profile')">Отмена</button>
+<button onclick="saveEdit()">
+✅ Сохранить изменения
+</button>
+
+<button class="gray" onclick="openPage('profile')">
+Отмена
+</button>
+
 </div>
 
 </div>
@@ -239,9 +354,12 @@ placeholder="Заметки о клиенте"></textarea>
 
 <div id="money" class="page">
 
-<h1>💵 Финансы</h1>
+<h1>
+💵 Финансы
+</h1>
 
 <div class="card">
+
 <h2>Общая статистика</h2>
 
 <div class="moneyBox">
@@ -273,17 +391,28 @@ placeholder="Заметки о клиенте"></textarea>
 
 </div>
 
+  <div class="bottom">
 
-<div class="bottom">
+<div class="nav active" onclick="openPage('home')">
+🏠<br>Главная
+</div>
 
-<div class="nav active" onclick="openPage('home')">🏠<br>Главная</div>
-<div class="nav" onclick="openPage('clients')">👥<br>Клиенты</div>
-<div class="nav" onclick="openPage('sessions')">📅<br>Записи</div>
-<div class="nav" onclick="openPage('money')">💵<br>Финансы</div>
+<div class="nav" onclick="openPage('clients')">
+👥<br>Клиенты
+</div>
+
+<div class="nav" onclick="openPage('sessions')">
+📅<br>Записи
+</div>
+
+<div class="nav" onclick="openPage('money')">
+💵<br>Финансы
+</div>
 
 </div>
 
-  <script>
+
+<script>
 let clients = JSON.parse(localStorage.getItem("clients") || "[]");
 let sessions = JSON.parse(localStorage.getItem("sessions") || "[]");
 let currentClient = null;
@@ -308,9 +437,10 @@ function openPage(id){
   renderMoney();
 }
 
-function addClient(){
+  function addClient(){
   let client = {
     name: document.getElementById("name").value,
+    instagram: document.getElementById("instagram").value,
     phone: document.getElementById("phone").value,
     style: document.getElementById("style").value,
     price: Number(document.getElementById("price").value || 0),
@@ -329,25 +459,27 @@ function addClient(){
   renderClientOptions();
   renderMoney();
 
-  document.getElementById("name").value="";
-  document.getElementById("phone").value="";
-  document.getElementById("style").value="";
-  document.getElementById("price").value="";
-  document.getElementById("paid").value="";
-  document.getElementById("notes").value="";
+  ["name","instagram","phone","style","price","paid","notes"].forEach(id=>{
+    document.getElementById(id).value="";
+  });
 
   alert("Клиент добавлен ✅");
 }
 
 function renderClients(){
+  let search = document.getElementById("search")?.value.toLowerCase() || "";
   let html = "";
 
   clients.forEach((c, index) => {
+    let text = `${c.name} ${c.phone} ${c.instagram} ${c.style} ${c.notes}`.toLowerCase();
+    if(!text.includes(search)) return;
+
     let debt = c.price - c.paid;
 
     html += `
       <div class="client" onclick="showClient(${index})">
         <h2>${c.name}</h2>
+        <p class="instagram">📸 ${c.instagram || "Instagram не указан"}</p>
         <p>📞 ${c.phone}</p>
         <p>🎨 ${c.style}</p>
         <p>💰 Остаток: $${debt}</p>
@@ -356,7 +488,7 @@ function renderClients(){
   });
 
   document.getElementById("clientList").innerHTML =
-    html || "<p>Клиентов пока нет</p>";
+    html || "<p>Ничего не найдено</p>";
 }
 
 function showClient(index){
@@ -365,6 +497,8 @@ function showClient(index){
   let debt = c.price - c.paid;
 
   document.getElementById("profileName").innerText = c.name;
+  document.getElementById("profileInstagram").innerText =
+    "📸 " + (c.instagram || "Instagram не указан");
   document.getElementById("profilePhone").innerText = "📞 " + c.phone;
   document.getElementById("profileStyle").innerText = "🎨 " + c.style;
   document.getElementById("profileMoney").innerText =
@@ -373,6 +507,17 @@ function showClient(index){
     "📝 " + (c.notes || "Нет заметок");
 
   openPage("profile");
+}
+
+function openInstagram(){
+  let c = clients[currentClient];
+  if(!c.instagram){
+    alert("Instagram не указан");
+    return;
+  }
+
+  let nick = c.instagram.replace("@","").trim();
+  window.open("https://instagram.com/" + nick, "_blank");
 }
 
 function addPayment(){
@@ -392,6 +537,7 @@ function editClient(){
   let c = clients[currentClient];
 
   document.getElementById("editName").value = c.name;
+  document.getElementById("editInstagram").value = c.instagram || "";
   document.getElementById("editPhone").value = c.phone;
   document.getElementById("editStyle").value = c.style;
   document.getElementById("editPrice").value = c.price;
@@ -404,6 +550,7 @@ function editClient(){
 function saveEdit(){
   clients[currentClient] = {
     name: document.getElementById("editName").value,
+    instagram: document.getElementById("editInstagram").value,
     phone: document.getElementById("editPhone").value,
     style: document.getElementById("editStyle").value,
     price: Number(document.getElementById("editPrice").value || 0),
@@ -470,10 +617,9 @@ function addSession(){
   renderSessions();
   renderMoney();
 
-  document.getElementById("sessionDate").value="";
-  document.getElementById("sessionTime").value="";
-  document.getElementById("sessionHours").value="";
-  document.getElementById("sessionIdea").value="";
+  ["sessionDate","sessionTime","sessionHours","sessionIdea"].forEach(id=>{
+    document.getElementById(id).value="";
+  });
 
   alert("Запись добавлена ✅");
 }
