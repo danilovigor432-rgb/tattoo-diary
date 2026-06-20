@@ -1,131 +1,219 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Tattoo Diary</title>
 
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    font-family:-apple-system, BlinkMacSystemFont, sans-serif;
-}
-
-body{
-    background:#0b0b0b;
-    color:white;
-    padding:20px;
-    padding-bottom:90px;
-}
-
-.logo{
-    font-size:32px;
-    font-weight:bold;
-    margin-bottom:25px;
-}
-
-.card{
-    background:#181818;
-    border-radius:20px;
-    padding:18px;
-    margin-bottom:15px;
-}
-
-.small{
-    color:#888;
-    margin-bottom:10px;
-}
-
-.client{
-    margin-top:10px;
-    padding:12px;
-    background:#222;
-    border-radius:15px;
-}
-
-.money{
-    color:#4caf50;
-    font-weight:bold;
-}
-
-.nav{
-    position:fixed;
-    bottom:0;
-    left:0;
-    width:100%;
-    background:#111;
-    display:flex;
-    justify-content:space-around;
-    padding:15px;
-    border-top:1px solid #333;
-}
-
-.nav div{
-    text-align:center;
-    font-size:13px;
-}
+*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,sans-serif}
+body{background:#080808;color:#fff;padding:18px 16px 90px}
+h1{font-size:32px;margin:10px 0 18px}
+h2{font-size:22px;margin-bottom:12px}
+.card{background:#171717;border:1px solid #2a2a2a;border-radius:22px;padding:16px;margin-bottom:14px}
+.row{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.muted{color:#8d8d93;font-size:14px}
+.money{color:#65d46e;font-weight:700}
+button{border:0;border-radius:15px;padding:12px 14px;font-weight:700;background:#2b7cff;color:white}
+button.gray{background:#2a2a2d}
+button.red{background:#8f2d2d}
+input,textarea,select{width:100%;background:#101010;color:white;border:1px solid #333;border-radius:14px;padding:13px;margin:7px 0 12px;font-size:16px}
+textarea{min-height:70px}
+.nav{position:fixed;bottom:0;left:0;right:0;background:#111;border-top:1px solid #333;display:flex;justify-content:space-around;padding:11px 5px 20px}
+.nav button{background:transparent;color:#aaa;font-size:12px;padding:6px}
+.nav button.active{color:white}
+.hidden{display:none}
+.item{background:#222;border-radius:16px;padding:13px;margin-top:10px}
+.pill{background:#2d2d32;border-radius:999px;padding:5px 9px;font-size:13px;color:#ccc}
+.topbtns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
 </style>
 </head>
-
 <body>
 
-<div class="logo">
-🖋️ Tattoo Diary
+<h1>🖋️ Tattoo Diary</h1>
+
+<div class="topbtns">
+  <button onclick="openClientForm()">➕ Клиент</button>
+  <button onclick="openSessionForm()">📅 Запись</button>
 </div>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tattoo Diary</title>
 
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,sans-serif}
+body{background:#080808;color:#fff;padding:18px 16px 90px}
+h1{font-size:32px;margin:10px 0 18px}
+h2{font-size:22px;margin-bottom:12px}
+.card{background:#171717;border:1px solid #2a2a2a;border-radius:22px;padding:16px;margin-bottom:14px}
+.row{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.muted{color:#8d8d93;font-size:14px}
+.money{color:#65d46e;font-weight:700}
+button{border:0;border-radius:15px;padding:12px 14px;font-weight:700;background:#2b7cff;color:white}
+button.gray{background:#2a2a2d}
+button.red{background:#8f2d2d}
+input,textarea,select{width:100%;background:#101010;color:white;border:1px solid #333;border-radius:14px;padding:13px;margin:7px 0 12px;font-size:16px}
+textarea{min-height:70px}
+.nav{position:fixed;bottom:0;left:0;right:0;background:#111;border-top:1px solid #333;display:flex;justify-content:space-around;padding:11px 5px 20px}
+.nav button{background:transparent;color:#aaa;font-size:12px;padding:6px}
+.nav button.active{color:white}
+.hidden{display:none}
+.item{background:#222;border-radius:16px;padding:13px;margin-top:10px}
+.pill{background:#2d2d32;border-radius:999px;padding:5px 9px;font-size:13px;color:#ccc}
+.topbtns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+</style>
+</head>
+<body>
 
-<div class="card">
-    <div class="small">Сегодня</div>
+<h1>🖋️ Tattoo Diary</h1>
 
-    <div class="client">
-        <h3>10:00 — Mike</h3>
-        <p>🐉 Японский дракон</p>
-        <p>Сеанс 2 из 5</p>
-        <p class="money">$400 осталось</p>
-    </div>
-
-    <div class="client">
-        <h3>15:00 — Sarah</h3>
-        <p>🌹 Минималистичная роза</p>
-        <p>Депозит получен</p>
-    </div>
+<div class="topbtns">
+  <button onclick="openClientForm()">➕ Клиент</button>
+  <button onclick="openSessionForm()">📅 Запись</button>
 </div>
+<script>
+let clients = JSON.parse(localStorage.getItem("clients") || "[]");
+let sessions = JSON.parse(localStorage.getItem("sessions") || "[]");
 
+function saveData(){
+  localStorage.setItem("clients", JSON.stringify(clients));
+  localStorage.setItem("sessions", JSON.stringify(sessions));
+}
 
-<div class="card">
-    <div class="small">
-        Статистика дня
-    </div>
+function openClientForm(){
+  closeForms();
+  document.getElementById("clientForm").classList.remove("hidden");
+}
 
-    <h2>$800 ожидаемый доход</h2>
+function openSessionForm(){
+  closeForms();
+  document.getElementById("sessionForm").classList.remove("hidden");
+}
 
-    <br>
+function closeForms(){
+  document.getElementById("clientForm").classList.add("hidden");
+  document.getElementById("sessionForm").classList.add("hidden");
+}
 
-    <p>
-    🎨 1 эскиз подготовить
-    </p>
+function saveClient(){
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const inst = document.getElementById("inst").value.trim();
 
-    <p>
-    📅 Завтра 2 записи
-    </p>
-</div>
-<div class="card">
-    <div class="small">Быстрые действия</div>
-    <p>➕ Новая запись</p>
-    <p>👤 Новый клиент</p>
-    <p>💵 Добавить оплату</p>
-    <p>📷 Фото работы</p>
-</div>
+  if(!name){
+    alert("Введите имя клиента");
+    return;
+  }
 
+  clients.push({
+    id: Date.now(),
+    name,
+    phone,
+    inst
+  });
+
+  document.getElementById("name").value = "";
+  document.getElementById("phone").value = "";
+  document.getElementById("inst").value = "";
+
+  saveData();
+  render();
+  closeForms();
+}
+
+function saveSession(){
+  const date = document.getElementById("date").value;
+  const time = document.getElementById("time").value;
+  const price = Number(document.getElementById("price").value || 0);
+  const deposit = Number(document.getElementById("deposit").value || 0);
+  const idea = document.getElementById("idea").value.trim();
+
+  if(!date || !time){
+    alert("Введите дату и время");
+    return;
+  }
+
+  sessions.push({
+    id: Date.now(),
+    date,
+    time,
+    price,
+    deposit,
+    idea
+  });
+
+  document.getElementById("date").value = "";
+  document.getElementById("time").value = "";
+  document.getElementById("price").value = "";
+  document.getElementById("deposit").value = "";
+  document.getElementById("idea").value = "";
+
+  saveData();
+  render();
+  closeForms();
+}
+    function deleteClient(id){
+  clients = clients.filter(c => c.id !== id);
+  saveData();
+  render();
+}
+
+function deleteSession(id){
+  sessions = sessions.filter(s => s.id !== id);
+  saveData();
+  render();
+}
+
+function render(){
+  const clientList = document.getElementById("clientList");
+  const sessionList = document.getElementById("sessionList");
+
+  if(clients.length === 0){
+    clientList.innerHTML = '<p class="muted">Пока нет клиентов</p>';
+  } else {
+    clientList.innerHTML = clients.map(c => `
+      <div class="item">
+        <div class="row">
+          <strong>${c.name}</strong>
+          <button class="red" onclick="deleteClient(${c.id})">Удалить</button>
+        </div>
+        <p class="muted">${c.phone || "Телефон не указан"}</p>
+        <p class="muted">${c.inst || "Instagram не указан"}</p>
+      </div>
+    `).join("");
+  }
+
+  if(sessions.length === 0){
+    sessionList.innerHTML = '<p class="muted">Пока нет записей</p>';
+  } else {
+    sessionList.innerHTML = sessions.map(s => {
+      const balance = s.price - s.deposit;
+      return `
+        <div class="item">
+          <div class="row">
+            <strong>${s.date} ${s.time}</strong>
+            <span class="pill">$${s.price}</span>
+          </div>
+          <p>${s.idea || "Без описания"}</p>
+          <p class="money">Депозит: $${s.deposit} / Остаток: $${balance}</p>
+          <button class="red" onclick="deleteSession(${s.id})">Удалить запись</button>
+        </div>
+      `;
+    }).join("");
+  }
+}
+
+render();
+</script>
 
 <div class="nav">
-    <div>🏠<br>Сегодня</div>
-    <div>📅<br>Календарь</div>
-    <div>👥<br>Клиенты</div>
-    <div>💵<br>Деньги</div>
+  <button class="active">🏠<br>Главная</button>
+  <button>👥<br>Клиенты</button>
+  <button>📅<br>Записи</button>
+  <button>💵<br>Деньги</button>
 </div>
 
 </body>
