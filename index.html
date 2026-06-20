@@ -3,264 +3,116 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Tattoo Diary</title>
-
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    font-family:-apple-system, sans-serif;
-}
-
-body{
-    background:#000;
-    color:white;
-    padding:25px;
-    padding-bottom:100px;
-}
-
-.header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.logo{
-    font-size:42px;
-    font-weight:bold;
-}
-
-.subtitle{
-    color:#888;
-    margin-top:8px;
-}
-
-.card{
-    background:#121212;
-    border-radius:30px;
-    padding:25px;
-    margin-top:25px;
-    box-shadow:0 0 35px #0a2b8b;
-}
-
-h2{
-    font-size:26px;
-    margin-bottom:15px;
-}
-
-.stats{
-    display:flex;
-    gap:15px;
-    margin-top:20px;
-}
-
-.stat{
-    flex:1;
-    background:#050505;
-    padding:20px;
-    border-radius:20px;
-}
-
-.money{
-    font-size:35px;
-    font-weight:bold;
-}
-
-.buttons{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:15px;
-}
-
-button{
-    background:#2962ff;
-    color:white;
-    border:none;
-    padding:18px;
-    border-radius:20px;
-    font-size:22px;
-}
-
-.client{
-    background:#111;
-    padding:18px;
-    border-radius:20px;
-    margin-top:15px;
-}
-
-.client p{
-    color:#bbb;
-    margin-top:5px;
-}
-
-.bottom{
-    position:fixed;
-    bottom:0;
-    left:0;
-    right:0;
-    background:#070707;
-    display:flex;
-    justify-content:space-around;
-    padding:15px;
-    border-top:1px solid #222;
-}
-
-.nav{
-    color:#999;
-    text-align:center;
-    font-size:14px;
-}
-
-.active{
-    color:white;
-}
-
-.page{
-    display:none;
-}
-
-.show{
-    display:block;
-}
+*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,sans-serif}
+body{background:#000;color:white;padding:25px;padding-bottom:100px}
+.logo{font-size:40px;font-weight:bold;margin-bottom:8px}
+.sub{color:#888;margin-bottom:25px}
+.card{background:#121212;border-radius:30px;padding:25px;margin-top:20px;box-shadow:0 0 35px #061f66}
+button{background:#2962ff;color:white;border:0;border-radius:20px;padding:18px;font-size:22px;width:100%;margin-top:15px}
+input{width:100%;padding:16px;margin-top:12px;border:0;border-radius:15px;background:#222;color:white;font-size:18px}
+.client{background:#111;padding:18px;border-radius:20px;margin-top:15px}
+.client p{color:#bbb;margin-top:6px}
+.page{display:none}.show{display:block}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#070707;display:flex;justify-content:space-around;padding:15px;border-top:1px solid #222}
+.nav{color:#999;text-align:center;font-size:14px}.active{color:white}
 </style>
-
 </head>
-
 <body>
 
 <div id="home" class="page show">
+  <div class="logo">🖋 Tattoo Diary</div>
+  <div class="sub">Премиальный дневник мастера</div>
 
-<div class="header">
-<div>
-<div class="logo">🖋 Tattoo Diary</div>
-<div class="subtitle">Премиальный дневник мастера</div>
+  <div class="card">
+    <h2>Добрый вечер, Игорь</h2>
+    <p>Сегодня 2 сеанса. Один эскиз ждёт подготовки.</p>
+  </div>
+
+  <div class="card">
+    <h2>⚡ Быстрые действия</h2>
+    <button onclick="openPage('clients')">➕ Клиент</button>
+    <button>📅 Запись</button>
+    <button>💵 Оплата</button>
+  </div>
 </div>
-
-<div style="font-size:35px">🔥</div>
-</div>
-
-
-<div class="card">
-
-<h2>Добрый вечер, Игорь</h2>
-
-<p>Сегодня 2 сеанса. Один эскиз ждёт подготовки.</p>
-
-
-<div class="stats">
-
-<div class="stat">
-Сегодня<br>
-<div class="money">$800</div>
-</div>
-
-<div class="stat">
-Клиентов<br>
-<div class="money">147</div>
-</div>
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<h2>⚡ Быстрые действия</h2>
-
-<div class="buttons">
-
-<button>➕ Клиент</button>
-
-<button>📅 Запись</button>
-
-<button>🎨 Эскиз</button>
-
-<button>💵 Оплата</button>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- Клиенты -->
 
 <div id="clients" class="page">
+  <h1>👥 Клиенты</h1>
 
-<h1>👥 Клиенты</h1>
+  <div class="card">
+    <h2>Добавить клиента</h2>
+    <input id="name" placeholder="Имя">
+    <input id="phone" placeholder="Телефон">
+    <input id="style" placeholder="Стиль / эскиз">
+    <input id="balance" placeholder="Остаток $">
+    <button onclick="addClient()">Сохранить</button>
+  </div>
 
-<div class="card">
-
-<div class="client">
-<b>Алексей</b>
-<p>📞 916-555-1234</p>
-<p>🎨 Японский рукав</p>
-<p>💰 Остаток $300</p>
+  <div class="card">
+    <h2>Список клиентов</h2>
+    <div id="clientList"></div>
+  </div>
 </div>
-
-
-<div class="client">
-<b>Мария</b>
-<p>📞 916-555-7777</p>
-<p>🎨 Минимализм</p>
-<p>✅ Оплачено</p>
-</div>
-
-<button style="margin-top:20px;width:100%">
-➕ Добавить клиента
-</button>
-
-</div>
-
-</div>
-
 
 <div class="bottom">
-
-<div class="nav active" onclick="openPage('home',this)">
-🏠<br>Главная
+  <div class="nav active" onclick="openPage('home')">🏠<br>Главная</div>
+  <div class="nav" onclick="openPage('clients')">👥<br>Клиенты</div>
+  <div class="nav">📅<br>Записи</div>
+  <div class="nav">💵<br>Финансы</div>
 </div>
-
-<div class="nav" onclick="openPage('clients',this)">
-👥<br>Клиенты
-</div>
-
-<div class="nav">
-📅<br>Записи
-</div>
-
-<div class="nav">
-💵<br>Финансы
-</div>
-
-</div>
-
 
 <script>
+let clients = JSON.parse(localStorage.getItem("clients") || "[]");
 
-function openPage(id, element){
-
-document.querySelectorAll(".page")
-.forEach(p => p.classList.remove("show"));
-
-document.getElementById(id)
-.classList.add("show");
-
-
-document.querySelectorAll(".nav")
-.forEach(n => n.classList.remove("active"));
-
-
-element.classList.add("active");
-
+function save(){
+  localStorage.setItem("clients", JSON.stringify(clients));
 }
 
-</script>
+function openPage(id){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("show"));
+  document.getElementById(id).classList.add("show");
 
+  document.querySelectorAll(".nav").forEach(n=>n.classList.remove("active"));
+  if(id==="home") document.querySelectorAll(".nav")[0].classList.add("active");
+  if(id==="clients") document.querySelectorAll(".nav")[1].classList.add("active");
+}
+
+function addClient(){
+  let name=document.getElementById("name").value;
+  let phone=document.getElementById("phone").value;
+  let style=document.getElementById("style").value;
+  let balance=document.getElementById("balance").value;
+
+  if(!name){ alert("Введите имя"); return; }
+
+  clients.push({name,phone,style,balance});
+  save();
+  render();
+
+  document.getElementById("name").value="";
+  document.getElementById("phone").value="";
+  document.getElementById("style").value="";
+  document.getElementById("balance").value="";
+}
+
+function render(){
+  let html="";
+  clients.forEach(c=>{
+    html+=`
+    <div class="client">
+      <h2>${c.name}</h2>
+      <p>📞 ${c.phone}</p>
+      <p>🎨 ${c.style}</p>
+      <p>💰 Остаток: $${c.balance}</p>
+    </div>`;
+  });
+  document.getElementById("clientList").innerHTML = html || "<p>Клиентов пока нет</p>";
+}
+
+render();
+</script>
 
 </body>
 </html>
