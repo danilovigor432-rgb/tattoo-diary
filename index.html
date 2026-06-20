@@ -1,33 +1,137 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Tattoo Diary</title>
+
 <style>
-body{
-  background:#000;
-  color:white;
-  font-family:-apple-system;
-  padding:30px;
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:-apple-system, BlinkMacSystemFont, sans-serif;
 }
-button{
-  background:#2b7cff;
+
+body{
+  background:#090909;
   color:white;
-  border:0;
+  padding:25px;
+}
+
+.logo{
+  font-size:42px;
+  font-weight:bold;
+  margin-bottom:25px;
+}
+
+.card{
+  background:#181818;
+  border-radius:20px;
+  padding:20px;
+  margin-bottom:15px;
+}
+
+h2{
+  margin-bottom:15px;
+}
+
+.button{
+  background:#2979ff;
+  color:white;
+  border:none;
   border-radius:15px;
-  padding:15px;
+  padding:16px;
   font-size:18px;
   width:100%;
+  margin-top:10px;
+}
+
+.menu{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:#111;
+  display:flex;
+  justify-content:space-around;
+  padding:15px;
+  border-top:1px solid #333;
+}
+
+.menu div{
+  text-align:center;
+  color:#aaa;
+}
+
+.active{
+  color:white !important;
 }
 </style>
 </head>
+
 <body>
 
-<h1>Tattoo Diary работает ✅</h1>
+<div class="logo">
+🖊 Tattoo Diary
+</div>
 
-<button onclick="alert('Кнопка работает')">
-Проверить кнопку
+
+<div class="card">
+<h2>Добро пожаловать</h2>
+
+<p>
+Ваш личный помощник тату мастера
+</p>
+
+<button class="button">
+👤 Клиенты
 </button>
+
+<button class="button">
+📅 Записи
+</button>
+
+<button class="button">
+💵 Финансы
+</button>
+
+</div>
+
+
+<div class="card">
+<h2>Сегодня</h2>
+
+<p>
+Нет записей на сегодня
+</p>
+</div>
+
+
+<div class="menu">
+
+<div class="active">
+🏠<br>
+Главная
+</div>
+
+<div>
+👤<br>
+Клиенты
+</div>
+
+<div>
+📅<br>
+Записи
+</div>
+
+<div>
+💵<br>
+Деньги
+</div>
+
+</div>
 
 </body>
 </html>
