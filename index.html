@@ -3,229 +3,264 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Tattoo Diary</title>
 
 <style>
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:-apple-system, sans-serif;
 }
 
 body{
-  min-height:100vh;
-  background:
-    radial-gradient(circle at top right,#1d2b4f 0,#080808 38%),
-    #080808;
-  color:white;
-  padding:22px;
-  padding-bottom:110px;
+    background:#000;
+    color:white;
+    padding:25px;
+    padding-bottom:100px;
 }
 
 .header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:28px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
 .logo{
-  font-size:34px;
-  font-weight:800;
+    font-size:42px;
+    font-weight:bold;
 }
 
-.sub{
-  color:#9b9b9b;
-  font-size:15px;
-  margin-top:4px;
-}
-
-.icon{
-  width:46px;
-  height:46px;
-  border-radius:50%;
-  background:rgba(255,255,255,.08);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:22px;
-  border:1px solid rgba(255,255,255,.12);
-}
-
-  .hero{
-  background:linear-gradient(145deg,rgba(255,255,255,.12),rgba(255,255,255,.04));
-  border:1px solid rgba(255,255,255,.14);
-  border-radius:30px;
-  padding:24px;
-  margin-bottom:18px;
-  box-shadow:0 20px 60px rgba(0,0,0,.45);
-}
-
-.hero h1{
-  font-size:31px;
-  line-height:1.08;
-  margin-bottom:14px;
-}
-
-.hero p{
-  color:#c7c7c7;
-  font-size:16px;
-  line-height:1.4;
-}
-
-.stats{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-  margin-top:20px;
-}
-
-.stat{
-  background:rgba(0,0,0,.35);
-  border-radius:22px;
-  padding:16px;
-  border:1px solid rgba(255,255,255,.08);
-}
-
-.stat .label{
-  color:#9b9b9b;
-  font-size:13px;
-  margin-bottom:6px;
-}
-
-.stat .value{
-  font-size:25px;
-  font-weight:800;
+.subtitle{
+    color:#888;
+    margin-top:8px;
 }
 
 .card{
-  background:rgba(18,18,18,.88);
-  border:1px solid rgba(255,255,255,.1);
-  border-radius:26px;
-  padding:20px;
-  margin-bottom:16px;
+    background:#121212;
+    border-radius:30px;
+    padding:25px;
+    margin-top:25px;
+    box-shadow:0 0 35px #0a2b8b;
 }
 
-  .actions{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-  margin-top:15px;
+h2{
+    font-size:26px;
+    margin-bottom:15px;
 }
 
-.btn{
-  background:#2962ff;
-  border:none;
-  color:white;
-  padding:16px;
-  border-radius:18px;
-  font-size:16px;
-  font-weight:700;
+.stats{
+    display:flex;
+    gap:15px;
+    margin-top:20px;
 }
 
-.today{
-  margin-top:10px;
-  padding:16px;
-  background:rgba(255,255,255,.04);
-  border-radius:18px;
+.stat{
+    flex:1;
+    background:#050505;
+    padding:20px;
+    border-radius:20px;
+}
+
+.money{
+    font-size:35px;
+    font-weight:bold;
+}
+
+.buttons{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+button{
+    background:#2962ff;
+    color:white;
+    border:none;
+    padding:18px;
+    border-radius:20px;
+    font-size:22px;
+}
+
+.client{
+    background:#111;
+    padding:18px;
+    border-radius:20px;
+    margin-top:15px;
+}
+
+.client p{
+    color:#bbb;
+    margin-top:5px;
+}
+
+.bottom{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    background:#070707;
+    display:flex;
+    justify-content:space-around;
+    padding:15px;
+    border-top:1px solid #222;
 }
 
 .nav{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  height:75px;
-  background:rgba(12,12,12,.92);
-  backdrop-filter:blur(20px);
-  border-top:1px solid rgba(255,255,255,.1);
-  display:flex;
-  justify-content:space-around;
-  align-items:center;
-}
-
-.nav div{
-  color:#8d8d8d;
-  text-align:center;
-  font-size:13px;
+    color:#999;
+    text-align:center;
+    font-size:14px;
 }
 
 .active{
-  color:white !important;
+    color:white;
 }
 
+.page{
+    display:none;
+}
+
+.show{
+    display:block;
+}
 </style>
+
 </head>
 
 <body>
 
+<div id="home" class="page show">
+
 <div class="header">
-  <div>
-    <div class="logo">🖋 Tattoo Diary</div>
-    <div class="sub">Премиальный дневник мастера</div>
-  </div>
-  <div class="icon">🔥</div>
+<div>
+<div class="logo">🖋 Tattoo Diary</div>
+<div class="subtitle">Премиальный дневник мастера</div>
 </div>
 
-<div class="hero">
-  <h1>Добрый вечер, Игорь</h1>
-  <p>Сегодня у тебя 2 сеанса. Один эскиз ждёт подготовки.</p>
-
-  <div class="stats">
-    <div class="stat">
-      <div class="label">Сегодня</div>
-      <div class="value">$800</div>
-    </div>
-
-    <div class="stat">
-      <div class="label">Клиентов</div>
-      <div class="value">147</div>
-    </div>
-  </div>
+<div style="font-size:35px">🔥</div>
 </div>
 
 
 <div class="card">
-  <h2>⚡ Быстрые действия</h2>
 
-  <div class="actions">
-    <button class="btn">➕ Клиент</button>
-    <button class="btn">📅 Запись</button>
-    <button class="btn">🎨 Эскиз</button>
-    <button class="btn">💵 Оплата</button>
-  </div>
+<h2>Добрый вечер, Игорь</h2>
+
+<p>Сегодня 2 сеанса. Один эскиз ждёт подготовки.</p>
+
+
+<div class="stats">
+
+<div class="stat">
+Сегодня<br>
+<div class="money">$800</div>
+</div>
+
+<div class="stat">
+Клиентов<br>
+<div class="money">147</div>
+</div>
+
+</div>
+
 </div>
 
 
 <div class="card">
-  <h2>📅 Сегодня</h2>
 
-  <div class="today">
-    <strong>14:00 — Алексей</strong><br>
-    Японский рукав<br>
-    Остаток: $300
-  </div>
+<h2>⚡ Быстрые действия</h2>
+
+<div class="buttons">
+
+<button>➕ Клиент</button>
+
+<button>📅 Запись</button>
+
+<button>🎨 Эскиз</button>
+
+<button>💵 Оплата</button>
+
 </div>
 
+</div>
+
+</div>
+
+
+<!-- Клиенты -->
+
+<div id="clients" class="page">
+
+<h1>👥 Клиенты</h1>
+
+<div class="card">
+
+<div class="client">
+<b>Алексей</b>
+<p>📞 916-555-1234</p>
+<p>🎨 Японский рукав</p>
+<p>💰 Остаток $300</p>
+</div>
+
+
+<div class="client">
+<b>Мария</b>
+<p>📞 916-555-7777</p>
+<p>🎨 Минимализм</p>
+<p>✅ Оплачено</p>
+</div>
+
+<button style="margin-top:20px;width:100%">
+➕ Добавить клиента
+</button>
+
+</div>
+
+</div>
+
+
+<div class="bottom">
+
+<div class="nav active" onclick="openPage('home',this)">
+🏠<br>Главная
+</div>
+
+<div class="nav" onclick="openPage('clients',this)">
+👥<br>Клиенты
+</div>
 
 <div class="nav">
-  <div class="active">
-    🏠<br>Главная
-  </div>
-
-  <div>
-    👥<br>Клиенты
-  </div>
-
-  <div>
-    📅<br>Записи
-  </div>
-
-  <div>
-    💰<br>Финансы
-  </div>
+📅<br>Записи
 </div>
+
+<div class="nav">
+💵<br>Финансы
+</div>
+
+</div>
+
+
+<script>
+
+function openPage(id, element){
+
+document.querySelectorAll(".page")
+.forEach(p => p.classList.remove("show"));
+
+document.getElementById(id)
+.classList.add("show");
+
+
+document.querySelectorAll(".nav")
+.forEach(n => n.classList.remove("active"));
+
+
+element.classList.add("active");
+
+}
+
+</script>
+
 
 </body>
 </html>
