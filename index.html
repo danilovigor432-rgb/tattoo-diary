@@ -4,19 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tattoo Diary</title>
+
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,sans-serif}
-body{background:#000;color:white;padding:25px;padding-bottom:100px}
+body{background:#000;color:white;padding:25px;padding-bottom:105px}
 .logo{font-size:40px;font-weight:bold;margin-bottom:8px}
 .sub{color:#888;margin-bottom:25px}
+h1{font-size:42px;margin-bottom:20px}
+h2{font-size:26px;margin-bottom:15px}
 .card{background:#121212;border-radius:30px;padding:25px;margin-top:20px;box-shadow:0 0 35px #061f66}
 button{background:#2962ff;color:white;border:0;border-radius:20px;padding:18px;font-size:22px;width:100%;margin-top:15px}
-input{width:100%;padding:16px;margin-top:12px;border:0;border-radius:15px;background:#222;color:white;font-size:18px}
+button.red{background:#9b1c1c}
+button.gray{background:#2a2a2a}
+input,textarea{width:100%;padding:16px;margin-top:12px;border:0;border-radius:15px;background:#222;color:white;font-size:18px}
+textarea{height:90px}
 .client{background:#111;padding:18px;border-radius:20px;margin-top:15px}
 .client p{color:#bbb;margin-top:6px}
 .page{display:none}.show{display:block}
 .bottom{position:fixed;bottom:0;left:0;right:0;background:#070707;display:flex;justify-content:space-around;padding:15px;border-top:1px solid #222}
 .nav{color:#999;text-align:center;font-size:14px}.active{color:white}
+.back{background:#2a2a2a;width:auto;padding:12px 18px;font-size:18px}
 </style>
 </head>
 <body>
@@ -38,7 +45,7 @@ input{width:100%;padding:16px;margin-top:12px;border:0;border-radius:15px;backgr
   </div>
 </div>
 
-<div id="clients" class="page">
+  <div id="clients" class="page">
   <h1>👥 Клиенты</h1>
 
   <div class="card">
@@ -46,13 +53,29 @@ input{width:100%;padding:16px;margin-top:12px;border:0;border-radius:15px;backgr
     <input id="name" placeholder="Имя">
     <input id="phone" placeholder="Телефон">
     <input id="style" placeholder="Стиль / эскиз">
-    <input id="balance" placeholder="Остаток $">
+    <input id="price" placeholder="Общая цена $">
+    <input id="paid" placeholder="Внесено $">
+    <textarea id="notes" placeholder="Заметки по клиенту"></textarea>
     <button onclick="addClient()">Сохранить</button>
   </div>
 
   <div class="card">
     <h2>Список клиентов</h2>
     <div id="clientList"></div>
+  </div>
+</div>
+
+<div id="profile" class="page">
+  <button class="back" onclick="openPage('clients')">← Назад</button>
+
+  <div class="card">
+    <h1 id="profileName">Клиент</h1>
+    <p id="profilePhone"></p>
+    <p id="profileStyle"></p>
+    <p id="profileMoney"></p>
+    <p id="profileNotes"></p>
+
+    <button class="red" onclick="deleteCurrentClient()">🗑 Удалить клиента</button>
   </div>
 </div>
 
@@ -63,55 +86,130 @@ input{width:100%;padding:16px;margin-top:12px;border:0;border-radius:15px;backgr
   <div class="nav">💵<br>Финансы</div>
 </div>
 
-<script>
-let clients = JSON.parse(localStorage.getItem("clients") || "[]");
+  <script>
 
-function save(){
+let clients = JSON.parse(localStorage.getItem("clients") || "[]");
+let currentClient = null;
+
+function saveData(){
   localStorage.setItem("clients", JSON.stringify(clients));
 }
 
 function openPage(id){
-  document.querySelectorAll(".page").forEach(p=>p.classList.remove("show"));
-  document.getElementById(id).classList.add("show");
+  document.querySelectorAll(".page")
+    .forEach(p => p.classList.remove("show"));
 
-  document.querySelectorAll(".nav").forEach(n=>n.classList.remove("active"));
-  if(id==="home") document.querySelectorAll(".nav")[0].classList.add("active");
-  if(id==="clients") document.querySelectorAll(".nav")[1].classList.add("active");
+  document.getElementById(id)
+    .classList.add("show");
+
+  document.querySelectorAll(".nav")
+    .forEach(n => n.classList.remove("active"));
+
+  if(id==="home")
+    document.querySelectorAll(".nav")[0].classList.add("active");
+
+  if(id==="clients")
+    document.querySelectorAll(".nav")[1].classList.add("active");
 }
 
 function addClient(){
-  let name=document.getElementById("name").value;
-  let phone=document.getElementById("phone").value;
-  let style=document.getElementById("style").value;
-  let balance=document.getElementById("balance").value;
 
-  if(!name){ alert("Введите имя"); return; }
+  let client = {
+    name: name.value,
+    phone: phone.value,
+    style: style.value,
+    price: price.value || 0,
+    paid: paid.value || 0,
+    notes: notes.value
+  };
 
-  clients.push({name,phone,style,balance});
-  save();
-  render();
+  if(!client.name){
+    alert("Введите имя клиента");
+    return;
+  }
 
-  document.getElementById("name").value="";
-  document.getElementById("phone").value="";
-  document.getElementById("style").value="";
-  document.getElementById("balance").value="";
+  clients.push(client);
+
+  saveData();
+  renderClients();
+
+  name.value="";
+  phone.value="";
+  style.value="";
+  price.value="";
+  paid.value="";
+  notes.value="";
+
+  alert("Клиент добавлен ✅");
 }
 
-function render(){
+
+function renderClients(){
+
   let html="";
-  clients.forEach(c=>{
-    html+=`
-    <div class="client">
+
+  clients.forEach((c, index)=>{
+
+    let debt = c.price - c.paid;
+
+    html += `
+    <div class="client" onclick="showClient(${index})">
       <h2>${c.name}</h2>
       <p>📞 ${c.phone}</p>
       <p>🎨 ${c.style}</p>
-      <p>💰 Остаток: $${c.balance}</p>
-    </div>`;
+      <p>💰 Остаток: $${debt}</p>
+    </div>
+    `;
+
   });
-  document.getElementById("clientList").innerHTML = html || "<p>Клиентов пока нет</p>";
+
+  if(!html){
+    html = "<p>Клиентов пока нет</p>";
+  }
+
+  clientList.innerHTML = html;
 }
 
-render();
+
+function showClient(index){
+
+  currentClient = index;
+
+  let c = clients[index];
+
+  profileName.innerText = c.name;
+  profilePhone.innerText = "📞 " + c.phone;
+  profileStyle.innerText = "🎨 " + c.style;
+  profileMoney.innerText =
+    "💰 Цена: $" + c.price +
+    " | Внесено: $" + c.paid +
+    " | Остаток: $" + (c.price-c.paid);
+
+  profileNotes.innerText =
+    "📝 " + (c.notes || "Нет заметок");
+
+  openPage("profile");
+}
+
+
+function deleteCurrentClient(){
+
+  if(!confirm("Удалить клиента?")){
+    return;
+  }
+
+  clients.splice(currentClient,1);
+
+  saveData();
+
+  renderClients();
+
+  openPage("clients");
+}
+
+
+renderClients();
+
 </script>
 
 </body>
