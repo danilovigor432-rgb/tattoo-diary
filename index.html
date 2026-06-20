@@ -56,14 +56,14 @@ input,textarea,select{
 
 textarea{height:90px}
 
-.client,.session{
+.client,.session,.moneyBox{
   background:#111;
   padding:18px;
   border-radius:20px;
   margin-top:15px;
 }
 
-.client p,.session p{
+.client p,.session p,.moneyBox p{
   color:#bbb;
   margin-top:6px;
 }
@@ -106,10 +106,12 @@ textarea{height:90px}
 
 <div class="card">
 
-<h2>Добро пожаловать, Игорь</h2>
+<h2>
+Добро пожаловать, Игорь
+</h2>
 
 <p>
-Клиенты, оплаты и записи всегда под рукой
+Клиенты, записи и финансы всегда под рукой
 </p>
 
 <button onclick="openPage('clients')">
@@ -118,6 +120,10 @@ textarea{height:90px}
 
 <button onclick="openPage('sessions')">
 📅 Записи
+</button>
+
+<button onclick="openPage('money')">
+💵 Финансы
 </button>
 
 </div>
@@ -130,6 +136,7 @@ textarea{height:90px}
 <h1>
 👥 Клиенты
 </h1>
+
 
 <div class="card">
 
@@ -147,7 +154,8 @@ textarea{height:90px}
 
 <input id="paid" placeholder="Внесено $">
 
-<textarea id="notes" placeholder="Заметки о клиенте"></textarea>
+<textarea id="notes"
+placeholder="Заметки о клиенте"></textarea>
 
 <button onclick="addClient()">
 ➕ Сохранить клиента
@@ -162,8 +170,7 @@ textarea{height:90px}
 Список клиентов
 </h2>
 
-<div id="clientList">
-</div>
+<div id="clientList"></div>
 
 </div>
 
@@ -171,40 +178,18 @@ textarea{height:90px}
 
   <div id="profile" class="page">
 
-<h1 id="profileName">
-Клиент
-</h1>
+<h1 id="profileName">Клиент</h1>
 
 <div class="card">
-
 <p id="profilePhone"></p>
-
 <p id="profileStyle"></p>
-
 <p id="profileMoney"></p>
-
 <p id="profileNotes"></p>
 
-<button class="green"
-onclick="addPayment()">
-💵 Добавить оплату
-</button>
-
-<button class="gray"
-onclick="editClient()">
-✏️ Редактировать
-</button>
-
-<button class="red"
-onclick="deleteCurrentClient()">
-🗑 Удалить клиента
-</button>
-
-<button class="gray"
-onclick="openPage('clients')">
-← Назад
-</button>
-
+<button class="green" onclick="addPayment()">💵 Добавить оплату</button>
+<button class="gray" onclick="editClient()">✏️ Редактировать</button>
+<button class="red" onclick="deleteCurrentClient()">🗑 Удалить клиента</button>
+<button class="gray" onclick="openPage('clients')">← Назад</button>
 </div>
 
 </div>
@@ -212,79 +197,77 @@ onclick="openPage('clients')">
 
 <div id="sessions" class="page">
 
-<h1>
-📅 Записи
-</h1>
+<h1>📅 Записи</h1>
 
 <div class="card">
+<h2>Новая запись</h2>
 
-<h2>
-Новая запись
-</h2>
+<select id="sessionClient"></select>
+<input id="sessionDate" type="date">
+<input id="sessionTime" type="time">
+<input id="sessionHours" placeholder="Длительность (часов)">
+<textarea id="sessionIdea" placeholder="Что делаем, эскиз, место"></textarea>
 
-<select id="sessionClient">
-</select>
-
-<input id="sessionDate"
-type="date">
-
-<input id="sessionTime"
-type="time">
-
-<input id="sessionHours"
-placeholder="Длительность (часов)">
-
-<textarea id="sessionIdea"
-placeholder="Что делаем, эскиз, место">
-</textarea>
-
-<button onclick="addSession()">
-➕ Сохранить запись
-</button>
-
+<button onclick="addSession()">➕ Сохранить запись</button>
 </div>
-
 
 <div class="card">
-
-<h2>
-Ближайшие записи
-</h2>
-
-<div id="sessionList">
-</div>
-
+<h2>Ближайшие записи</h2>
+<div id="sessionList"></div>
 </div>
 
 </div>
 
   <div id="edit" class="page">
 
-<h1>
-✏️ Редактировать
-</h1>
+<h1>✏️ Редактировать</h1>
 
 <div class="card">
-
 <input id="editName" placeholder="Имя клиента">
-
 <input id="editPhone" placeholder="Телефон">
-
 <input id="editStyle" placeholder="Эскиз / стиль">
-
 <input id="editPrice" placeholder="Полная стоимость $">
-
 <input id="editPaid" placeholder="Внесено $">
-
 <textarea id="editNotes" placeholder="Заметки"></textarea>
 
-<button onclick="saveEdit()">
-✅ Сохранить изменения
-</button>
+<button onclick="saveEdit()">✅ Сохранить изменения</button>
+<button class="gray" onclick="openPage('profile')">Отмена</button>
+</div>
 
-<button class="gray" onclick="openPage('profile')">
-Отмена
-</button>
+</div>
+
+
+<div id="money" class="page">
+
+<h1>💵 Финансы</h1>
+
+<div class="card">
+<h2>Общая статистика</h2>
+
+<div class="moneyBox">
+<h2 id="totalPrice">$0</h2>
+<p>Общая сумма проектов</p>
+</div>
+
+<div class="moneyBox">
+<h2 id="totalPaid">$0</h2>
+<p>Уже внесено</p>
+</div>
+
+<div class="moneyBox">
+<h2 id="totalDebt">$0</h2>
+<p>Осталось получить</p>
+</div>
+
+<div class="moneyBox">
+<h2 id="totalClients">0</h2>
+<p>Клиентов</p>
+</div>
+
+<div class="moneyBox">
+<h2 id="totalSessions">0</h2>
+<p>Записей</p>
+</div>
 
 </div>
 
@@ -293,21 +276,10 @@ placeholder="Что делаем, эскиз, место">
 
 <div class="bottom">
 
-<div class="nav active" onclick="openPage('home')">
-🏠<br>Главная
-</div>
-
-<div class="nav" onclick="openPage('clients')">
-👥<br>Клиенты
-</div>
-
-<div class="nav" onclick="openPage('sessions')">
-📅<br>Записи
-</div>
-
-<div class="nav">
-💵<br>Финансы
-</div>
+<div class="nav active" onclick="openPage('home')">🏠<br>Главная</div>
+<div class="nav" onclick="openPage('clients')">👥<br>Клиенты</div>
+<div class="nav" onclick="openPage('sessions')">📅<br>Записи</div>
+<div class="nav" onclick="openPage('money')">💵<br>Финансы</div>
 
 </div>
 
@@ -329,9 +301,11 @@ function openPage(id){
   if(id==="home") document.querySelectorAll(".nav")[0].classList.add("active");
   if(id==="clients") document.querySelectorAll(".nav")[1].classList.add("active");
   if(id==="sessions") document.querySelectorAll(".nav")[2].classList.add("active");
+  if(id==="money") document.querySelectorAll(".nav")[3].classList.add("active");
 
   renderClientOptions();
   renderSessions();
+  renderMoney();
 }
 
 function addClient(){
@@ -353,6 +327,7 @@ function addClient(){
   saveData();
   renderClients();
   renderClientOptions();
+  renderMoney();
 
   document.getElementById("name").value="";
   document.getElementById("phone").value="";
@@ -409,6 +384,7 @@ function addPayment(){
 
   saveData();
   renderClients();
+  renderMoney();
   showClient(currentClient);
 }
 
@@ -437,6 +413,7 @@ function saveEdit(){
 
   saveData();
   renderClients();
+  renderMoney();
   showClient(currentClient);
 }
 
@@ -447,6 +424,7 @@ function deleteCurrentClient(){
   saveData();
   renderClients();
   renderClientOptions();
+  renderMoney();
   openPage("clients");
 }
 
@@ -454,13 +432,14 @@ function renderClientOptions(){
   let select = document.getElementById("sessionClient");
   if(!select) return;
 
+  if(clients.length === 0){
+    select.innerHTML = `<option>Сначала добавьте клиента</option>`;
+    return;
+  }
+
   select.innerHTML = clients.map((c, index) =>
     `<option value="${index}">${c.name}</option>`
   ).join("");
-
-  if(clients.length === 0){
-    select.innerHTML = `<option>Сначала добавьте клиента</option>`;
-  }
 }
 
 function addSession(){
@@ -489,6 +468,7 @@ function addSession(){
   sessions.push(session);
   saveData();
   renderSessions();
+  renderMoney();
 
   document.getElementById("sessionDate").value="";
   document.getElementById("sessionTime").value="";
@@ -501,21 +481,24 @@ function addSession(){
 function renderSessions(){
   let html = "";
 
-  sessions.forEach((s, index) => {
-    let client = clients[s.clientIndex];
-    let debt = client ? client.price - client.paid : 0;
+  sessions
+    .map((s, index) => ({...s, realIndex:index}))
+    .sort((a,b) => new Date(a.date + "T" + a.time) - new Date(b.date + "T" + b.time))
+    .forEach((s) => {
+      let client = clients[s.clientIndex];
+      let debt = client ? client.price - client.paid : 0;
 
-    html += `
-      <div class="session">
-        <h2>${s.date} — ${s.time}</h2>
-        <p>👤 ${s.clientName}</p>
-        <p>🎨 ${s.idea || "Без описания"}</p>
-        <p>⏱ ${s.hours || "?"} часов</p>
-        <p>💰 Остаток клиента: $${debt}</p>
-        <button class="red" onclick="deleteSession(${index})">Удалить запись</button>
-      </div>
-    `;
-  });
+      html += `
+        <div class="session">
+          <h2>${s.date} — ${s.time}</h2>
+          <p>👤 ${s.clientName}</p>
+          <p>🎨 ${s.idea || "Без описания"}</p>
+          <p>⏱ ${s.hours || "?"} часов</p>
+          <p>💰 Остаток клиента: $${debt}</p>
+          <button class="red" onclick="deleteSession(${s.realIndex})">Удалить запись</button>
+        </div>
+      `;
+    });
 
   document.getElementById("sessionList").innerHTML =
     html || "<p>Записей пока нет</p>";
@@ -527,11 +510,25 @@ function deleteSession(index){
   sessions.splice(index, 1);
   saveData();
   renderSessions();
+  renderMoney();
+}
+
+function renderMoney(){
+  let totalPrice = clients.reduce((sum,c) => sum + Number(c.price || 0), 0);
+  let totalPaid = clients.reduce((sum,c) => sum + Number(c.paid || 0), 0);
+  let totalDebt = totalPrice - totalPaid;
+
+  document.getElementById("totalPrice").innerText = "$" + totalPrice;
+  document.getElementById("totalPaid").innerText = "$" + totalPaid;
+  document.getElementById("totalDebt").innerText = "$" + totalDebt;
+  document.getElementById("totalClients").innerText = clients.length;
+  document.getElementById("totalSessions").innerText = sessions.length;
 }
 
 renderClients();
 renderClientOptions();
 renderSessions();
+renderMoney();
 </script>
 
 </body>
