@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Tattoo Diary</title>
 
 <style>
@@ -11,126 +10,221 @@
   box-sizing:border-box;
   margin:0;
   padding:0;
-  font-family:-apple-system, BlinkMacSystemFont, sans-serif;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
 }
 
 body{
-  background:#090909;
+  min-height:100vh;
+  background:
+    radial-gradient(circle at top right,#1d2b4f 0,#080808 38%),
+    #080808;
   color:white;
-  padding:25px;
+  padding:22px;
+  padding-bottom:110px;
+}
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:28px;
 }
 
 .logo{
-  font-size:42px;
-  font-weight:bold;
-  margin-bottom:25px;
+  font-size:34px;
+  font-weight:800;
+}
+
+.sub{
+  color:#9b9b9b;
+  font-size:15px;
+  margin-top:4px;
+}
+
+.icon{
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  background:rgba(255,255,255,.08);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  border:1px solid rgba(255,255,255,.12);
+}
+
+  .hero{
+  background:linear-gradient(145deg,rgba(255,255,255,.12),rgba(255,255,255,.04));
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:30px;
+  padding:24px;
+  margin-bottom:18px;
+  box-shadow:0 20px 60px rgba(0,0,0,.45);
+}
+
+.hero h1{
+  font-size:31px;
+  line-height:1.08;
+  margin-bottom:14px;
+}
+
+.hero p{
+  color:#c7c7c7;
+  font-size:16px;
+  line-height:1.4;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:20px;
+}
+
+.stat{
+  background:rgba(0,0,0,.35);
+  border-radius:22px;
+  padding:16px;
+  border:1px solid rgba(255,255,255,.08);
+}
+
+.stat .label{
+  color:#9b9b9b;
+  font-size:13px;
+  margin-bottom:6px;
+}
+
+.stat .value{
+  font-size:25px;
+  font-weight:800;
 }
 
 .card{
-  background:#181818;
-  border-radius:20px;
+  background:rgba(18,18,18,.88);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:26px;
   padding:20px;
-  margin-bottom:15px;
+  margin-bottom:16px;
 }
 
-h2{
-  margin-bottom:15px;
+  .actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:15px;
 }
 
-.button{
-  background:#2979ff;
-  color:white;
+.btn{
+  background:#2962ff;
   border:none;
-  border-radius:15px;
+  color:white;
   padding:16px;
-  font-size:18px;
-  width:100%;
-  margin-top:10px;
+  border-radius:18px;
+  font-size:16px;
+  font-weight:700;
 }
 
-.menu{
+.today{
+  margin-top:10px;
+  padding:16px;
+  background:rgba(255,255,255,.04);
+  border-radius:18px;
+}
+
+.nav{
   position:fixed;
   bottom:0;
   left:0;
-  width:100%;
-  background:#111;
+  right:0;
+  height:75px;
+  background:rgba(12,12,12,.92);
+  backdrop-filter:blur(20px);
+  border-top:1px solid rgba(255,255,255,.1);
   display:flex;
   justify-content:space-around;
-  padding:15px;
-  border-top:1px solid #333;
+  align-items:center;
 }
 
-.menu div{
+.nav div{
+  color:#8d8d8d;
   text-align:center;
-  color:#aaa;
+  font-size:13px;
 }
 
 .active{
   color:white !important;
 }
+
 </style>
 </head>
 
 <body>
 
-<div class="logo">
-🖊 Tattoo Diary
+<div class="header">
+  <div>
+    <div class="logo">🖋 Tattoo Diary</div>
+    <div class="sub">Премиальный дневник мастера</div>
+  </div>
+  <div class="icon">🔥</div>
+</div>
+
+<div class="hero">
+  <h1>Добрый вечер, Игорь</h1>
+  <p>Сегодня у тебя 2 сеанса. Один эскиз ждёт подготовки.</p>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="label">Сегодня</div>
+      <div class="value">$800</div>
+    </div>
+
+    <div class="stat">
+      <div class="label">Клиентов</div>
+      <div class="value">147</div>
+    </div>
+  </div>
 </div>
 
 
 <div class="card">
-<h2>Добро пожаловать</h2>
+  <h2>⚡ Быстрые действия</h2>
 
-<p>
-Ваш личный помощник тату мастера
-</p>
-
-<button class="button">
-👤 Клиенты
-</button>
-
-<button class="button">
-📅 Записи
-</button>
-
-<button class="button">
-💵 Финансы
-</button>
-
+  <div class="actions">
+    <button class="btn">➕ Клиент</button>
+    <button class="btn">📅 Запись</button>
+    <button class="btn">🎨 Эскиз</button>
+    <button class="btn">💵 Оплата</button>
+  </div>
 </div>
 
 
 <div class="card">
-<h2>Сегодня</h2>
+  <h2>📅 Сегодня</h2>
 
-<p>
-Нет записей на сегодня
-</p>
+  <div class="today">
+    <strong>14:00 — Алексей</strong><br>
+    Японский рукав<br>
+    Остаток: $300
+  </div>
 </div>
 
 
-<div class="menu">
+<div class="nav">
+  <div class="active">
+    🏠<br>Главная
+  </div>
 
-<div class="active">
-🏠<br>
-Главная
-</div>
+  <div>
+    👥<br>Клиенты
+  </div>
 
-<div>
-👤<br>
-Клиенты
-</div>
+  <div>
+    📅<br>Записи
+  </div>
 
-<div>
-📅<br>
-Записи
-</div>
-
-<div>
-💵<br>
-Деньги
-</div>
-
+  <div>
+    💰<br>Финансы
+  </div>
 </div>
 
 </body>
