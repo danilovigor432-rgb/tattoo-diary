@@ -43,7 +43,7 @@ button{
 button.gray{background:#2a2a2a}
 button.green{background:#16833a}
 
-input,textarea{
+input,textarea,select{
   width:100%;
   padding:16px;
   margin-top:12px;
@@ -56,14 +56,14 @@ input,textarea{
 
 textarea{height:90px}
 
-.client{
+.client,.session{
   background:#111;
   padding:18px;
   border-radius:20px;
   margin-top:15px;
 }
 
-.client p{
+.client p,.session p{
   color:#bbb;
   margin-top:6px;
 }
@@ -109,11 +109,15 @@ textarea{height:90px}
 <h2>Добро пожаловать, Игорь</h2>
 
 <p>
-Ваши клиенты, оплаты и проекты всегда под рукой
+Клиенты, оплаты и записи всегда под рукой
 </p>
 
 <button onclick="openPage('clients')">
 👥 Клиенты
+</button>
+
+<button onclick="openPage('sessions')">
+📅 Записи
 </button>
 
 </div>
@@ -137,18 +141,13 @@ textarea{height:90px}
 
 <input id="phone" placeholder="Телефон">
 
-<input id="style"
-placeholder="Эскиз / стиль">
+<input id="style" placeholder="Эскиз / стиль">
 
-<input id="price"
-placeholder="Полная стоимость $">
+<input id="price" placeholder="Полная стоимость $">
 
-<input id="paid"
-placeholder="Внесено $">
+<input id="paid" placeholder="Внесено $">
 
-<textarea id="notes"
-placeholder="Заметки о клиенте">
-</textarea>
+<textarea id="notes" placeholder="Заметки о клиенте"></textarea>
 
 <button onclick="addClient()">
 ➕ Сохранить клиента
@@ -170,8 +169,7 @@ placeholder="Заметки о клиенте">
 
 </div>
 
-
-<div id="profile" class="page">
+  <div id="profile" class="page">
 
 <h1 id="profileName">
 Клиент
@@ -206,6 +204,55 @@ onclick="deleteCurrentClient()">
 onclick="openPage('clients')">
 ← Назад
 </button>
+
+</div>
+
+</div>
+
+
+<div id="sessions" class="page">
+
+<h1>
+📅 Записи
+</h1>
+
+<div class="card">
+
+<h2>
+Новая запись
+</h2>
+
+<select id="sessionClient">
+</select>
+
+<input id="sessionDate"
+type="date">
+
+<input id="sessionTime"
+type="time">
+
+<input id="sessionHours"
+placeholder="Длительность (часов)">
+
+<textarea id="sessionIdea"
+placeholder="Что делаем, эскиз, место">
+</textarea>
+
+<button onclick="addSession()">
+➕ Сохранить запись
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h2>
+Ближайшие записи
+</h2>
+
+<div id="sessionList">
+</div>
 
 </div>
 
@@ -254,7 +301,7 @@ onclick="openPage('clients')">
 👥<br>Клиенты
 </div>
 
-<div class="nav">
+<div class="nav" onclick="openPage('sessions')">
 📅<br>Записи
 </div>
 
@@ -266,10 +313,12 @@ onclick="openPage('clients')">
 
   <script>
 let clients = JSON.parse(localStorage.getItem("clients") || "[]");
+let sessions = JSON.parse(localStorage.getItem("sessions") || "[]");
 let currentClient = null;
 
 function saveData(){
   localStorage.setItem("clients", JSON.stringify(clients));
+  localStorage.setItem("sessions", JSON.stringify(sessions));
 }
 
 function openPage(id){
@@ -279,6 +328,10 @@ function openPage(id){
   document.querySelectorAll(".nav").forEach(n => n.classList.remove("active"));
   if(id==="home") document.querySelectorAll(".nav")[0].classList.add("active");
   if(id==="clients") document.querySelectorAll(".nav")[1].classList.add("active");
+  if(id==="sessions") document.querySelectorAll(".nav")[2].classList.add("active");
+
+  renderClientOptions();
+  renderSessions();
 }
 
 function addClient(){
@@ -299,13 +352,14 @@ function addClient(){
   clients.push(client);
   saveData();
   renderClients();
+  renderClientOptions();
 
-  name.value="";
-  phone.value="";
-  style.value="";
-  price.value="";
-  paid.value="";
-  notes.value="";
+  document.getElementById("name").value="";
+  document.getElementById("phone").value="";
+  document.getElementById("style").value="";
+  document.getElementById("price").value="";
+  document.getElementById("paid").value="";
+  document.getElementById("notes").value="";
 
   alert("Клиент добавлен ✅");
 }
@@ -326,7 +380,8 @@ function renderClients(){
     `;
   });
 
-  clientList.innerHTML = html || "<p>Клиентов пока нет</p>";
+  document.getElementById("clientList").innerHTML =
+    html || "<p>Клиентов пока нет</p>";
 }
 
 function showClient(index){
@@ -334,50 +389,50 @@ function showClient(index){
   let c = clients[index];
   let debt = c.price - c.paid;
 
-  profileName.innerText = c.name;
-  profilePhone.innerText = "📞 " + c.phone;
-  profileStyle.innerText = "🎨 " + c.style;
-  profileMoney.innerText =
+  document.getElementById("profileName").innerText = c.name;
+  document.getElementById("profilePhone").innerText = "📞 " + c.phone;
+  document.getElementById("profileStyle").innerText = "🎨 " + c.style;
+  document.getElementById("profileMoney").innerText =
     "💰 Цена: $" + c.price + " | Внесено: $" + c.paid + " | Остаток: $" + debt;
-  profileNotes.innerText = "📝 " + (c.notes || "Нет заметок");
+  document.getElementById("profileNotes").innerText =
+    "📝 " + (c.notes || "Нет заметок");
 
   openPage("profile");
 }
 
 function addPayment(){
   let amount = prompt("Сколько клиент доплатил?");
-
   if(!amount) return;
 
   clients[currentClient].paid =
     Number(clients[currentClient].paid) + Number(amount);
 
   saveData();
-  showClient(currentClient);
   renderClients();
+  showClient(currentClient);
 }
 
 function editClient(){
   let c = clients[currentClient];
 
-  editName.value = c.name;
-  editPhone.value = c.phone;
-  editStyle.value = c.style;
-  editPrice.value = c.price;
-  editPaid.value = c.paid;
-  editNotes.value = c.notes;
+  document.getElementById("editName").value = c.name;
+  document.getElementById("editPhone").value = c.phone;
+  document.getElementById("editStyle").value = c.style;
+  document.getElementById("editPrice").value = c.price;
+  document.getElementById("editPaid").value = c.paid;
+  document.getElementById("editNotes").value = c.notes;
 
   openPage("edit");
 }
 
 function saveEdit(){
   clients[currentClient] = {
-    name: editName.value,
-    phone: editPhone.value,
-    style: editStyle.value,
-    price: Number(editPrice.value || 0),
-    paid: Number(editPaid.value || 0),
-    notes: editNotes.value
+    name: document.getElementById("editName").value,
+    phone: document.getElementById("editPhone").value,
+    style: document.getElementById("editStyle").value,
+    price: Number(document.getElementById("editPrice").value || 0),
+    paid: Number(document.getElementById("editPaid").value || 0),
+    notes: document.getElementById("editNotes").value
   };
 
   saveData();
@@ -391,13 +446,93 @@ function deleteCurrentClient(){
   clients.splice(currentClient, 1);
   saveData();
   renderClients();
+  renderClientOptions();
   openPage("clients");
 }
 
+function renderClientOptions(){
+  let select = document.getElementById("sessionClient");
+  if(!select) return;
+
+  select.innerHTML = clients.map((c, index) =>
+    `<option value="${index}">${c.name}</option>`
+  ).join("");
+
+  if(clients.length === 0){
+    select.innerHTML = `<option>Сначала добавьте клиента</option>`;
+  }
+}
+
+function addSession(){
+  if(clients.length === 0){
+    alert("Сначала добавьте клиента");
+    return;
+  }
+
+  let clientIndex = Number(document.getElementById("sessionClient").value);
+  let client = clients[clientIndex];
+
+  let session = {
+    clientIndex: clientIndex,
+    clientName: client.name,
+    date: document.getElementById("sessionDate").value,
+    time: document.getElementById("sessionTime").value,
+    hours: document.getElementById("sessionHours").value,
+    idea: document.getElementById("sessionIdea").value
+  };
+
+  if(!session.date || !session.time){
+    alert("Введите дату и время");
+    return;
+  }
+
+  sessions.push(session);
+  saveData();
+  renderSessions();
+
+  document.getElementById("sessionDate").value="";
+  document.getElementById("sessionTime").value="";
+  document.getElementById("sessionHours").value="";
+  document.getElementById("sessionIdea").value="";
+
+  alert("Запись добавлена ✅");
+}
+
+function renderSessions(){
+  let html = "";
+
+  sessions.forEach((s, index) => {
+    let client = clients[s.clientIndex];
+    let debt = client ? client.price - client.paid : 0;
+
+    html += `
+      <div class="session">
+        <h2>${s.date} — ${s.time}</h2>
+        <p>👤 ${s.clientName}</p>
+        <p>🎨 ${s.idea || "Без описания"}</p>
+        <p>⏱ ${s.hours || "?"} часов</p>
+        <p>💰 Остаток клиента: $${debt}</p>
+        <button class="red" onclick="deleteSession(${index})">Удалить запись</button>
+      </div>
+    `;
+  });
+
+  document.getElementById("sessionList").innerHTML =
+    html || "<p>Записей пока нет</p>";
+}
+
+function deleteSession(index){
+  if(!confirm("Удалить запись?")) return;
+
+  sessions.splice(index, 1);
+  saveData();
+  renderSessions();
+}
+
 renderClients();
+renderClientOptions();
+renderSessions();
 </script>
 
 </body>
 </html>
-
-  
