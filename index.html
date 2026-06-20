@@ -39,10 +39,11 @@ button{
   margin-top:15px;
 }
 
-button.red{background:#9b1c1c}
+  button.red{background:#9b1c1c}
 button.gray{background:#2a2a2a}
+button.green{background:#16833a}
 
-  input,textarea{
+input,textarea{
   width:100%;
   padding:16px;
   margin-top:12px;
@@ -94,47 +95,76 @@ textarea{height:90px}
 <body>
 
   <div id="home" class="page show">
-  <div class="logo">🖋️ Tattoo Diary</div>
-  <div class="sub">Премиальный дневник мастера</div>
 
-  <div class="card">
-    <h2>Добро пожаловать, Игорь</h2>
-    <p>Ваши клиенты и проекты всегда под рукой</p>
+<div class="logo">
+🖋 Tattoo Diary
+</div>
 
-    <button onclick="openPage('clients')">
-      👥 Клиенты
-    </button>
-  </div>
+<div class="sub">
+Премиальный дневник мастера
+</div>
+
+<div class="card">
+
+<h2>Добро пожаловать, Игорь</h2>
+
+<p>
+Ваши клиенты, оплаты и проекты всегда под рукой
+</p>
+
+<button onclick="openPage('clients')">
+👥 Клиенты
+</button>
+
+</div>
+
 </div>
 
 
 <div id="clients" class="page">
 
-<h1>👥 Клиенты</h1>
+<h1>
+👥 Клиенты
+</h1>
 
 <div class="card">
 
-<h2>Добавить клиента</h2>
+<h2>
+Новый клиент
+</h2>
 
-<input id="name" placeholder="Имя">
+<input id="name" placeholder="Имя клиента">
+
 <input id="phone" placeholder="Телефон">
-<input id="style" placeholder="Стиль / эскиз">
-<input id="price" placeholder="Цена $">
-<input id="paid" placeholder="Внесено $">
+
+<input id="style"
+placeholder="Эскиз / стиль">
+
+<input id="price"
+placeholder="Полная стоимость $">
+
+<input id="paid"
+placeholder="Внесено $">
+
 <textarea id="notes"
-placeholder="Заметки"></textarea>
+placeholder="Заметки о клиенте">
+</textarea>
 
 <button onclick="addClient()">
-Сохранить
+➕ Сохранить клиента
 </button>
 
 </div>
 
 
 <div class="card">
-<h2>Список клиентов</h2>
 
-<div id="clientList"></div>
+<h2>
+Список клиентов
+</h2>
+
+<div id="clientList">
+</div>
 
 </div>
 
@@ -157,28 +187,84 @@ placeholder="Заметки"></textarea>
 
 <p id="profileNotes"></p>
 
+<button class="green"
+onclick="addPayment()">
+💵 Добавить оплату
+</button>
+
 <button class="gray"
-onclick="openPage('clients')">
-Назад
+onclick="editClient()">
+✏️ Редактировать
 </button>
 
 <button class="red"
 onclick="deleteCurrentClient()">
-Удалить клиента
+🗑 Удалить клиента
+</button>
+
+<button class="gray"
+onclick="openPage('clients')">
+← Назад
 </button>
 
 </div>
 
 </div>
 
-  <div class="bottom">
-  <div class="nav active" onclick="openPage('home')">🏠<br>Главная</div>
-  <div class="nav" onclick="openPage('clients')">👥<br>Клиенты</div>
-  <div class="nav">📅<br>Записи</div>
-  <div class="nav">💵<br>Финансы</div>
+  <div id="edit" class="page">
+
+<h1>
+✏️ Редактировать
+</h1>
+
+<div class="card">
+
+<input id="editName" placeholder="Имя клиента">
+
+<input id="editPhone" placeholder="Телефон">
+
+<input id="editStyle" placeholder="Эскиз / стиль">
+
+<input id="editPrice" placeholder="Полная стоимость $">
+
+<input id="editPaid" placeholder="Внесено $">
+
+<textarea id="editNotes" placeholder="Заметки"></textarea>
+
+<button onclick="saveEdit()">
+✅ Сохранить изменения
+</button>
+
+<button class="gray" onclick="openPage('profile')">
+Отмена
+</button>
+
 </div>
 
-<script>
+</div>
+
+
+<div class="bottom">
+
+<div class="nav active" onclick="openPage('home')">
+🏠<br>Главная
+</div>
+
+<div class="nav" onclick="openPage('clients')">
+👥<br>Клиенты
+</div>
+
+<div class="nav">
+📅<br>Записи
+</div>
+
+<div class="nav">
+💵<br>Финансы
+</div>
+
+</div>
+
+  <script>
 let clients = JSON.parse(localStorage.getItem("clients") || "[]");
 let currentClient = null;
 
@@ -214,12 +300,12 @@ function addClient(){
   saveData();
   renderClients();
 
-  document.getElementById("name").value="";
-  document.getElementById("phone").value="";
-  document.getElementById("style").value="";
-  document.getElementById("price").value="";
-  document.getElementById("paid").value="";
-  document.getElementById("notes").value="";
+  name.value="";
+  phone.value="";
+  style.value="";
+  price.value="";
+  paid.value="";
+  notes.value="";
 
   alert("Клиент добавлен ✅");
 }
@@ -240,8 +326,7 @@ function renderClients(){
     `;
   });
 
-  document.getElementById("clientList").innerHTML =
-    html || "<p>Клиентов пока нет</p>";
+  clientList.innerHTML = html || "<p>Клиентов пока нет</p>";
 }
 
 function showClient(index){
@@ -249,15 +334,55 @@ function showClient(index){
   let c = clients[index];
   let debt = c.price - c.paid;
 
-  document.getElementById("profileName").innerText = c.name;
-  document.getElementById("profilePhone").innerText = "📞 " + c.phone;
-  document.getElementById("profileStyle").innerText = "🎨 " + c.style;
-  document.getElementById("profileMoney").innerText =
+  profileName.innerText = c.name;
+  profilePhone.innerText = "📞 " + c.phone;
+  profileStyle.innerText = "🎨 " + c.style;
+  profileMoney.innerText =
     "💰 Цена: $" + c.price + " | Внесено: $" + c.paid + " | Остаток: $" + debt;
-  document.getElementById("profileNotes").innerText =
-    "📝 " + (c.notes || "Нет заметок");
+  profileNotes.innerText = "📝 " + (c.notes || "Нет заметок");
 
   openPage("profile");
+}
+
+function addPayment(){
+  let amount = prompt("Сколько клиент доплатил?");
+
+  if(!amount) return;
+
+  clients[currentClient].paid =
+    Number(clients[currentClient].paid) + Number(amount);
+
+  saveData();
+  showClient(currentClient);
+  renderClients();
+}
+
+function editClient(){
+  let c = clients[currentClient];
+
+  editName.value = c.name;
+  editPhone.value = c.phone;
+  editStyle.value = c.style;
+  editPrice.value = c.price;
+  editPaid.value = c.paid;
+  editNotes.value = c.notes;
+
+  openPage("edit");
+}
+
+function saveEdit(){
+  clients[currentClient] = {
+    name: editName.value,
+    phone: editPhone.value,
+    style: editStyle.value,
+    price: Number(editPrice.value || 0),
+    paid: Number(editPaid.value || 0),
+    notes: editNotes.value
+  };
+
+  saveData();
+  renderClients();
+  showClient(currentClient);
 }
 
 function deleteCurrentClient(){
@@ -274,3 +399,5 @@ renderClients();
 
 </body>
 </html>
+
+  
