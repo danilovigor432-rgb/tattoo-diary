@@ -64,7 +64,7 @@ color:white;
 background:#2962ff;
 }
 
-button.red{
+  button.red{
 background:#a51818;
 }
 
@@ -89,6 +89,14 @@ margin-top:12px;
 font-size:18px;
 }
 
+input[type="date"],
+input[type="time"]{
+text-align:left;
+appearance:none;
+-webkit-appearance:none;
+min-height:56px;
+}
+
 textarea{
 height:90px;
 }
@@ -97,7 +105,7 @@ height:90px;
 display:none;
 }
 
-  .client,
+.client,
 .session,
 .moneyBox{
 background:#181818;
@@ -106,7 +114,7 @@ border-radius:20px;
 margin-top:15px;
 }
 
-.client p,
+  .client p,
 .session p,
 .moneyBox p{
 color:#bbb;
@@ -169,7 +177,7 @@ CRM для тату-мастера
 </h2>
 
 <p>
-Все клиенты, записи и деньги в одном месте
+Клиенты, записи и финансы в одном месте
 </p>
 
 <button onclick="openPage('clients')">
@@ -198,50 +206,30 @@ CRM для тату-мастера
 
 <div class="card">
 
-<h2>
-🔎 Поиск клиента
-</h2>
-
-<input id="search"
-placeholder="Имя, телефон, Instagram, эскиз..."
-oninput="renderClients()">
-
-</div>
-
-
-<div class="card">
-
 <button onclick="toggleClientForm()">
 ➕ Добавить нового клиента
 </button>
 
 
-<div id="clientForm"
-class="hidden">
+<div id="clientForm" class="hidden">
 
 <input id="name"
 placeholder="Имя клиента">
 
-
 <input id="instagram"
 placeholder="Instagram @username">
-
 
 <input id="phone"
 placeholder="Телефон">
 
-
 <input id="style"
 placeholder="Эскиз / стиль">
-
 
 <input id="price"
 placeholder="Полная стоимость $">
 
-
 <input id="paid"
 placeholder="Внесено $">
-
 
 <textarea id="notes"
 placeholder="Заметки">
@@ -263,6 +251,10 @@ onclick="addClient()">
 <h2>
 📋 База клиентов
 </h2>
+
+<input id="search"
+placeholder="🔎 Поиск по имени, телефону, Instagram, эскизу..."
+oninput="renderClients()">
 
 <div id="clientList">
 </div>
@@ -453,7 +445,8 @@ onclick="openPage('sessions')">
 
 </div>
 
-  <div id="money" class="page">
+
+<div id="money" class="page">
 
 <h1>
 💵 Финансы
@@ -494,8 +487,7 @@ onclick="openPage('sessions')">
 
 </div>
 
-
-<div class="bottom">
+  <div class="bottom">
 
 <div class="nav active"
 onclick="openPage('home')">
@@ -519,319 +511,468 @@ onclick="openPage('money')">
 
 </div>
 
-  <script>
-let clients = JSON.parse(localStorage.getItem("clients") || "[]");
-let sessions = JSON.parse(localStorage.getItem("sessions") || "[]");
+
+<script>
+
+let clients =
+JSON.parse(localStorage.getItem("clients") || "[]");
+
+let sessions =
+JSON.parse(localStorage.getItem("sessions") || "[]");
+
 let currentClient = null;
 let currentSession = null;
 
+
 function saveData(){
-  localStorage.setItem("clients", JSON.stringify(clients));
-  localStorage.setItem("sessions", JSON.stringify(sessions));
+
+localStorage.setItem(
+"clients",
+JSON.stringify(clients)
+);
+
+localStorage.setItem(
+"sessions",
+JSON.stringify(sessions)
+);
+
 }
+
 
 function toggleClientForm(){
-  document.getElementById("clientForm").classList.toggle("hidden");
+
+document
+.getElementById("clientForm")
+.classList.toggle("hidden");
+
 }
+
 
 function toggleSessionForm(){
-  document.getElementById("sessionForm").classList.toggle("hidden");
+
+document
+.getElementById("sessionForm")
+.classList.toggle("hidden");
+
 }
+
 
 function openPage(id){
-  document.querySelectorAll(".page").forEach(p => p.classList.remove("show"));
-  document.getElementById(id).classList.add("show");
 
-  document.querySelectorAll(".nav").forEach(n => n.classList.remove("active"));
-  if(id==="home") document.querySelectorAll(".nav")[0].classList.add("active");
-  if(id==="clients") document.querySelectorAll(".nav")[1].classList.add("active");
-  if(id==="sessions") document.querySelectorAll(".nav")[2].classList.add("active");
-  if(id==="money") document.querySelectorAll(".nav")[3].classList.add("active");
+document
+.querySelectorAll(".page")
+.forEach(p => p.classList.remove("show"));
 
-  renderClientOptions();
-  renderSessions();
-  renderMoney();
+document
+.getElementById(id)
+.classList.add("show");
+
+
+document
+.querySelectorAll(".nav")
+.forEach(n => n.classList.remove("active"));
+
+
+if(id==="home")
+document.querySelectorAll(".nav")[0].classList.add("active");
+
+
+if(id==="clients")
+document.querySelectorAll(".nav")[1].classList.add("active");
+
+
+if(id==="sessions")
+document.querySelectorAll(".nav")[2].classList.add("active");
+
+
+if(id==="money")
+document.querySelectorAll(".nav")[3].classList.add("active");
+
+
+renderClientOptions();
+renderSessions();
+renderMoney();
+
 }
 
-    function addClient(){
-  let client = {
-    name: document.getElementById("name").value,
-    instagram: document.getElementById("instagram").value,
-    phone: document.getElementById("phone").value,
-    style: document.getElementById("style").value,
-    price: Number(document.getElementById("price").value || 0),
-    paid: Number(document.getElementById("paid").value || 0),
-    notes: document.getElementById("notes").value
-  };
+  function addClient(){
 
-  if(!client.name){
-    alert("Введите имя клиента");
-    return;
-  }
+let client = {
+name: document.getElementById("name").value,
+instagram: document.getElementById("instagram").value,
+phone: document.getElementById("phone").value,
+style: document.getElementById("style").value,
+price: Number(document.getElementById("price").value || 0),
+paid: Number(document.getElementById("paid").value || 0),
+notes: document.getElementById("notes").value
+};
 
-  clients.push(client);
-  saveData();
-  renderClients();
-  renderClientOptions();
-  renderMoney();
-
-  ["name","instagram","phone","style","price","paid","notes"].forEach(id=>{
-    document.getElementById(id).value="";
-  });
-
-  document.getElementById("clientForm").classList.add("hidden");
-  alert("Клиент добавлен ✅");
+if(!client.name){
+alert("Введите имя клиента");
+return;
 }
+
+clients.push(client);
+saveData();
+renderClients();
+renderClientOptions();
+renderMoney();
+
+["name","instagram","phone","style","price","paid","notes"]
+.forEach(id=>{
+document.getElementById(id).value="";
+});
+
+document.getElementById("clientForm").classList.add("hidden");
+
+alert("Клиент добавлен ✅");
+
+}
+
 
 function renderClients(){
-  let search = document.getElementById("search")?.value.toLowerCase() || "";
-  let html = "";
 
-  clients.forEach((c, index) => {
-    let text = `${c.name} ${c.phone} ${c.instagram} ${c.style} ${c.notes}`.toLowerCase();
-    if(!text.includes(search)) return;
+let search =
+document.getElementById("search")?.value.toLowerCase() || "";
 
-    let debt = c.price - c.paid;
+let html = "";
 
-    html += `
-      <div class="client" onclick="showClient(${index})">
-        <h2>${c.name}</h2>
-        <p class="instagram">📸 ${c.instagram || "Instagram не указан"}</p>
-        <p>📞 ${c.phone}</p>
-        <p>🎨 ${c.style}</p>
-        <p>💰 Остаток: $${debt}</p>
-      </div>
-    `;
-  });
+clients.forEach((c,index)=>{
 
-  document.getElementById("clientList").innerHTML =
-    html || "<p>Ничего не найдено</p>";
+let text =
+`${c.name} ${c.phone} ${c.instagram} ${c.style} ${c.notes}`
+.toLowerCase();
+
+if(!text.includes(search)) return;
+
+let debt = c.price - c.paid;
+
+let instagramLine = c.instagram
+? `<p class="instagram">📸 ${c.instagram}</p>`
+: "";
+
+html += `
+<div class="client" onclick="showClient(${index})">
+<h2>${c.name}</h2>
+${instagramLine}
+<p>📞 ${c.phone}</p>
+<p>🎨 ${c.style}</p>
+<p>💰 Остаток: $${debt}</p>
+</div>
+`;
+
+});
+
+document.getElementById("clientList").innerHTML =
+html || "<p>Ничего не найдено</p>";
+
 }
+
 
 function showClient(index){
-  currentClient = index;
-  let c = clients[index];
-  let debt = c.price - c.paid;
 
-  document.getElementById("profileName").innerText = c.name;
-  document.getElementById("profileInstagram").innerText =
-    "📸 " + (c.instagram || "Instagram не указан");
-  document.getElementById("profilePhone").innerText = "📞 " + c.phone;
-  document.getElementById("profileStyle").innerText = "🎨 " + c.style;
-  document.getElementById("profileMoney").innerText =
-    "💰 Цена: $" + c.price + " | Внесено: $" + c.paid + " | Остаток: $" + debt;
-  document.getElementById("profileNotes").innerText =
-    "📝 " + (c.notes || "Нет заметок");
+currentClient = index;
 
-  openPage("profile");
+let c = clients[index];
+let debt = c.price - c.paid;
+
+document.getElementById("profileName").innerText = c.name;
+
+document.getElementById("profileInstagram").innerText =
+c.instagram ? "📸 " + c.instagram : "";
+
+document.getElementById("profilePhone").innerText =
+c.phone ? "📞 " + c.phone : "";
+
+document.getElementById("profileStyle").innerText =
+c.style ? "🎨 " + c.style : "";
+
+document.getElementById("profileMoney").innerText =
+"💰 Цена: $" + c.price +
+" | Внесено: $" + c.paid +
+" | Остаток: $" + debt;
+
+document.getElementById("profileNotes").innerText =
+c.notes ? "📝 " + c.notes : "";
+
+openPage("profile");
+
 }
+
 
 function openInstagram(){
-  let c = clients[currentClient];
-  if(!c.instagram){
-    alert("Instagram не указан");
-    return;
-  }
 
-  let nick = c.instagram.replace("@","").trim();
-  window.open("https://instagram.com/" + nick, "_blank");
+let c = clients[currentClient];
+
+if(!c.instagram){
+alert("Instagram не указан");
+return;
 }
+
+let nick = c.instagram.replace("@","").trim();
+
+window.open("https://instagram.com/" + nick, "_blank");
+
+}
+
 
 function addPayment(){
-  let amount = prompt("Сколько клиент доплатил?");
-  if(!amount) return;
 
-  clients[currentClient].paid =
-    Number(clients[currentClient].paid) + Number(amount);
+let amount = prompt("Сколько клиент доплатил?");
 
-  saveData();
-  renderClients();
-  renderMoney();
-  showClient(currentClient);
+if(!amount) return;
+
+clients[currentClient].paid =
+Number(clients[currentClient].paid) + Number(amount);
+
+saveData();
+renderClients();
+renderMoney();
+showClient(currentClient);
+
 }
+
 
 function editClient(){
-  let c = clients[currentClient];
 
-  document.getElementById("editName").value = c.name;
-  document.getElementById("editInstagram").value = c.instagram || "";
-  document.getElementById("editPhone").value = c.phone;
-  document.getElementById("editStyle").value = c.style;
-  document.getElementById("editPrice").value = c.price;
-  document.getElementById("editPaid").value = c.paid;
-  document.getElementById("editNotes").value = c.notes;
+let c = clients[currentClient];
 
-  openPage("edit");
+document.getElementById("editName").value = c.name;
+document.getElementById("editInstagram").value = c.instagram || "";
+document.getElementById("editPhone").value = c.phone;
+document.getElementById("editStyle").value = c.style;
+document.getElementById("editPrice").value = c.price;
+document.getElementById("editPaid").value = c.paid;
+document.getElementById("editNotes").value = c.notes;
+
+openPage("edit");
+
 }
+
 
 function saveEdit(){
-  clients[currentClient] = {
-    name: document.getElementById("editName").value,
-    instagram: document.getElementById("editInstagram").value,
-    phone: document.getElementById("editPhone").value,
-    style: document.getElementById("editStyle").value,
-    price: Number(document.getElementById("editPrice").value || 0),
-    paid: Number(document.getElementById("editPaid").value || 0),
-    notes: document.getElementById("editNotes").value
-  };
 
-  saveData();
-  renderClients();
-  renderMoney();
-  showClient(currentClient);
+clients[currentClient] = {
+name: document.getElementById("editName").value,
+instagram: document.getElementById("editInstagram").value,
+phone: document.getElementById("editPhone").value,
+style: document.getElementById("editStyle").value,
+price: Number(document.getElementById("editPrice").value || 0),
+paid: Number(document.getElementById("editPaid").value || 0),
+notes: document.getElementById("editNotes").value
+};
+
+saveData();
+renderClients();
+renderMoney();
+showClient(currentClient);
+
 }
+
 
 function deleteCurrentClient(){
-  if(!confirm("Удалить клиента?")) return;
 
-  clients.splice(currentClient, 1);
-  saveData();
-  renderClients();
-  renderClientOptions();
-  renderMoney();
-  openPage("clients");
+if(!confirm("Удалить клиента?")) return;
+
+clients.splice(currentClient,1);
+
+saveData();
+renderClients();
+renderClientOptions();
+renderMoney();
+openPage("clients");
+
 }
+
 
 function renderClientOptions(){
-  let selects = [
-    document.getElementById("sessionClient"),
-    document.getElementById("editSessionClient")
-  ];
 
-  selects.forEach(select=>{
-    if(!select) return;
+let selects = [
+document.getElementById("sessionClient"),
+document.getElementById("editSessionClient")
+];
 
-    if(clients.length === 0){
-      select.innerHTML = `<option>Сначала добавьте клиента</option>`;
-      return;
-    }
+selects.forEach(select=>{
 
-    select.innerHTML = clients.map((c, index) =>
-      `<option value="${index}">${c.name}</option>`
-    ).join("");
-  });
+if(!select) return;
+
+if(clients.length === 0){
+select.innerHTML =
+`<option>Сначала добавьте клиента</option>`;
+return;
 }
+
+select.innerHTML =
+clients.map((c,index)=>
+`<option value="${index}">${c.name}</option>`
+).join("");
+
+});
+
+}
+
 
 function addSession(){
-  if(clients.length === 0){
-    alert("Сначала добавьте клиента");
-    return;
-  }
 
-  let clientIndex = Number(document.getElementById("sessionClient").value);
-  let client = clients[clientIndex];
-
-  let session = {
-    clientIndex: clientIndex,
-    clientName: client.name,
-    date: document.getElementById("sessionDate").value,
-    time: document.getElementById("sessionTime").value,
-    hours: document.getElementById("sessionHours").value,
-    idea: document.getElementById("sessionIdea").value
-  };
-
-  if(!session.date || !session.time){
-    alert("Введите дату и время");
-    return;
-  }
-
-  sessions.push(session);
-  saveData();
-  renderSessions();
-  renderMoney();
-
-  ["sessionDate","sessionTime","sessionHours","sessionIdea"].forEach(id=>{
-    document.getElementById(id).value="";
-  });
-
-  document.getElementById("sessionForm").classList.add("hidden");
-  alert("Запись добавлена ✅");
+if(clients.length === 0){
+alert("Сначала добавьте клиента");
+return;
 }
+
+let clientIndex =
+Number(document.getElementById("sessionClient").value);
+
+let client = clients[clientIndex];
+
+let session = {
+clientIndex: clientIndex,
+clientName: client.name,
+date: document.getElementById("sessionDate").value,
+time: document.getElementById("sessionTime").value,
+hours: document.getElementById("sessionHours").value,
+idea: document.getElementById("sessionIdea").value
+};
+
+if(!session.date || !session.time){
+alert("Введите дату и время");
+return;
+}
+
+sessions.push(session);
+
+saveData();
+renderSessions();
+renderMoney();
+
+["sessionDate","sessionTime","sessionHours","sessionIdea"]
+.forEach(id=>{
+document.getElementById(id).value="";
+});
+
+document.getElementById("sessionForm").classList.add("hidden");
+
+alert("Запись добавлена ✅");
+
+}
+
 
 function renderSessions(){
-  let html = "";
 
-  sessions
-    .map((s, index) => ({...s, realIndex:index}))
-    .sort((a,b) => new Date(a.date + "T" + a.time) - new Date(b.date + "T" + b.time))
-    .forEach((s) => {
-      let client = clients[s.clientIndex];
-      let debt = client ? client.price - client.paid : 0;
+let html = "";
 
-      html += `
-        <div class="session">
-          <h2>${s.date} — ${s.time}</h2>
-          <p>👤 ${s.clientName}</p>
-          <p>🎨 ${s.idea || "Без описания"}</p>
-          <p>⏱ ${s.hours || "?"} часов</p>
-          <p>💰 Остаток клиента: $${debt}</p>
-          <button class="gray" onclick="editSession(${s.realIndex})">✏️ Редактировать запись</button>
-          <button class="red" onclick="deleteSession(${s.realIndex})">Удалить запись</button>
-        </div>
-      `;
-    });
+sessions
+.map((s,index)=>({...s,realIndex:index}))
+.sort((a,b)=>
+new Date(a.date + "T" + a.time) -
+new Date(b.date + "T" + b.time)
+)
+.forEach((s)=>{
 
-  document.getElementById("sessionList").innerHTML =
-    html || "<p>Записей пока нет</p>";
+let client = clients[s.clientIndex];
+let debt = client ? client.price - client.paid : 0;
+
+html += `
+<div class="session">
+<h2>${s.date} — ${s.time}</h2>
+<p>👤 ${s.clientName}</p>
+<p>🎨 ${s.idea || "Без описания"}</p>
+<p>⏱ ${s.hours || "?"} часов</p>
+<p>💰 Остаток клиента: $${debt}</p>
+<button class="gray" onclick="editSession(${s.realIndex})">
+✏️ Редактировать запись
+</button>
+<button class="red" onclick="deleteSession(${s.realIndex})">
+Удалить запись
+</button>
+</div>
+`;
+
+});
+
+document.getElementById("sessionList").innerHTML =
+html || "<p>Записей пока нет</p>";
+
 }
+
 
 function editSession(index){
-  currentSession = index;
-  let s = sessions[index];
 
-  document.getElementById("editSessionClient").value = s.clientIndex;
-  document.getElementById("editSessionDate").value = s.date;
-  document.getElementById("editSessionTime").value = s.time;
-  document.getElementById("editSessionHours").value = s.hours;
-  document.getElementById("editSessionIdea").value = s.idea;
+currentSession = index;
 
-  openPage("editSession");
+let s = sessions[index];
+
+document.getElementById("editSessionClient").value = s.clientIndex;
+document.getElementById("editSessionDate").value = s.date;
+document.getElementById("editSessionTime").value = s.time;
+document.getElementById("editSessionHours").value = s.hours;
+document.getElementById("editSessionIdea").value = s.idea;
+
+openPage("editSession");
+
 }
+
 
 function saveSessionEdit(){
-  let clientIndex = Number(document.getElementById("editSessionClient").value);
-  let client = clients[clientIndex];
 
-  sessions[currentSession] = {
-    clientIndex: clientIndex,
-    clientName: client.name,
-    date: document.getElementById("editSessionDate").value,
-    time: document.getElementById("editSessionTime").value,
-    hours: document.getElementById("editSessionHours").value,
-    idea: document.getElementById("editSessionIdea").value
-  };
+let clientIndex =
+Number(document.getElementById("editSessionClient").value);
 
-  saveData();
-  renderSessions();
-  renderMoney();
-  openPage("sessions");
+let client = clients[clientIndex];
+
+sessions[currentSession] = {
+clientIndex: clientIndex,
+clientName: client.name,
+date: document.getElementById("editSessionDate").value,
+time: document.getElementById("editSessionTime").value,
+hours: document.getElementById("editSessionHours").value,
+idea: document.getElementById("editSessionIdea").value
+};
+
+saveData();
+renderSessions();
+renderMoney();
+openPage("sessions");
+
 }
+
 
 function deleteSession(index){
-  if(!confirm("Удалить запись?")) return;
 
-  sessions.splice(index, 1);
-  saveData();
-  renderSessions();
-  renderMoney();
+if(!confirm("Удалить запись?")) return;
+
+sessions.splice(index,1);
+
+saveData();
+renderSessions();
+renderMoney();
+
 }
+
 
 function renderMoney(){
-  let totalPrice = clients.reduce((sum,c) => sum + Number(c.price || 0), 0);
-  let totalPaid = clients.reduce((sum,c) => sum + Number(c.paid || 0), 0);
-  let totalDebt = totalPrice - totalPaid;
 
-  document.getElementById("totalPrice").innerText = "$" + totalPrice;
-  document.getElementById("totalPaid").innerText = "$" + totalPaid;
-  document.getElementById("totalDebt").innerText = "$" + totalDebt;
-  document.getElementById("totalClients").innerText = clients.length;
-  document.getElementById("totalSessions").innerText = sessions.length;
+let totalPrice =
+clients.reduce((sum,c)=>sum + Number(c.price || 0),0);
+
+let totalPaid =
+clients.reduce((sum,c)=>sum + Number(c.paid || 0),0);
+
+let totalDebt = totalPrice - totalPaid;
+
+document.getElementById("totalPrice").innerText = "$" + totalPrice;
+document.getElementById("totalPaid").innerText = "$" + totalPaid;
+document.getElementById("totalDebt").innerText = "$" + totalDebt;
+document.getElementById("totalClients").innerText = clients.length;
+document.getElementById("totalSessions").innerText = sessions.length;
+
 }
+
 
 renderClients();
 renderClientOptions();
 renderSessions();
 renderMoney();
+
 </script>
 
 </body>
