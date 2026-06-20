@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tattoo Diary</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:-apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body{
+    background:#0b0b0b;
+    color:white;
+    padding:20px;
+    padding-bottom:90px;
+}
+
+.logo{
+    font-size:32px;
+    font-weight:bold;
+    margin-bottom:25px;
+}
+
+.card{
+    background:#181818;
+    border-radius:20px;
+    padding:18px;
+    margin-bottom:15px;
+}
+
+.small{
+    color:#888;
+    margin-bottom:10px;
+}
+
+.client{
+    margin-top:10px;
+    padding:12px;
+    background:#222;
+    border-radius:15px;
+}
+
+.money{
+    color:#4caf50;
+    font-weight:bold;
+}
+
+.nav{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:#111;
+    display:flex;
+    justify-content:space-around;
+    padding:15px;
+    border-top:1px solid #333;
+}
+
+.nav div{
+    text-align:center;
+    font-size:13px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="logo">
+🖋️ Tattoo Diary
+</div>
+
+
+<div class="card">
+    <div class="small">Сегодня</div>
+
+    <div class="client">
+        <h3>10:00 — Mike</h3>
+        <p>🐉 Японский дракон</p>
+        <p>Сеанс 2 из 5</p>
+        <p class="money">$400 осталось</p>
+    </div>
+
+    <div class="client">
+        <h3>15:00 — Sarah</h3>
+        <p>🌹 Минималистичная роза</p>
+        <p>Депозит получен</p>
+    </div>
+</div>
+
+
+<div class="card">
+    <div class="small">
+        Статистика дня
+    </div>
+
+    <h2>$800 ожидаемый доход</h2>
+
+    <br>
+
+    <p>
+    🎨 1 эскиз подготовить
+    </p>
+
+    <p>
+    📅 Завтра 2 записи
+    </p>
+</div>
+<div class="card">
+    <div class="small">Быстрые действия</div>
+    <p>➕ Новая запись</p>
+    <p>👤 Новый клиент</p>
+    <p>💵 Добавить оплату</p>
+    <p>📷 Фото работы</p>
+</div>
+
+
+<div class="nav">
+    <div>🏠<br>Сегодня</div>
+    <div>📅<br>Календарь</div>
+    <div>👥<br>Клиенты</div>
+    <div>💵<br>Деньги</div>
+</div>
+
+</body>
+</html>
