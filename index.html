@@ -2,70 +2,326 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tattoo Diary CRM</title>
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+InkFlow CRM
+</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,sans-serif}
-body{background:#000;color:white;padding:20px;padding-bottom:105px}
-.logo{font-size:34px;font-weight:800}
-.sub{color:#888;margin-top:4px;margin-bottom:18px}
-h1{font-size:30px;margin-bottom:16px}
-h2{font-size:22px;margin-bottom:10px}
-p{line-height:1.35}
-.card{background:#111;border-radius:24px;padding:18px;margin-top:14px;box-shadow:0 0 24px #041d66}
-button{width:100%;padding:15px;margin-top:12px;border:none;border-radius:18px;font-size:18px;color:white;background:#2962ff}
-button.red{background:#a51818}
-button.green{background:#148a34}
-button.gray{background:#2a2a2a}
-input,textarea,select{width:100%;background:#222;color:white;border:none;border-radius:14px;padding:15px;margin-top:10px;font-size:16px}
-input[type="date"],input[type="time"]{text-align:left;appearance:none;-webkit-appearance:none;min-height:54px}
-textarea{height:85px}
-.hidden{display:none}
 
-  .client,.session,.moneyBox,.dayBox{background:#181818;padding:15px;border-radius:18px;margin-top:12px}
-.client p,.session p,.moneyBox p,.dayBox p{color:#bbb;margin-top:5px}
-.instagram{color:#9bbcff}
-.page{display:none}
-.show{display:block}
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+font-family:-apple-system,
+BlinkMacSystemFont,
+sans-serif;
+}
 
-.bottom{position:fixed;bottom:0;left:0;right:0;background:#070707;display:flex;justify-content:space-around;padding:13px;border-top:1px solid #222}
-.nav{color:#999;text-align:center;font-size:13px}
-.active{color:white}
+body{
+background:#000;
+color:#fff;
+padding:20px;
+padding-bottom:110px;
+}
 
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.moneyBox h2{font-size:24px;margin-bottom:4px}
+.logo{
+font-size:34px;
+font-weight:800;
+}
 
-.calendarHeader{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.calendarHeader button{width:auto;padding:10px 14px;margin-top:0;font-size:18px}
-.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;margin-top:14px}
-.day{background:#222;border-radius:13px;padding:9px;text-align:center;font-size:15px;min-height:48px}
-.day.today{border:2px solid #2962ff}
-.day.selected{outline:2px solid white}
-.day.busy{background:#148a34}
-.day.more{background:#8a5b14}
+.sub{
+color:#888;
+margin-top:5px;
+margin-bottom:18px;
+}
+
+h1{
+font-size:28px;
+margin-bottom:15px;
+}
+
+h2{
+font-size:21px;
+margin-bottom:10px;
+}
+
+p{
+line-height:1.35;
+}
+
+.card{
+background:#111;
+border-radius:24px;
+padding:18px;
+margin-top:14px;
+box-shadow:0 0 24px #041d66;
+}
+
+button{
+width:100%;
+border:none;
+border-radius:18px;
+padding:15px;
+margin-top:12px;
+font-size:18px;
+color:white;
+background:#2962ff;
+}
+
+button.green{
+background:#148a34;
+}
+
+button.red{
+background:#a51818;
+}
+
+button.gray{
+background:#2a2a2a;
+}
+
+  input,textarea,select{
+width:100%;
+background:#222;
+color:white;
+border:none;
+border-radius:14px;
+padding:15px;
+margin-top:10px;
+font-size:16px;
+}
+
+input[type="date"],
+input[type="time"]{
+text-align:left;
+appearance:none;
+-webkit-appearance:none;
+min-height:54px;
+}
+
+textarea{
+height:85px;
+}
+
+.hidden{
+display:none;
+}
+
+.client,
+.session,
+.moneyBox,
+.dayBox{
+background:#181818;
+padding:15px;
+border-radius:18px;
+margin-top:12px;
+}
+
+.client p,
+.session p,
+.moneyBox p,
+.dayBox p{
+color:#bbb;
+margin-top:5px;
+}
+
+.instagram{
+color:#9bbcff;
+}
+
+.page{
+display:none;
+}
+
+.show{
+display:block;
+}
+
+  .bottom{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+background:#070707;
+display:flex;
+justify-content:space-around;
+padding:13px;
+border-top:1px solid #222;
+}
+
+.nav{
+color:#999;
+text-align:center;
+font-size:13px;
+}
+
+.active{
+color:white;
+}
+
+.grid2{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+}
+
+.moneyBox h2{
+font-size:24px;
+margin-bottom:4px;
+}
+
+.calendarHeader{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+}
+
+.calendarHeader button{
+width:auto;
+padding:10px 14px;
+margin-top:0;
+font-size:18px;
+}
+
+.calendar{
+display:grid;
+grid-template-columns:repeat(7,1fr);
+gap:7px;
+margin-top:14px;
+}
+
+.day{
+background:#222;
+border-radius:13px;
+padding:9px;
+text-align:center;
+font-size:15px;
+min-height:48px;
+}
+
+.day.today{
+border:2px solid #2962ff;
+}
+
+.day.selected{
+outline:2px solid white;
+}
+
+.day.busy{
+background:#148a34;
+}
+
+.day.more{
+background:#8a5b14;
+}
+
+  .homeTabs{
+display:flex;
+background:#181818;
+border-radius:18px;
+padding:4px;
+margin-top:15px;
+}
+
+.homeTab{
+flex:1;
+padding:12px;
+text-align:center;
+border-radius:14px;
+color:#999;
+font-size:15px;
+}
+
+.homeTab.active{
+background:#2962ff;
+color:white;
+}
+
+.infoLine{
+display:flex;
+justify-content:space-between;
+padding:10px 0;
+border-bottom:1px solid #222;
+}
+
+.infoLine:last-child{
+border:none;
+}
+
+.badge{
+display:inline-block;
+background:#222;
+color:#9bbcff;
+padding:6px 12px;
+border-radius:12px;
+font-size:14px;
+margin-top:8px;
+}
+
+.warning{
+color:#ffb347;
+}
+
+.success{
+color:#4ade80;
+}
+
+.danger{
+color:#ff6666;
+}
+
 </style>
+
 </head>
+
 <body>
 
   <div id="home" class="page show">
 
 <div class="logo">
-🖋 Tattoo Diary
+🖋 InkFlow
 </div>
 
 <div class="sub">
-Твой рабочий стол
+Рабочий стол тату-мастера
+</div>
+
+
+<div class="homeTabs">
+
+<div id="tabToday"
+class="homeTab active"
+onclick="setHomeMode('today')">
+Сегодня
+</div>
+
+<div id="tabWeek"
+class="homeTab"
+onclick="setHomeMode('week')">
+7 дней
+</div>
+
+<div id="tabMonth"
+class="homeTab"
+onclick="setHomeMode('month')">
+Месяц
+</div>
+
 </div>
 
 
 <div class="card">
 
-<h2>
+<h2 id="homeTitle">
 ☀️ Сегодня
 </h2>
 
-<div id="todayList"></div>
+<div id="homeContent">
+</div>
 
 </div>
 
@@ -76,7 +332,8 @@ textarea{height:85px}
 🚨 Внимание
 </h2>
 
-<div id="attentionList"></div>
+<div id="attentionList">
+</div>
 
 </div>
 
@@ -103,66 +360,37 @@ textarea{height:85px}
 
 </div>
 
+  <div id="clients" class="page">
 
-
-<div id="clients" class="page">
-
-<h1>
-👥 Клиенты
-</h1>
-
+<h1>👥 Клиенты</h1>
 
 <div class="card">
-
 <button onclick="toggleClientForm()">
 ➕ Добавить клиента
 </button>
 
-
 <div id="clientForm" class="hidden">
-
 <input id="name" placeholder="Имя клиента">
+<input id="instagram" placeholder="Instagram @username">
+<input id="phone" placeholder="Телефон">
+<input id="style" placeholder="Эскиз / проект">
+<input id="price" placeholder="Стоимость проекта $">
+<input id="paid" placeholder="Оплачено $">
+<textarea id="notes" placeholder="Заметки"></textarea>
 
-<input id="instagram"
-placeholder="Instagram @username">
-
-<input id="phone"
-placeholder="Телефон">
-
-<input id="style"
-placeholder="Эскиз / проект">
-
-<input id="price"
-placeholder="Стоимость проекта $">
-
-<input id="paid"
-placeholder="Оплачено $">
-
-<textarea id="notes"
-placeholder="Заметки"></textarea>
-
-
-<button class="green"
-onclick="addClient()">
+<button class="green" onclick="addClient()">
 💾 Сохранить клиента
 </button>
-
+</div>
 </div>
 
-</div>
-
-  <div class="card">
-
-<h2>
-📋 База клиентов
-</h2>
-
+<div class="card">
+<h2>📋 База клиентов</h2>
 <input id="search"
 placeholder="🔎 Имя, телефон, Instagram, проект..."
 oninput="renderClients()">
 
 <div id="clientList"></div>
-
 </div>
 
 </div>
@@ -170,12 +398,9 @@ oninput="renderClients()">
 
 <div id="profile" class="page">
 
-<h1 id="profileName">
-Клиент
-</h1>
+<h1 id="profileName">Клиент</h1>
 
 <div class="card">
-
 <p id="profileInstagram" class="instagram"></p>
 <p id="profilePhone"></p>
 <p id="profileStyle"></p>
@@ -183,36 +408,18 @@ oninput="renderClients()">
 <p id="profileNextSession"></p>
 <p id="profileNotes"></p>
 
-<button class="green" onclick="openInstagram()">
-📸 Открыть Instagram
-</button>
-
-<button class="green" onclick="addPayment()">
-💵 Добавить оплату
-</button>
-
-<button class="gray" onclick="editClient()">
-✏️ Редактировать
-</button>
-
-<button class="red" onclick="deleteCurrentClient()">
-🗑 Удалить клиента
-</button>
-
-<button class="gray" onclick="openPage('clients')">
-← Назад
-</button>
-
+<button class="green" onclick="openInstagram()">📸 Открыть Instagram</button>
+<button class="green" onclick="addPayment()">💵 Добавить оплату</button>
+<button class="gray" onclick="editClient()">✏️ Редактировать</button>
+<button class="red" onclick="deleteCurrentClient()">🗑 Удалить клиента</button>
+<button class="gray" onclick="openPage('clients')">← Назад</button>
 </div>
 
 </div>
 
   <div id="sessions" class="page">
 
-<h1>
-📅 Календарь
-</h1>
-
+<h1>📅 Календарь</h1>
 
 <div class="card">
 
@@ -222,11 +429,9 @@ oninput="renderClients()">
 ◀️
 </button>
 
-
 <h2 id="calendarTitle">
 Месяц
 </h2>
-
 
 <button onclick="changeMonth(1)">
 ▶️
@@ -235,14 +440,12 @@ oninput="renderClients()">
 </div>
 
 
-<button class="gray"
-onclick="goToday()">
+<button class="gray" onclick="goToday()">
 📍 Сегодня
 </button>
 
 
-<div id="calendar"
-class="calendar">
+<div id="calendar" class="calendar">
 </div>
 
 </div>
@@ -250,8 +453,8 @@ class="calendar">
 
 <div class="card">
 
-<h2>
-📌 Записи выбранного дня
+<h2 id="selectedDayTitle">
+📌 Выбранный день
 </h2>
 
 <div id="selectedDayList">
@@ -259,31 +462,25 @@ class="calendar">
 
 
 <button onclick="toggleSessionForm()">
-➕ Добавить запись на этот день
+➕ Добавить запись
 </button>
 
 
-<div id="sessionForm"
-class="hidden">
+<div id="sessionForm" class="hidden">
 
 <select id="sessionClient">
 </select>
 
+<input id="sessionDate" type="date">
 
-<input id="sessionDate"
-type="date">
-
-
-<input id="sessionTime"
-type="time">
-
+<input id="sessionTime" type="time">
 
 <input id="sessionHours"
 placeholder="Длительность (часов)">
 
 
 <textarea id="sessionIdea"
-placeholder="Эскиз, место, заметки">
+placeholder="Что делаем, место, заметки">
 </textarea>
 
 
@@ -311,7 +508,6 @@ onclick="addSession()">
 </div>
 
   <div id="edit" class="page">
-
 <h1>✏️ Клиент</h1>
 
 <div class="card">
@@ -323,20 +519,13 @@ onclick="addSession()">
 <input id="editPaid" placeholder="Оплачено $">
 <textarea id="editNotes" placeholder="Заметки"></textarea>
 
-<button class="green" onclick="saveEdit()">
-💾 Сохранить изменения
-</button>
-
-<button class="gray" onclick="showClient(currentClient)">
-← Назад
-</button>
+<button class="green" onclick="saveEdit()">💾 Сохранить изменения</button>
+<button class="gray" onclick="showClient(currentClient)">← Назад</button>
 </div>
-
 </div>
 
 
 <div id="editSession" class="page">
-
 <h1>✏️ Запись</h1>
 
 <div class="card">
@@ -344,70 +533,65 @@ onclick="addSession()">
 <input id="editSessionDate" type="date">
 <input id="editSessionTime" type="time">
 <input id="editSessionHours" placeholder="Длительность (часов)">
-<textarea id="editSessionIdea" placeholder="Эскиз, место, заметки"></textarea>
+<textarea id="editSessionIdea" placeholder="Что делаем, место, заметки"></textarea>
 
-<button class="green" onclick="saveSessionEdit()">
-💾 Сохранить запись
-</button>
-
-<button class="gray" onclick="openPage('sessions')">
-← Назад
-</button>
+<button class="green" onclick="saveSessionEdit()">💾 Сохранить запись</button>
+<button class="gray" onclick="openPage('sessions')">← Назад</button>
 </div>
-
 </div>
 
 
 <div id="money" class="page">
-
 <h1>💵 Финансы</h1>
 
 <div class="card">
-
 <div class="grid2">
-  <div class="moneyBox">
-    <h2 id="moneyTotalPrice">$0</h2>
-    <p>Проекты</p>
-  </div>
 
-  <div class="moneyBox">
-    <h2 id="moneyTotalPaid">$0</h2>
-    <p>Оплачено</p>
-  </div>
-
-  <div class="moneyBox">
-    <h2 id="moneyTotalDebt">$0</h2>
-    <p>Остаток</p>
-  </div>
-
-  <div class="moneyBox">
-    <h2 id="moneyTotalClients">0</h2>
-    <p>Клиентов</p>
-  </div>
+<div class="moneyBox">
+<h2 id="moneyTotalPrice">$0</h2>
+<p>Проекты</p>
 </div>
 
 <div class="moneyBox">
-  <h2 id="moneyTotalSessions">0</h2>
-  <p>Записей</p>
+<h2 id="moneyTotalPaid">$0</h2>
+<p>Оплачено</p>
+</div>
+
+<div class="moneyBox">
+<h2 id="moneyTotalDebt">$0</h2>
+<p>Остаток</p>
+</div>
+
+<div class="moneyBox">
+<h2 id="moneyTotalClients">0</h2>
+<p>Клиентов</p>
 </div>
 
 </div>
 
+<div class="moneyBox">
+<h2 id="moneyTotalSessions">0</h2>
+<p>Записей</p>
 </div>
 
-  <div class="bottom">
-  <div class="nav active" onclick="openPage('home')">🏠<br>Главная</div>
-  <div class="nav" onclick="openPage('clients')">👥<br>Клиенты</div>
-  <div class="nav" onclick="openPage('sessions')">📅<br>Записи</div>
-  <div class="nav" onclick="openPage('money')">💵<br>Финансы</div>
+</div>
 </div>
 
-<script>
+
+<div class="bottom">
+<div class="nav active" onclick="openPage('home')">🏠<br>Главная</div>
+<div class="nav" onclick="openPage('clients')">👥<br>Клиенты</div>
+<div class="nav" onclick="openPage('sessions')">📅<br>Записи</div>
+<div class="nav" onclick="openPage('money')">💵<br>Финансы</div>
+</div>
+
+  <script>
 let clients = JSON.parse(localStorage.getItem("clients") || "[]");
 let sessions = JSON.parse(localStorage.getItem("sessions") || "[]");
 
 let currentClient = null;
 let currentSession = null;
+let homeMode = "today";
 
 let today = new Date();
 let calendarYear = today.getFullYear();
@@ -419,13 +603,14 @@ function saveData(){
   localStorage.setItem("sessions", JSON.stringify(sessions));
 }
 
-function toggleClientForm(){
-  document.getElementById("clientForm").classList.toggle("hidden");
-}
-
-function toggleSessionForm(){
-  document.getElementById("sessionForm").classList.toggle("hidden");
-  document.getElementById("sessionDate").value = selectedDate;
+function renderAll(){
+  renderClients();
+  renderClientOptions();
+  renderSessions();
+  renderMoney();
+  renderCalendar();
+  renderSelectedDay();
+  renderHome();
 }
 
 function openPage(id){
@@ -441,25 +626,35 @@ function openPage(id){
   renderAll();
 }
 
-  function renderAll(){
-  renderClients();
-  renderClientOptions();
-  renderSessions();
-  renderMoney();
-  renderCalendar();
+function setHomeMode(mode){
+  homeMode = mode;
+
+  document.querySelectorAll(".homeTab").forEach(t => t.classList.remove("active"));
+  if(mode==="today") tabToday.classList.add("active");
+  if(mode==="week") tabWeek.classList.add("active");
+  if(mode==="month") tabMonth.classList.add("active");
+
   renderHome();
-  renderSelectedDay();
+}
+
+function toggleClientForm(){
+  clientForm.classList.toggle("hidden");
+}
+
+function toggleSessionForm(){
+  sessionForm.classList.toggle("hidden");
+  sessionDate.value = selectedDate;
 }
 
 function addClient(){
   let client = {
-    name: document.getElementById("name").value,
-    instagram: document.getElementById("instagram").value,
-    phone: document.getElementById("phone").value,
-    style: document.getElementById("style").value,
-    price: Number(document.getElementById("price").value || 0),
-    paid: Number(document.getElementById("paid").value || 0),
-    notes: document.getElementById("notes").value
+    name: name.value,
+    instagram: instagram.value,
+    phone: phone.value,
+    style: style.value,
+    price: Number(price.value || 0),
+    paid: Number(paid.value || 0),
+    notes: notes.value
   };
 
   if(!client.name){
@@ -474,13 +669,13 @@ function addClient(){
     document.getElementById(id).value="";
   });
 
-  document.getElementById("clientForm").classList.add("hidden");
+  clientForm.classList.add("hidden");
   renderAll();
   alert("Клиент добавлен ✅");
 }
 
 function renderClients(){
-  let searchText = document.getElementById("search")?.value?.toLowerCase() || "";
+  let searchText = search?.value?.toLowerCase() || "";
   let html = "";
 
   clients.forEach((c,index)=>{
@@ -501,7 +696,7 @@ function renderClients(){
     `;
   });
 
-  document.getElementById("clientList").innerHTML = html || "<p>Ничего не найдено</p>";
+  clientList.innerHTML = html || "<p>Ничего не найдено</p>";
 }
 
 function showClient(index){
@@ -510,13 +705,13 @@ function showClient(index){
   let debt = c.price - c.paid;
   let next = getNextSession(index);
 
-  document.getElementById("profileName").innerText = c.name;
-  document.getElementById("profileInstagram").innerText = c.instagram ? "📸 " + c.instagram : "";
-  document.getElementById("profilePhone").innerText = c.phone ? "📞 " + c.phone : "";
-  document.getElementById("profileStyle").innerText = c.style ? "🎨 " + c.style : "";
-  document.getElementById("profileMoney").innerText = `💰 Цена: $${c.price} | Оплачено: $${c.paid} | Остаток: $${debt}`;
-  document.getElementById("profileNextSession").innerText = next ? `📅 Следующая запись: ${next.date} ${next.time}` : "⚠️ Нет ближайшей записи";
-  document.getElementById("profileNotes").innerText = c.notes ? "📝 " + c.notes : "";
+  profileName.innerText = c.name;
+  profileInstagram.innerText = c.instagram ? "📸 " + c.instagram : "";
+  profilePhone.innerText = c.phone ? "📞 " + c.phone : "";
+  profileStyle.innerText = c.style ? "🎨 " + c.style : "";
+  profileMoney.innerText = `💰 Цена: $${c.price} | Оплачено: $${c.paid} | Остаток: $${debt}`;
+  profileNextSession.innerText = next ? `📅 Следующая запись: ${next.date} ${next.time}` : "⚠️ Нет ближайшей записи";
+  profileNotes.innerText = c.notes ? "📝 " + c.notes : "";
 
   openPage("profile");
 }
@@ -550,26 +745,26 @@ function addPayment(){
 function editClient(){
   let c = clients[currentClient];
 
-  document.getElementById("editName").value = c.name;
-  document.getElementById("editInstagram").value = c.instagram || "";
-  document.getElementById("editPhone").value = c.phone;
-  document.getElementById("editStyle").value = c.style;
-  document.getElementById("editPrice").value = c.price;
-  document.getElementById("editPaid").value = c.paid;
-  document.getElementById("editNotes").value = c.notes;
+  editName.value = c.name;
+  editInstagram.value = c.instagram || "";
+  editPhone.value = c.phone;
+  editStyle.value = c.style;
+  editPrice.value = c.price;
+  editPaid.value = c.paid;
+  editNotes.value = c.notes;
 
   openPage("edit");
 }
 
 function saveEdit(){
   clients[currentClient] = {
-    name: document.getElementById("editName").value,
-    instagram: document.getElementById("editInstagram").value,
-    phone: document.getElementById("editPhone").value,
-    style: document.getElementById("editStyle").value,
-    price: Number(document.getElementById("editPrice").value || 0),
-    paid: Number(document.getElementById("editPaid").value || 0),
-    notes: document.getElementById("editNotes").value
+    name: editName.value,
+    instagram: editInstagram.value,
+    phone: editPhone.value,
+    style: editStyle.value,
+    price: Number(editPrice.value || 0),
+    paid: Number(editPaid.value || 0),
+    notes: editNotes.value
   };
 
   saveData();
@@ -586,10 +781,7 @@ function deleteCurrentClient(){
 }
 
 function renderClientOptions(){
-  let selects = [
-    document.getElementById("sessionClient"),
-    document.getElementById("editSessionClient")
-  ];
+  let selects = [sessionClient, editSessionClient];
 
   selects.forEach(select=>{
     if(!select) return;
@@ -611,16 +803,16 @@ function addSession(){
     return;
   }
 
-  let clientIndex = Number(document.getElementById("sessionClient").value);
+  let clientIndex = Number(sessionClient.value);
   let client = clients[clientIndex];
 
   let session = {
     clientIndex,
     clientName: client.name,
-    date: document.getElementById("sessionDate").value,
-    time: document.getElementById("sessionTime").value,
-    hours: document.getElementById("sessionHours").value,
-    idea: document.getElementById("sessionIdea").value
+    date: sessionDate.value,
+    time: sessionTime.value,
+    hours: sessionHours.value,
+    idea: sessionIdea.value
   };
 
   if(!session.date || !session.time){
@@ -635,7 +827,7 @@ function addSession(){
     document.getElementById(id).value="";
   });
 
-  document.getElementById("sessionForm").classList.add("hidden");
+  sessionForm.classList.add("hidden");
   renderAll();
   alert("Запись добавлена ✅");
 }
@@ -663,33 +855,33 @@ function renderSessions(){
       `;
     });
 
-  document.getElementById("sessionList").innerHTML = html || "<p>Записей пока нет</p>";
+  sessionList.innerHTML = html || "<p>Записей пока нет</p>";
 }
 
 function editSession(index){
   currentSession = index;
   let s = sessions[index];
 
-  document.getElementById("editSessionClient").value = s.clientIndex;
-  document.getElementById("editSessionDate").value = s.date;
-  document.getElementById("editSessionTime").value = s.time;
-  document.getElementById("editSessionHours").value = s.hours;
-  document.getElementById("editSessionIdea").value = s.idea;
+  editSessionClient.value = s.clientIndex;
+  editSessionDate.value = s.date;
+  editSessionTime.value = s.time;
+  editSessionHours.value = s.hours;
+  editSessionIdea.value = s.idea;
 
   openPage("editSession");
 }
 
 function saveSessionEdit(){
-  let clientIndex = Number(document.getElementById("editSessionClient").value);
+  let clientIndex = Number(editSessionClient.value);
   let client = clients[clientIndex];
 
   sessions[currentSession] = {
     clientIndex,
     clientName: client.name,
-    date: document.getElementById("editSessionDate").value,
-    time: document.getElementById("editSessionTime").value,
-    hours: document.getElementById("editSessionHours").value,
-    idea: document.getElementById("editSessionIdea").value
+    date: editSessionDate.value,
+    time: editSessionTime.value,
+    hours: editSessionHours.value,
+    idea: editSessionIdea.value
   };
 
   saveData();
@@ -709,11 +901,11 @@ function renderMoney(){
   let sumPaid = clients.reduce((sum,c)=>sum + Number(c.paid || 0),0);
   let sumDebt = sumPrice - sumPaid;
 
-  document.getElementById("moneyTotalPrice").innerText = "$" + sumPrice;
-  document.getElementById("moneyTotalPaid").innerText = "$" + sumPaid;
-  document.getElementById("moneyTotalDebt").innerText = "$" + sumDebt;
-  document.getElementById("moneyTotalClients").innerText = clients.length;
-  document.getElementById("moneyTotalSessions").innerText = sessions.length;
+  moneyTotalPrice.innerText = "$" + sumPrice;
+  moneyTotalPaid.innerText = "$" + sumPaid;
+  moneyTotalDebt.innerText = "$" + sumDebt;
+  moneyTotalClients.innerText = clients.length;
+  moneyTotalSessions.innerText = sessions.length;
 }
 
 function changeMonth(step){
@@ -742,7 +934,7 @@ function goToday(){
 
 function renderCalendar(){
   let monthDate = new Date(calendarYear, calendarMonth, 1);
-  document.getElementById("calendarTitle").innerText =
+  calendarTitle.innerText =
     monthDate.toLocaleString("ru-RU",{month:"long",year:"numeric"});
 
   let firstDay = new Date(calendarYear, calendarMonth, 1).getDay();
@@ -769,25 +961,25 @@ function renderCalendar(){
     html += `<div class="${cls}" onclick="selectDate('${date}')">${day}<br>${count ? "•".repeat(Math.min(count,3)) : ""}</div>`;
   }
 
-  document.getElementById("calendar").innerHTML = html;
+  calendar.innerHTML = html;
 }
 
 function selectDate(date){
   selectedDate = date;
-  document.getElementById("sessionDate").value = date;
+  sessionDate.value = date;
   renderCalendar();
   renderSelectedDay();
 }
 
 function renderSelectedDay(){
-  document.getElementById("selectedDayList").previousElementSibling.innerText = "📌 " + selectedDate;
+  selectedDayTitle.innerText = "📌 " + selectedDate;
 
   let list = sessions
     .map((s,index)=>({...s,realIndex:index}))
     .filter(s=>s.date===selectedDate)
     .sort((a,b)=>a.time.localeCompare(b.time));
 
-  document.getElementById("selectedDayList").innerHTML = list.map(s=>`
+  selectedDayList.innerHTML = list.map(s=>`
     <div class="dayBox">
       <h2>${s.time} — ${s.clientName}</h2>
       <p>🎨 ${s.idea || "Без описания"}</p>
@@ -798,20 +990,101 @@ function renderSelectedDay(){
 }
 
 function renderHome(){
+  if(homeMode==="today") renderHomeToday();
+  if(homeMode==="week") renderHomeWeek();
+  if(homeMode==="month") renderHomeMonth();
+  renderAttention();
+}
+
+function renderHomeToday(){
+  homeTitle.innerText = "☀️ Сегодня";
+
   let todayString = new Date().toISOString().split("T")[0];
 
   let todaySessions = sessions
     .filter(s=>s.date===todayString)
     .sort((a,b)=>a.time.localeCompare(b.time));
 
-  document.getElementById("todayList").innerHTML = todaySessions.map(s=>`
+  homeContent.innerHTML = todaySessions.map(s=>`
     <div class="dayBox">
       <h2>${s.time} — ${s.clientName}</h2>
       <p>🎨 ${s.idea || "Без описания"}</p>
       <p>⏱ ${s.hours || "?"} часов</p>
     </div>
   `).join("") || "<p>Сегодня записей нет</p>";
+}
 
+function renderHomeWeek(){
+  homeTitle.innerText = "📅 Ближайшие 7 дней";
+
+  let html = "";
+  let start = new Date();
+
+  for(let i=0;i<7;i++){
+    let d = new Date(start);
+    d.setDate(start.getDate()+i);
+    let date = d.toISOString().split("T")[0];
+
+    let daySessions = sessions
+      .filter(s=>s.date===date)
+      .sort((a,b)=>a.time.localeCompare(b.time));
+
+    html += `<div class="dayBox"><h2>${date}</h2>`;
+
+    if(daySessions.length===0){
+      html += `<p class="success">Свободно</p>`;
+    } else {
+      daySessions.forEach(s=>{
+        html += `<p>${s.time} — ${s.clientName} · ${s.idea || "Без описания"}</p>`;
+      });
+    }
+
+    html += `</div>`;
+  }
+
+  homeContent.innerHTML = html;
+}
+
+function renderHomeMonth(){
+  homeTitle.innerText = "📈 Этот месяц";
+
+  let now = new Date();
+  let year = now.getFullYear();
+  let month = now.getMonth();
+
+  let monthSessions = sessions.filter(s=>{
+    let d = new Date(s.date+"T"+s.time);
+    return d.getFullYear()===year && d.getMonth()===month;
+  });
+
+  let hours = monthSessions.reduce((sum,s)=>sum + Number(s.hours || 0),0);
+
+  let monthDebt = clients.reduce((sum,c)=>
+    sum + (Number(c.price||0)-Number(c.paid||0)),0);
+
+  homeContent.innerHTML = `
+    <div class="grid2">
+      <div class="moneyBox">
+        <h2>${monthSessions.length}</h2>
+        <p>Сеансов</p>
+      </div>
+      <div class="moneyBox">
+        <h2>${hours}</h2>
+        <p>Часов</p>
+      </div>
+      <div class="moneyBox">
+        <h2>$${monthDebt}</h2>
+        <p>Остаток</p>
+      </div>
+      <div class="moneyBox">
+        <h2>${clients.length}</h2>
+        <p>Клиентов</p>
+      </div>
+    </div>
+  `;
+}
+
+function renderAttention(){
   let clientsWithoutDate = clients.filter((c,index)=>
     !sessions.some(s=>Number(s.clientIndex)===Number(index))
   ).length;
@@ -819,10 +1092,14 @@ function renderHome(){
   let totalDebt = clients.reduce((sum,c)=>
     sum + (Number(c.price||0)-Number(c.paid||0)),0);
 
-  document.getElementById("attentionList").innerHTML = `
-    <p>⚠️ Клиентов без даты: ${clientsWithoutDate}</p>
-    <p>💰 Осталось получить: $${totalDebt}</p>
-    <p>📅 Всего записей: ${sessions.length}</p>
+  let nextSession = sessions
+    .filter(s=>new Date(s.date+"T"+s.time) >= new Date())
+    .sort((a,b)=>new Date(a.date+"T"+a.time)-new Date(b.date+"T"+b.time))[0];
+
+  attentionList.innerHTML = `
+    <div class="infoLine"><span>⚠️ Без даты</span><strong>${clientsWithoutDate}</strong></div>
+    <div class="infoLine"><span>💰 Осталось получить</span><strong>$${totalDebt}</strong></div>
+    <div class="infoLine"><span>📅 Ближайшая запись</span><strong>${nextSession ? nextSession.date + " " + nextSession.time : "нет"}</strong></div>
   `;
 }
 
