@@ -1,101 +1,155 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tattoo Diary</title>
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Tattoo Diary CRM</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,sans-serif}
 
-body{
-  background:#000;
-  color:white;
-  padding:25px;
-  padding-bottom:105px;
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+font-family:-apple-system, sans-serif;
 }
 
-.logo{font-size:40px;font-weight:bold;margin-bottom:8px}
-.sub{color:#888;margin-bottom:25px}
-h1{font-size:42px;margin-bottom:20px}
-h2{font-size:26px;margin-bottom:15px}
+body{
+background:#000;
+color:white;
+padding:25px;
+padding-bottom:110px;
+}
+
+.logo{
+font-size:42px;
+font-weight:bold;
+}
+
+.sub{
+color:#888;
+margin-top:5px;
+margin-bottom:25px;
+}
+
+h1{
+font-size:42px;
+margin-bottom:20px;
+}
+
+h2{
+font-size:28px;
+}
 
 .card{
-  background:#121212;
-  border-radius:30px;
-  padding:25px;
-  margin-top:20px;
-  box-shadow:0 0 35px #061f66;
+background:#111;
+border-radius:30px;
+padding:25px;
+margin-top:20px;
+box-shadow:0 0 35px #041d66;
 }
 
 button{
-  background:#2962ff;
-  color:white;
-  border:0;
-  border-radius:20px;
-  padding:18px;
-  font-size:22px;
-  width:100%;
-  margin-top:15px;
+width:100%;
+padding:18px;
+margin-top:15px;
+border:none;
+border-radius:20px;
+font-size:22px;
+color:white;
+background:#2962ff;
 }
 
-  button.red{background:#9b1c1c}
-button.gray{background:#2a2a2a}
-button.green{background:#16833a}
-
-input,textarea,select{
-  width:100%;
-  padding:16px;
-  margin-top:12px;
-  border:0;
-  border-radius:15px;
-  background:#222;
-  color:white;
-  font-size:18px;
+button.red{
+background:#a51818;
 }
 
-textarea{height:90px}
-
-.client,.session,.moneyBox{
-  background:#111;
-  padding:18px;
-  border-radius:20px;
-  margin-top:15px;
+button.green{
+background:#148a34;
 }
 
-.client p,.session p,.moneyBox p{
-  color:#bbb;
-  margin-top:6px;
+button.gray{
+background:#2a2a2a;
 }
 
-.page{display:none}
-.show{display:block}
+input,
+textarea,
+select{
+width:100%;
+background:#222;
+color:white;
+border:none;
+border-radius:15px;
+padding:16px;
+margin-top:12px;
+font-size:18px;
+}
+
+textarea{
+height:90px;
+}
+
+.hidden{
+display:none;
+}
+
+  .client,
+.session,
+.moneyBox{
+background:#181818;
+padding:18px;
+border-radius:20px;
+margin-top:15px;
+}
+
+.client p,
+.session p,
+.moneyBox p{
+color:#bbb;
+margin-top:6px;
+}
+
+.instagram{
+color:#9bbcff;
+}
+
+.page{
+display:none;
+}
+
+.show{
+display:block;
+}
 
 .bottom{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background:#070707;
-  display:flex;
-  justify-content:space-around;
-  padding:15px;
-  border-top:1px solid #222;
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+background:#070707;
+display:flex;
+justify-content:space-around;
+padding:15px;
+border-top:1px solid #222;
 }
 
 .nav{
-  color:#999;
-  text-align:center;
-  font-size:14px;
+color:#999;
+text-align:center;
+font-size:14px;
 }
 
-.active{color:white}
-
-.instagram{
-  color:#9bbcff;
+.active{
+color:white;
 }
+
 </style>
 </head>
+
 <body>
 
   <div id="home" class="page show">
@@ -105,17 +159,17 @@ textarea{height:90px}
 </div>
 
 <div class="sub">
-Премиальная CRM для тату-мастера
+CRM для тату-мастера
 </div>
 
 <div class="card">
 
 <h2>
-Добро пожаловать, Игорь
+Привет, Игорь 👋
 </h2>
 
 <p>
-Клиенты, Instagram, записи и финансы в одном месте
+Все клиенты, записи и деньги в одном месте
 </p>
 
 <button onclick="openPage('clients')">
@@ -157,36 +211,49 @@ oninput="renderClients()">
 
 <div class="card">
 
-<h2>
-➕ Новый клиент
-</h2>
+<button onclick="toggleClientForm()">
+➕ Добавить нового клиента
+</button>
 
+
+<div id="clientForm"
+class="hidden">
 
 <input id="name"
 placeholder="Имя клиента">
 
+
 <input id="instagram"
 placeholder="Instagram @username">
+
 
 <input id="phone"
 placeholder="Телефон">
 
+
 <input id="style"
 placeholder="Эскиз / стиль">
+
 
 <input id="price"
 placeholder="Полная стоимость $">
 
+
 <input id="paid"
 placeholder="Внесено $">
 
+
 <textarea id="notes"
-placeholder="Заметки о клиенте"></textarea>
+placeholder="Заметки">
+</textarea>
 
 
-<button onclick="addClient()">
+<button class="green"
+onclick="addClient()">
 💾 Сохранить клиента
 </button>
+
+</div>
 
 </div>
 
@@ -213,45 +280,35 @@ placeholder="Заметки о клиенте"></textarea>
 <div class="card">
 
 <p id="profileInstagram"
-class="instagram">
-</p>
+class="instagram"></p>
 
-<p id="profilePhone">
-</p>
+<p id="profilePhone"></p>
 
-<p id="profileStyle">
-</p>
+<p id="profileStyle"></p>
 
-<p id="profileMoney">
-</p>
+<p id="profileMoney"></p>
 
-<p id="profileNotes">
-</p>
-
+<p id="profileNotes"></p>
 
 <button class="green"
 onclick="openInstagram()">
 📸 Открыть Instagram
 </button>
 
-
 <button class="green"
 onclick="addPayment()">
 💵 Добавить оплату
 </button>
-
 
 <button class="gray"
 onclick="editClient()">
 ✏️ Редактировать
 </button>
 
-
 <button class="red"
 onclick="deleteCurrentClient()">
 🗑 Удалить клиента
 </button>
-
 
 <button class="gray"
 onclick="openPage('clients')">
@@ -269,37 +326,35 @@ onclick="openPage('clients')">
 📅 Записи
 </h1>
 
-
 <div class="card">
 
-<h2>
-Новая запись
-</h2>
+<button onclick="toggleSessionForm()">
+➕ Новая запись
+</button>
 
-<select id="sessionClient">
-</select>
+<div id="sessionForm"
+class="hidden">
 
+<select id="sessionClient"></select>
 
 <input id="sessionDate"
 type="date">
 
-
 <input id="sessionTime"
 type="time">
-
 
 <input id="sessionHours"
 placeholder="Длительность (часов)">
 
-
 <textarea id="sessionIdea"
-placeholder="Что делаем, эскиз, место">
-</textarea>
+placeholder="Что делаем, эскиз, место"></textarea>
 
-
-<button onclick="addSession()">
-➕ Сохранить запись
+<button class="green"
+onclick="addSession()">
+💾 Сохранить запись
 </button>
+
+</div>
 
 </div>
 
@@ -310,8 +365,7 @@ placeholder="Что делаем, эскиз, место">
 📌 Ближайшие записи
 </h2>
 
-<div id="sessionList">
-</div>
+<div id="sessionList"></div>
 
 </div>
 
@@ -320,31 +374,40 @@ placeholder="Что делаем, эскиз, место">
   <div id="edit" class="page">
 
 <h1>
-✏️ Редактировать
+✏️ Редактирование клиента
 </h1>
 
 <div class="card">
 
-<input id="editName" placeholder="Имя клиента">
+<input id="editName"
+placeholder="Имя клиента">
 
-<input id="editInstagram" placeholder="Instagram @username">
+<input id="editInstagram"
+placeholder="Instagram @username">
 
-<input id="editPhone" placeholder="Телефон">
+<input id="editPhone"
+placeholder="Телефон">
 
-<input id="editStyle" placeholder="Эскиз / стиль">
+<input id="editStyle"
+placeholder="Эскиз / стиль">
 
-<input id="editPrice" placeholder="Полная стоимость $">
+<input id="editPrice"
+placeholder="Полная стоимость $">
 
-<input id="editPaid" placeholder="Внесено $">
+<input id="editPaid"
+placeholder="Внесено $">
 
-<textarea id="editNotes" placeholder="Заметки"></textarea>
+<textarea id="editNotes"
+placeholder="Заметки"></textarea>
 
-<button onclick="saveEdit()">
-✅ Сохранить изменения
+<button class="green"
+onclick="saveEdit()">
+💾 Сохранить изменения
 </button>
 
-<button class="gray" onclick="openPage('profile')">
-Отмена
+<button class="gray"
+onclick="showClient(currentClient)">
+↩ Назад
 </button>
 
 </div>
@@ -352,7 +415,45 @@ placeholder="Что делаем, эскиз, место">
 </div>
 
 
-<div id="money" class="page">
+<div id="editSession" class="page">
+
+<h1>
+📅 Редактирование записи
+</h1>
+
+<div class="card">
+
+<select id="editSessionClient">
+</select>
+
+<input id="editSessionDate"
+type="date">
+
+<input id="editSessionTime"
+type="time">
+
+<input id="editSessionHours"
+placeholder="Длительность (часов)">
+
+<textarea id="editSessionIdea"
+placeholder="Что делаем, эскиз, место">
+</textarea>
+
+<button class="green"
+onclick="saveSessionEdit()">
+💾 Сохранить запись
+</button>
+
+<button class="gray"
+onclick="openPage('sessions')">
+↩ Назад
+</button>
+
+</div>
+
+</div>
+
+  <div id="money" class="page">
 
 <h1>
 💵 Финансы
@@ -360,7 +461,9 @@ placeholder="Что делаем, эскиз, место">
 
 <div class="card">
 
-<h2>Общая статистика</h2>
+<h2>
+Общая статистика
+</h2>
 
 <div class="moneyBox">
 <h2 id="totalPrice">$0</h2>
@@ -391,35 +494,48 @@ placeholder="Что делаем, эскиз, место">
 
 </div>
 
-  <div class="bottom">
 
-<div class="nav active" onclick="openPage('home')">
+<div class="bottom">
+
+<div class="nav active"
+onclick="openPage('home')">
 🏠<br>Главная
 </div>
 
-<div class="nav" onclick="openPage('clients')">
+<div class="nav"
+onclick="openPage('clients')">
 👥<br>Клиенты
 </div>
 
-<div class="nav" onclick="openPage('sessions')">
+<div class="nav"
+onclick="openPage('sessions')">
 📅<br>Записи
 </div>
 
-<div class="nav" onclick="openPage('money')">
+<div class="nav"
+onclick="openPage('money')">
 💵<br>Финансы
 </div>
 
 </div>
 
-
-<script>
+  <script>
 let clients = JSON.parse(localStorage.getItem("clients") || "[]");
 let sessions = JSON.parse(localStorage.getItem("sessions") || "[]");
 let currentClient = null;
+let currentSession = null;
 
 function saveData(){
   localStorage.setItem("clients", JSON.stringify(clients));
   localStorage.setItem("sessions", JSON.stringify(sessions));
+}
+
+function toggleClientForm(){
+  document.getElementById("clientForm").classList.toggle("hidden");
+}
+
+function toggleSessionForm(){
+  document.getElementById("sessionForm").classList.toggle("hidden");
 }
 
 function openPage(id){
@@ -437,7 +553,7 @@ function openPage(id){
   renderMoney();
 }
 
-  function addClient(){
+    function addClient(){
   let client = {
     name: document.getElementById("name").value,
     instagram: document.getElementById("instagram").value,
@@ -463,6 +579,7 @@ function openPage(id){
     document.getElementById(id).value="";
   });
 
+  document.getElementById("clientForm").classList.add("hidden");
   alert("Клиент добавлен ✅");
 }
 
@@ -576,17 +693,23 @@ function deleteCurrentClient(){
 }
 
 function renderClientOptions(){
-  let select = document.getElementById("sessionClient");
-  if(!select) return;
+  let selects = [
+    document.getElementById("sessionClient"),
+    document.getElementById("editSessionClient")
+  ];
 
-  if(clients.length === 0){
-    select.innerHTML = `<option>Сначала добавьте клиента</option>`;
-    return;
-  }
+  selects.forEach(select=>{
+    if(!select) return;
 
-  select.innerHTML = clients.map((c, index) =>
-    `<option value="${index}">${c.name}</option>`
-  ).join("");
+    if(clients.length === 0){
+      select.innerHTML = `<option>Сначала добавьте клиента</option>`;
+      return;
+    }
+
+    select.innerHTML = clients.map((c, index) =>
+      `<option value="${index}">${c.name}</option>`
+    ).join("");
+  });
 }
 
 function addSession(){
@@ -621,6 +744,7 @@ function addSession(){
     document.getElementById(id).value="";
   });
 
+  document.getElementById("sessionForm").classList.add("hidden");
   alert("Запись добавлена ✅");
 }
 
@@ -641,6 +765,7 @@ function renderSessions(){
           <p>🎨 ${s.idea || "Без описания"}</p>
           <p>⏱ ${s.hours || "?"} часов</p>
           <p>💰 Остаток клиента: $${debt}</p>
+          <button class="gray" onclick="editSession(${s.realIndex})">✏️ Редактировать запись</button>
           <button class="red" onclick="deleteSession(${s.realIndex})">Удалить запись</button>
         </div>
       `;
@@ -648,6 +773,38 @@ function renderSessions(){
 
   document.getElementById("sessionList").innerHTML =
     html || "<p>Записей пока нет</p>";
+}
+
+function editSession(index){
+  currentSession = index;
+  let s = sessions[index];
+
+  document.getElementById("editSessionClient").value = s.clientIndex;
+  document.getElementById("editSessionDate").value = s.date;
+  document.getElementById("editSessionTime").value = s.time;
+  document.getElementById("editSessionHours").value = s.hours;
+  document.getElementById("editSessionIdea").value = s.idea;
+
+  openPage("editSession");
+}
+
+function saveSessionEdit(){
+  let clientIndex = Number(document.getElementById("editSessionClient").value);
+  let client = clients[clientIndex];
+
+  sessions[currentSession] = {
+    clientIndex: clientIndex,
+    clientName: client.name,
+    date: document.getElementById("editSessionDate").value,
+    time: document.getElementById("editSessionTime").value,
+    hours: document.getElementById("editSessionHours").value,
+    idea: document.getElementById("editSessionIdea").value
+  };
+
+  saveData();
+  renderSessions();
+  renderMoney();
+  openPage("sessions");
 }
 
 function deleteSession(index){
