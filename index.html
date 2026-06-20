@@ -7,87 +7,178 @@
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,sans-serif}
-body{background:#000;color:white;padding:25px;padding-bottom:105px}
+
+body{
+  background:#000;
+  color:white;
+  padding:25px;
+  padding-bottom:105px;
+}
+
 .logo{font-size:40px;font-weight:bold;margin-bottom:8px}
 .sub{color:#888;margin-bottom:25px}
 h1{font-size:42px;margin-bottom:20px}
 h2{font-size:26px;margin-bottom:15px}
-.card{background:#121212;border-radius:30px;padding:25px;margin-top:20px;box-shadow:0 0 35px #061f66}
-button{background:#2962ff;color:white;border:0;border-radius:20px;padding:18px;font-size:22px;width:100%;margin-top:15px}
+
+.card{
+  background:#121212;
+  border-radius:30px;
+  padding:25px;
+  margin-top:20px;
+  box-shadow:0 0 35px #061f66;
+}
+
+button{
+  background:#2962ff;
+  color:white;
+  border:0;
+  border-radius:20px;
+  padding:18px;
+  font-size:22px;
+  width:100%;
+  margin-top:15px;
+}
+
 button.red{background:#9b1c1c}
 button.gray{background:#2a2a2a}
-input,textarea{width:100%;padding:16px;margin-top:12px;border:0;border-radius:15px;background:#222;color:white;font-size:18px}
+
+  input,textarea{
+  width:100%;
+  padding:16px;
+  margin-top:12px;
+  border:0;
+  border-radius:15px;
+  background:#222;
+  color:white;
+  font-size:18px;
+}
+
 textarea{height:90px}
-.client{background:#111;padding:18px;border-radius:20px;margin-top:15px}
-.client p{color:#bbb;margin-top:6px}
-.page{display:none}.show{display:block}
-.bottom{position:fixed;bottom:0;left:0;right:0;background:#070707;display:flex;justify-content:space-around;padding:15px;border-top:1px solid #222}
-.nav{color:#999;text-align:center;font-size:14px}.active{color:white}
-.back{background:#2a2a2a;width:auto;padding:12px 18px;font-size:18px}
+
+.client{
+  background:#111;
+  padding:18px;
+  border-radius:20px;
+  margin-top:15px;
+}
+
+.client p{
+  color:#bbb;
+  margin-top:6px;
+}
+
+.page{display:none}
+.show{display:block}
+
+.bottom{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:#070707;
+  display:flex;
+  justify-content:space-around;
+  padding:15px;
+  border-top:1px solid #222;
+}
+
+.nav{
+  color:#999;
+  text-align:center;
+  font-size:14px;
+}
+
+.active{color:white}
 </style>
 </head>
 <body>
 
-<div id="home" class="page show">
-  <div class="logo">🖋 Tattoo Diary</div>
+  <div id="home" class="page show">
+  <div class="logo">🖋️ Tattoo Diary</div>
   <div class="sub">Премиальный дневник мастера</div>
 
   <div class="card">
-    <h2>Добрый вечер, Игорь</h2>
-    <p>Сегодня 2 сеанса. Один эскиз ждёт подготовки.</p>
-  </div>
+    <h2>Добро пожаловать, Игорь</h2>
+    <p>Ваши клиенты и проекты всегда под рукой</p>
 
-  <div class="card">
-    <h2>⚡ Быстрые действия</h2>
-    <button onclick="openPage('clients')">➕ Клиент</button>
-    <button>📅 Запись</button>
-    <button>💵 Оплата</button>
+    <button onclick="openPage('clients')">
+      👥 Клиенты
+    </button>
   </div>
 </div>
 
-  <div id="clients" class="page">
-  <h1>👥 Клиенты</h1>
 
-  <div class="card">
-    <h2>Добавить клиента</h2>
-    <input id="name" placeholder="Имя">
-    <input id="phone" placeholder="Телефон">
-    <input id="style" placeholder="Стиль / эскиз">
-    <input id="price" placeholder="Общая цена $">
-    <input id="paid" placeholder="Внесено $">
-    <textarea id="notes" placeholder="Заметки по клиенту"></textarea>
-    <button onclick="addClient()">Сохранить</button>
-  </div>
+<div id="clients" class="page">
 
-  <div class="card">
-    <h2>Список клиентов</h2>
-    <div id="clientList"></div>
-  </div>
+<h1>👥 Клиенты</h1>
+
+<div class="card">
+
+<h2>Добавить клиента</h2>
+
+<input id="name" placeholder="Имя">
+<input id="phone" placeholder="Телефон">
+<input id="style" placeholder="Стиль / эскиз">
+<input id="price" placeholder="Цена $">
+<input id="paid" placeholder="Внесено $">
+<textarea id="notes"
+placeholder="Заметки"></textarea>
+
+<button onclick="addClient()">
+Сохранить
+</button>
+
 </div>
+
+
+<div class="card">
+<h2>Список клиентов</h2>
+
+<div id="clientList"></div>
+
+</div>
+
+</div>
+
 
 <div id="profile" class="page">
-  <button class="back" onclick="openPage('clients')">← Назад</button>
 
-  <div class="card">
-    <h1 id="profileName">Клиент</h1>
-    <p id="profilePhone"></p>
-    <p id="profileStyle"></p>
-    <p id="profileMoney"></p>
-    <p id="profileNotes"></p>
+<h1 id="profileName">
+Клиент
+</h1>
 
-    <button class="red" onclick="deleteCurrentClient()">🗑 Удалить клиента</button>
-  </div>
+<div class="card">
+
+<p id="profilePhone"></p>
+
+<p id="profileStyle"></p>
+
+<p id="profileMoney"></p>
+
+<p id="profileNotes"></p>
+
+<button class="gray"
+onclick="openPage('clients')">
+Назад
+</button>
+
+<button class="red"
+onclick="deleteCurrentClient()">
+Удалить клиента
+</button>
+
 </div>
 
-<div class="bottom">
+</div>
+
+  <div class="bottom">
   <div class="nav active" onclick="openPage('home')">🏠<br>Главная</div>
   <div class="nav" onclick="openPage('clients')">👥<br>Клиенты</div>
   <div class="nav">📅<br>Записи</div>
   <div class="nav">💵<br>Финансы</div>
 </div>
 
-  <script>
-
+<script>
 let clients = JSON.parse(localStorage.getItem("clients") || "[]");
 let currentClient = null;
 
@@ -96,32 +187,23 @@ function saveData(){
 }
 
 function openPage(id){
-  document.querySelectorAll(".page")
-    .forEach(p => p.classList.remove("show"));
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("show"));
+  document.getElementById(id).classList.add("show");
 
-  document.getElementById(id)
-    .classList.add("show");
-
-  document.querySelectorAll(".nav")
-    .forEach(n => n.classList.remove("active"));
-
-  if(id==="home")
-    document.querySelectorAll(".nav")[0].classList.add("active");
-
-  if(id==="clients")
-    document.querySelectorAll(".nav")[1].classList.add("active");
+  document.querySelectorAll(".nav").forEach(n => n.classList.remove("active"));
+  if(id==="home") document.querySelectorAll(".nav")[0].classList.add("active");
+  if(id==="clients") document.querySelectorAll(".nav")[1].classList.add("active");
 }
 
 function addClient(){
-
   let client = {
-  name: document.getElementById("name").value,
-  phone: document.getElementById("phone").value,
-  style: document.getElementById("style").value,
-  price: document.getElementById("price").value || 0,
-  paid: document.getElementById("paid").value || 0,
-  notes: document.getElementById("notes").value
- };
+    name: document.getElementById("name").value,
+    phone: document.getElementById("phone").value,
+    style: document.getElementById("style").value,
+    price: Number(document.getElementById("price").value || 0),
+    paid: Number(document.getElementById("paid").value || 0),
+    notes: document.getElementById("notes").value
+  };
 
   if(!client.name){
     alert("Введите имя клиента");
@@ -129,87 +211,65 @@ function addClient(){
   }
 
   clients.push(client);
-
   saveData();
   renderClients();
 
-  name.value="";
-  phone.value="";
-  style.value="";
-  price.value="";
-  paid.value="";
-  notes.value="";
+  document.getElementById("name").value="";
+  document.getElementById("phone").value="";
+  document.getElementById("style").value="";
+  document.getElementById("price").value="";
+  document.getElementById("paid").value="";
+  document.getElementById("notes").value="";
 
   alert("Клиент добавлен ✅");
 }
 
-
 function renderClients(){
+  let html = "";
 
-  let html="";
-
-  clients.forEach((c, index)=>{
-
+  clients.forEach((c, index) => {
     let debt = c.price - c.paid;
 
     html += `
-    <div class="client" onclick="showClient(${index})">
-      <h2>${c.name}</h2>
-      <p>📞 ${c.phone}</p>
-      <p>🎨 ${c.style}</p>
-      <p>💰 Остаток: $${debt}</p>
-    </div>
+      <div class="client" onclick="showClient(${index})">
+        <h2>${c.name}</h2>
+        <p>📞 ${c.phone}</p>
+        <p>🎨 ${c.style}</p>
+        <p>💰 Остаток: $${debt}</p>
+      </div>
     `;
-
   });
 
-  if(!html){
-    html = "<p>Клиентов пока нет</p>";
-  }
-
-  clientList.innerHTML = html;
+  document.getElementById("clientList").innerHTML =
+    html || "<p>Клиентов пока нет</p>";
 }
 
-
 function showClient(index){
-
   currentClient = index;
-
   let c = clients[index];
+  let debt = c.price - c.paid;
 
-  profileName.innerText = c.name;
-  profilePhone.innerText = "📞 " + c.phone;
-  profileStyle.innerText = "🎨 " + c.style;
-  profileMoney.innerText =
-    "💰 Цена: $" + c.price +
-    " | Внесено: $" + c.paid +
-    " | Остаток: $" + (c.price-c.paid);
-
-  profileNotes.innerText =
+  document.getElementById("profileName").innerText = c.name;
+  document.getElementById("profilePhone").innerText = "📞 " + c.phone;
+  document.getElementById("profileStyle").innerText = "🎨 " + c.style;
+  document.getElementById("profileMoney").innerText =
+    "💰 Цена: $" + c.price + " | Внесено: $" + c.paid + " | Остаток: $" + debt;
+  document.getElementById("profileNotes").innerText =
     "📝 " + (c.notes || "Нет заметок");
 
   openPage("profile");
 }
 
-
 function deleteCurrentClient(){
+  if(!confirm("Удалить клиента?")) return;
 
-  if(!confirm("Удалить клиента?")){
-    return;
-  }
-
-  clients.splice(currentClient,1);
-
+  clients.splice(currentClient, 1);
   saveData();
-
   renderClients();
-
   openPage("clients");
 }
 
-
 renderClients();
-
 </script>
 
 </body>
