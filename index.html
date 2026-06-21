@@ -5,31 +5,42 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>InkFlow</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-body{background:#000;color:#fff;padding:18px;padding-bottom:120px}
-.page{display:none}.show{display:block}
-h1{font-size:31px;margin-bottom:14px}h2{font-size:20px;margin-bottom:10px}
-p{line-height:1.35}.small{color:#888;font-size:14px}
-.card{background:#111;border-radius:22px;padding:18px;margin-top:14px}
-.item{background:#181818;border-radius:16px;padding:15px;margin-top:10px}
-.item p{color:#bbb;margin-top:5px}
-button{width:100%;border:none;border-radius:16px;padding:15px;margin-top:12px;font-size:17px;color:white;background:#2563eb}
-button.gray{background:#2a2a2a}button.green{background:#15803d}button.red{background:#991b1b}
-input,textarea,select{width:100%;max-width:100%;min-width:0;background:#1d1d1d;color:white;border:none;border-radius:14px;padding:14px;margin-top:10px;font-size:16px}
-input[type="date"]{width:100%;max-width:100%;-webkit-appearance:none;appearance:none}
+*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-tap-highlight-color:transparent}
+body{background:radial-gradient(circle at top,#1A1208 0%,#070707 45%);color:#fff;padding:20px;padding-bottom:125px;min-height:100vh}
+.page{display:none;animation:fade .2s ease}.show{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+h1{font-size:34px;font-weight:800;letter-spacing:-1px;margin-bottom:20px}
+h2{font-size:19px;font-weight:700;margin-bottom:10px}
+p{line-height:1.45}.small{color:#8e8e93;font-size:14px}
+.card{background:rgba(28,28,30,.85);backdrop-filter:blur(18px);border:1px solid #2c2c2e;border-radius:28px;padding:18px;margin-top:14px;box-shadow:0 10px 30px rgba(0,0,0,.45)}
+.item{background:linear-gradient(180deg,#1d1d21,#141416);border:1px solid #2c2c2e;border-radius:22px;padding:16px;margin-top:12px;transition:.15s}
+.item p{color:#8e8e93;margin-top:5px}
+.click{cursor:pointer}.click:active,.item:active{transform:scale(.97);opacity:.85}
+button{width:100%;border:none;border-radius:18px;padding:15px;margin-top:12px;font-size:16px;font-weight:600;color:white;background:linear-gradient(135deg,#ff6a00,#ff8a00);box-shadow:0 8px 20px rgba(255,106,0,.35)}
+button.gray{background:#2c2c2e;box-shadow:none}button.green{background:linear-gradient(135deg,#22c55e,#16a34a)}button.red{background:linear-gradient(135deg,#ef4444,#b91c1c)}
+input,textarea,select{width:100%;max-width:100%;min-width:0;background:rgba(30,30,32,.9);color:#fff;border:1px solid #2c2c2e;border-radius:18px;padding:15px;margin-top:10px;font-size:16px;outline:none}
+input[type="date"]{appearance:none;-webkit-appearance:none}
 textarea{min-height:90px;resize:none}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.grid7{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;margin-top:12px}
-.day{background:#181818;border-radius:14px;min-height:48px;display:flex;align-items:center;justify-content:center;flex-direction:column;font-size:15px}
-.day.today{outline:2px solid #2563eb}.day.selected{background:#2563eb}
-.dots{font-size:12px;color:#4ade80;line-height:10px;margin-top:3px}
-.hidden{display:none}.click{cursor:pointer}.click:active{transform:scale(.97);opacity:.85}
-.bottom{position:fixed;left:0;right:0;bottom:0;background:#050505;border-top:1px solid #222;display:flex;justify-content:space-around;padding:10px 6px}
-.nav{flex:1;text-align:center;font-size:13px;color:#888}.nav.active{color:white}
-.thumb{width:100%;border-radius:14px;margin-top:10px;max-height:220px;object-fit:cover}
-.fullImg{width:100%;border-radius:18px;margin-top:10px}
+.grid7{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;margin-top:14px}
+.day{background:#141416;border:1px solid #2c2c2e;border-radius:18px;min-height:56px;display:flex;align-items:center;justify-content:center;flex-direction:column;font-size:15px}
+.day.today{border:1.5px solid #ff6a00;box-shadow:0 0 18px rgba(255,106,0,.4)}
+.day.selected{background:linear-gradient(135deg,#ff6a00,#ff8a00);border:none}
+.dots{font-size:11px;margin-top:4px;letter-spacing:1px;color:#22c55e}
+.hidden{display:none}
+.thumb{width:100%;border-radius:18px;margin-top:10px;max-height:220px;object-fit:cover;border:1px solid #2c2c2e}
+.fullImg{width:100%;border-radius:24px;margin-top:10px;box-shadow:0 10px 25px rgba(0,0,0,.5)}
+.bottom{position:fixed;left:12px;right:12px;bottom:12px;height:74px;background:rgba(20,20,22,.9);backdrop-filter:blur(25px);border:1px solid #2c2c2e;border-radius:26px;display:flex;align-items:center;justify-content:space-around;box-shadow:0 10px 35px rgba(0,0,0,.6)}
+.nav{flex:1;text-align:center;color:#8e8e93;font-size:11px;font-weight:600;letter-spacing:.5px}
+.nav.active{color:#ff6a00;transform:translateY(-2px)}
+.money{color:#ff6a00;font-weight:700}
+.recordHead{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.recordTime{font-size:18px;font-weight:800}
+.recordArrow{color:#ff6a00;font-size:18px}
+@media(max-width:390px){h1{font-size:32px}.card{border-radius:24px}.bottom{height:68px}button{font-size:15px}}
 </style>
 </head>
+
 <body>
 
 <div id="today" class="page show">
@@ -42,15 +53,19 @@ textarea{min-height:90px;resize:none}
 
 <div id="calendar" class="page">
 <h1>📅 Календарь</h1>
+
 <div class="card">
 <div class="grid2">
 <button class="gray" onclick="changeMonth(-1)">← Месяц</button>
 <button class="gray" onclick="changeMonth(1)">Месяц →</button>
 </div>
+
 <h2 id="monthTitle"></h2>
+
 <div class="grid7">
 <div class="small">ПН</div><div class="small">ВТ</div><div class="small">СР</div><div class="small">ЧТ</div><div class="small">ПТ</div><div class="small">СБ</div><div class="small">ВС</div>
 </div>
+
 <div id="calendarDays" class="grid7"></div>
 </div>
 
@@ -78,7 +93,7 @@ textarea{min-height:90px;resize:none}
 <p id="clientIdea"></p>
 
 <h2>💰 Деньги</h2>
-<p id="clientMoney"></p>
+<p id="clientMoney" class="money"></p>
 
 <h2>📅 Следующая запись</h2>
 <p id="clientNext"></p>
@@ -86,12 +101,32 @@ textarea{min-height:90px;resize:none}
 <h2>📝 Заметка</h2>
 <p id="clientNote" class="small">Пока нет</p>
 
-<button onclick="addPayment()">💵 Добавить оплату</button>
+<div class="grid2">
+<button onclick="addPayment()">💵 Оплата</button>
 <button onclick="openSketchPage()">🎨 Эскиз</button>
-<button onclick="addNote()">📝 Добавить заметку</button>
+</div>
+
+<div class="grid2">
+<button onclick="openEditClient()">✏️ Редактировать</button>
+<button onclick="addNote()">📝 Заметка</button>
+</div>
+
 <button onclick="openRecordForClient()">📅 Записать дату</button>
 <button class="red" onclick="deleteClient()">🗑 Удалить клиента</button>
 <button class="gray" onclick="openPage('clients')">← Назад</button>
+</div>
+</div>
+
+<div id="editClientPage" class="page">
+<h1>✏️ Клиент</h1>
+<div class="card">
+<input id="editName" placeholder="Имя клиента">
+<input id="editPhone" placeholder="Телефон">
+<input id="editInstagram" placeholder="Instagram">
+<textarea id="editIdea" placeholder="Что хочет"></textarea>
+<input id="editPrice" placeholder="Цена">
+<button class="green" onclick="saveClientEdit()">💾 Сохранить</button>
+<button class="gray" onclick="openClient(currentClientId)">← Назад</button>
 </div>
 </div>
 
@@ -180,6 +215,7 @@ let currentClientId=null;
 let selectedClientId=null;
 let editRecordId=null;
 let currentSketchId=null;
+let expandedRecordId=null;
 let saving=false;
 
 function localDate(d=new Date()){
@@ -201,7 +237,8 @@ function setupTime(){
  recordMinute.innerHTML="";
  for(let h=0;h<24;h++)recordHour.innerHTML+=`<option>${String(h).padStart(2,"0")}</option>`;
  for(let m=0;m<60;m++)recordMinute.innerHTML+=`<option>${String(m).padStart(2,"0")}</option>`;
- recordHour.value="12";recordMinute.value="00";
+ recordHour.value="12";
+ recordMinute.value="00";
 }
 
 function openPage(id){
@@ -228,7 +265,7 @@ function renderToday(){
   return `<div class="item click" onclick="openClient('${c.id}')">
    <h2>${r.time} — ${c.name}</h2>
    <p>${r.plan||c.idea}</p>
-   <p>💰 Осталось $${left(c)}</p>
+   <p class="money">💰 Осталось $${left(c)}</p>
   </div>`;
  }).join("")||`<p class="small">Сегодня свободно</p>`;
 }
@@ -252,51 +289,87 @@ function renderCalendar(){
  }
  calendarDays.innerHTML=html;
  selectedDayTitle.innerText=selectedDate;
+
  let list=records.filter(r=>r.date===selectedDate).sort((a,b)=>a.time.localeCompare(b.time));
  dayRecords.innerHTML=list.map(r=>{
   let c=clientById(r.clientId);
   if(!c)return "";
+  let open=expandedRecordId===r.id;
   return `<div class="item">
-   <h2>${r.time} — ${c.name}</h2>
-   <p>${r.plan||c.idea}</p>
+   <div class="click" onclick="toggleRecord('${r.id}')">
+    <div class="recordHead">
+     <div>
+      <div class="recordTime">${r.time} — ${c.name}</div>
+      <p>${r.plan||c.idea}</p>
+     </div>
+     <div class="recordArrow">${open?"▲":"▼"}</div>
+    </div>
+   </div>
+   ${open?`
    <div class="grid2">
     <button class="gray" onclick="openClient('${c.id}')">Клиент</button>
     <button class="gray" onclick="editRecord('${r.id}')">Перенести</button>
    </div>
    <button class="red" onclick="deleteRecord('${r.id}')">Удалить запись</button>
+   `:""}
   </div>`;
  }).join("")||`<p class="small">Нет записей</p>`;
 }
 
+function toggleRecord(id){
+ expandedRecordId=expandedRecordId===id?null:id;
+ renderCalendar();
+}
 function changeMonth(n){currentDate.setMonth(currentDate.getMonth()+n);renderCalendar()}
-function selectDay(ds){selectedDate=ds;renderCalendar()}
+function selectDay(ds){selectedDate=ds;expandedRecordId=null;renderCalendar()}
 
 function openRecord(){
- editRecordId=null;selectedClientId=null;recordMode.value="new";
- switchRecordMode();clearRecordForm();recordDate.value=selectedDate||localDate();openPage("recordPage");
+ editRecordId=null;
+ selectedClientId=null;
+ recordMode.value="new";
+ switchRecordMode();
+ clearRecordForm();
+ recordDate.value=selectedDate||localDate();
+ openPage("recordPage");
 }
+
 function openRecordForClient(){
- editRecordId=null;selectedClientId=currentClientId;recordMode.value="old";
- switchRecordMode();clearRecordForm();
+ editRecordId=null;
+ selectedClientId=currentClientId;
+ recordMode.value="old";
+ switchRecordMode();
+ clearRecordForm();
  oldChoices.innerHTML=`<div class="item">✅ ${clientById(currentClientId).name}</div>`;
- recordDate.value=selectedDate||localDate();openPage("recordPage");
+ recordDate.value=selectedDate||localDate();
+ openPage("recordPage");
 }
+
 function clearRecordForm(){
- newName.value="";newPhone.value="";newInstagram.value="";newIdea.value="";newPrice.value="";
- oldSearch.value="";oldChoices.innerHTML="";recordPlan.value="";
- recordHour.value="12";recordMinute.value="00";
+ newName.value="";
+ newPhone.value="";
+ newInstagram.value="";
+ newIdea.value="";
+ newPrice.value="";
+ oldSearch.value="";
+ oldChoices.innerHTML="";
+ recordPlan.value="";
+ recordHour.value="12";
+ recordMinute.value="00";
 }
+
 function switchRecordMode(){
  newClientBlock.classList.toggle("hidden",recordMode.value!=="new");
  oldClientBlock.classList.toggle("hidden",recordMode.value!=="old");
 }
+
 function renderOldChoices(){
  let q=oldSearch.value.toLowerCase();
  oldChoices.innerHTML=clients.filter(c=>(c.name+" "+c.phone+" "+c.instagram+" "+c.idea).toLowerCase().includes(q)).map(c=>
  `<div class="item click" onclick="selectedClientId='${c.id}';oldChoices.innerHTML='<div class=&quot;item&quot;>✅ ${c.name}</div>'">
-  <h2>${c.name}</h2><p>${c.idea}</p><p>💰 Осталось $${left(c)}</p>
+  <h2>${c.name}</h2><p>${c.idea}</p><p class="money">💰 Осталось $${left(c)}</p>
  </div>`).join("")||`<p class="small">Не найдено</p>`;
 }
+
 function similarClient(name,idea,price){
  return clients.find(c=>
   c.name.trim().toLowerCase()===name.trim().toLowerCase() &&
@@ -304,6 +377,7 @@ function similarClient(name,idea,price){
   Number(c.price)===Number(price)
  );
 }
+
 function saveRecord(){
  if(saving)return;
  saving=true;
@@ -330,6 +404,7 @@ function saveRecord(){
    clients.push(c);clientId=c.id;
   }
  }
+
  if(!clientId){alert("Выберите клиента");saving=false;return}
  if(!recordDate.value){alert("Выберите дату");saving=false;return}
 
@@ -345,21 +420,28 @@ function saveRecord(){
  saveData();
  openPage("calendar");
 }
+
 function editRecord(id){
  let r=records.find(x=>x.id===id);
  if(!r)return;
- editRecordId=id;selectedClientId=r.clientId;recordMode.value="old";
- switchRecordMode();clearRecordForm();
+ editRecordId=id;
+ selectedClientId=r.clientId;
+ recordMode.value="old";
+ switchRecordMode();
+ clearRecordForm();
  oldChoices.innerHTML=`<div class="item">✅ ${clientById(r.clientId).name}</div>`;
  recordDate.value=r.date;
  let [h,m]=r.time.split(":");
  recordHour.value=h;recordMinute.value=m;recordPlan.value=r.plan||"";
  openPage("recordPage");
 }
+
 function deleteRecord(id){
  if(confirm("Удалить запись?")){
   records=records.filter(r=>r.id!==id);
-  saveData();renderAll();
+  if(expandedRecordId===id)expandedRecordId=null;
+  saveData();
+  renderAll();
  }
 }
 
@@ -367,9 +449,10 @@ function renderClients(){
  let q=(clientSearch.value||"").toLowerCase();
  clientList.innerHTML=clients.filter(c=>(c.name+" "+c.phone+" "+c.instagram+" "+c.idea).toLowerCase().includes(q)).map(c=>
  `<div class="item click" onclick="openClient('${c.id}')">
-  <h2>${c.name}</h2><p>${c.idea}</p><p>💰 Осталось $${left(c)}</p>
+  <h2>${c.name}</h2><p>${c.idea}</p><p class="money">💰 Осталось $${left(c)}</p>
  </div>`).join("")||`<p class="small">Клиентов пока нет</p>`;
 }
+
 function openClient(id){
  currentClientId=id;
  let c=clientById(id);
@@ -382,12 +465,43 @@ function openClient(id){
  clientNote.innerText=c.note||"Пока нет";
  openPage("clientPage");
 }
+
+function openEditClient(){
+ let c=clientById(currentClientId);
+ if(!c)return;
+ editName.value=c.name||"";
+ editPhone.value=c.phone||"";
+ editInstagram.value=c.instagram||"";
+ editIdea.value=c.idea||"";
+ editPrice.value=c.price||"";
+ openPage("editClientPage");
+}
+
+function saveClientEdit(){
+ let c=clientById(currentClientId);
+ if(!c)return;
+
+ if(!editName.value.trim()){alert("Введите имя");return}
+ if(!editIdea.value.trim()){alert("Введите что хочет");return}
+ if(!editPrice.value.trim()){alert("Введите цену");return}
+
+ c.name=editName.value.trim();
+ c.phone=editPhone.value.trim();
+ c.instagram=editInstagram.value.trim();
+ c.idea=editIdea.value.trim();
+ c.price=Number(editPrice.value);
+
+ saveData();
+ openClient(currentClientId);
+}
+
 function addPayment(){
  let amount=prompt("Сколько заплатил?");
  if(!amount)return;
  payments.push({id:makeId(),clientId:currentClientId,amount:Number(amount),date:localDate()});
  saveData();openClient(currentClientId);
 }
+
 function addNote(){
  let c=clientById(currentClientId);
  let note=prompt("Заметка:",c.note||"");
@@ -395,6 +509,7 @@ function addNote(){
  c.note=note;
  saveData();openClient(currentClientId);
 }
+
 function deleteClient(){
  let c=clientById(currentClientId);
  if(!c)return;
@@ -403,7 +518,9 @@ function deleteClient(){
   records=records.filter(r=>r.clientId!==currentClientId);
   payments=payments.filter(p=>p.clientId!==currentClientId);
   sketches=sketches.filter(s=>s.clientId!==currentClientId);
-  saveData();currentClientId=null;openPage("clients");
+  saveData();
+  currentClientId=null;
+  openPage("clients");
  }
 }
 
@@ -415,6 +532,7 @@ function openSketchPage(){
  renderSketches();
  openPage("sketchPage");
 }
+
 function renderSketches(){
  let list=sketches.filter(s=>s.clientId===currentClientId).sort((a,b)=>b.created.localeCompare(a.created));
  sketchList.innerHTML=list.map(s=>
@@ -424,6 +542,7 @@ function renderSketches(){
   <img class="thumb" src="${s.data}">
  </div>`).join("")||`<p class="small">Эскизов пока нет</p>`;
 }
+
 function addSketch(){
  let file=sketchFile.files[0];
  if(!file){alert("Выберите изображение");return}
@@ -434,6 +553,7 @@ function addSketch(){
  };
  reader.readAsDataURL(file);
 }
+
 function openSketch(id){
  currentSketchId=id;
  let s=sketches.find(x=>x.id===id);
@@ -442,6 +562,7 @@ function openSketch(id){
  sketchViewImg.src=s.data;
  openPage("sketchView");
 }
+
 function deleteSketch(){
  if(!currentSketchId)return;
  if(confirm("Удалить эскиз?")){
