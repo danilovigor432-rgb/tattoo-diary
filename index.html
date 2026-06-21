@@ -6,104 +6,156 @@
 <title>InkFlow</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,sans-serif}
-body{background:#000;color:white;padding:20px;padding-bottom:110px}
-h1{font-size:28px;margin-bottom:15px}
-h2{font-size:21px;margin-bottom:10px}
-p{line-height:1.35}
-.logo{font-size:34px;font-weight:800}
-.sub{color:#888;margin-top:5px;margin-bottom:18px}
-
-.card{
-background:#111;
-border-radius:24px;
-padding:18px;
-margin-top:14px;
-box-shadow:0 0 24px #041d66;
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 
-.box{
-background:#181818;
-padding:15px;
-border-radius:18px;
-margin-top:12px;
+body{
+  background:#000;
+  color:#fff;
+  padding:18px;
+  padding-bottom:90px;
 }
 
-.box p{color:#bbb;margin-top:5px}
-
-button{
-width:100%;
-border:none;
-border-radius:18px;
-padding:15px;
-margin-top:12px;
-font-size:18px;
-color:white;
-background:#2962ff;
-}
-
-button.green{background:#148a34}
-button.red{background:#a51818}
-button.gray{background:#2a2a2a}
-
-  input,textarea,select{
-width:100%;
-background:#222;
-color:white;
-border:none;
-border-radius:14px;
-padding:15px;
-margin-top:10px;
-font-size:16px;
-}
-
-textarea{height:90px}
-
-.hidden{display:none}
 .page{display:none}
 .show{display:block}
 
-.small{
-color:#888;
-font-size:14px;
+h1{
+  font-size:31px;
+  margin-bottom:14px;
 }
 
-.clickable{cursor:pointer}
-.clickable:active{transform:scale(0.97);opacity:0.85}
+h2{
+  font-size:20px;
+  margin-bottom:10px;
+}
+
+p{
+  line-height:1.35;
+}
+
+.small{
+  color:#888;
+  font-size:14px;
+}
+
+.card{
+  background:#111;
+  border-radius:22px;
+  padding:18px;
+  margin-top:14px;
+}
+
+.item{
+  background:#181818;
+  border-radius:16px;
+  padding:15px;
+  margin-top:10px;
+}
+
+.item p{
+  color:#bbb;
+  margin-top:5px;
+}
+
+  button{
+  width:100%;
+  border:none;
+  border-radius:16px;
+  padding:15px;
+  margin-top:12px;
+  font-size:17px;
+  color:white;
+  background:#2563eb;
+}
+
+button.gray{background:#2a2a2a}
+button.green{background:#15803d}
+button.red{background:#991b1b}
+
+input,
+textarea,
+select{
+  width:100%;
+  background:#1d1d1d;
+  color:white;
+  border:none;
+  border-radius:14px;
+  padding:14px;
+  margin-top:10px;
+  font-size:16px;
+}
+
+textarea{
+  min-height:90px;
+  resize:none;
+}
 
 .grid2{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:12px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
 }
 
+.grid7{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:7px;
+  margin-top:12px;
+}
+
+.day{
+  background:#181818;
+  border-radius:14px;
+  min-height:46px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  font-size:15px;
+}
+
+.day.today{outline:2px solid #2563eb}
+.day.selected{background:#2563eb}
+
+.dot{
+  width:5px;
+  height:5px;
+  background:#4ade80;
+  border-radius:50%;
+  margin-top:4px;
+}
+
+.hidden{display:none}
+
   .bottom{
-position:fixed;
-bottom:0;
-left:0;
-right:0;
-background:#070707;
-display:flex;
-justify-content:space-around;
-padding:12px;
-border-top:1px solid #222;
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  background:#050505;
+  border-top:1px solid #222;
+  display:flex;
+  justify-content:space-around;
+  padding:10px 6px;
 }
 
 .nav{
-flex:1;
-text-align:center;
-color:#999;
-font-size:13px;
+  flex:1;
+  text-align:center;
+  font-size:13px;
+  color:#888;
 }
 
 .nav.active{
-color:white;
+  color:white;
 }
 
-.plus{
-font-size:26px;
-font-weight:700;
-color:#2962ff;
+.click{
+  cursor:pointer;
 }
 
 </style>
@@ -111,51 +163,38 @@ color:#2962ff;
 
 <body>
 
+<div id="today" class="page show">
 
-<div id="home" class="page show">
+<h1>☀️ Сегодня</h1>
 
-<div class="logo">
-🖋 InkFlow
-</div>
+<div class="card">
 
-<div class="sub">
-Вся память тату-мастера
+<h2>
+💵 Заработано сегодня
+</h2>
+
+<p id="incomeToday">
+$0
+</p>
+
 </div>
 
 
 <div class="card">
 
 <h2>
-☀️ Сегодня
+📅 Записи на сегодня
 </h2>
 
 <div id="todayList">
 
 <p class="small">
-Сегодня записей нет
+Сегодня свободно
 </p>
 
 </div>
 
 </div>
-
-
-<div class="card">
-
-<h2>
-⚠️ Требует внимания
-</h2>
-
-<div id="alerts">
-
-<p class="small">
-Пока всё спокойно
-</p>
-
-</div>
-
-</div>
-
 
 </div>
 
@@ -164,72 +203,60 @@ color:#2962ff;
 <h1>📅 Календарь</h1>
 
 <div class="card">
+
 <div class="grid2">
-<button class="gray" onclick="changeMonth(-1)">← Месяц</button>
-<button class="gray" onclick="changeMonth(1)">Месяц →</button>
+
+<button class="gray" onclick="changeMonth(-1)">
+← Месяц
+</button>
+
+<button class="gray" onclick="changeMonth(1)">
+Месяц →
+</button>
+
 </div>
 
-<h2 id="calendarTitle">Месяц</h2>
-<div id="calendarGrid"></div>
+<h2 id="monthTitle">
+Июль 2026
+</h2>
+
+<div class="grid7">
+
+<div class="small">ПН</div>
+<div class="small">ВТ</div>
+<div class="small">СР</div>
+<div class="small">ЧТ</div>
+<div class="small">ПТ</div>
+<div class="small">СБ</div>
+<div class="small">ВС</div>
+
 </div>
+
+<div id="calendarDays"
+class="grid7">
+
+</div>
+
+</div>
+
 
 <div class="card">
-<h2 id="selectedDateTitle">📌 День</h2>
-<div id="dayList"></div>
-</div>
+
+<h2 id="selectedDay">
+Выберите дату
+</h2>
+
+<div id="dayAppointments">
+
+<p class="small">
+Нет записей
+</p>
 
 </div>
 
-  <div id="newTattoo" class="page">
-
-<h1>➕ Новая тату</h1>
-
-<div class="card">
-
-<h2>👤 Клиент</h2>
-
-<input id="newName" placeholder="Имя клиента *">
-<input id="newPhone" placeholder="Телефон">
-<input id="newInstagram" placeholder="Instagram">
-
-<h2>🎨 Что хочет</h2>
-
-<input id="tattooName" placeholder="Название / тема тату *">
-<textarea id="tattooIdea" placeholder="Описание, пожелания, детали"></textarea>
-
-<h2>💰 Деньги</h2>
-
-<input id="tattooPrice" placeholder="Стоимость проекта *">
-<input id="tattooDeposit" placeholder="Депозит">
-
-<h2>📅 Первый визит</h2>
-
-<select id="firstVisit">
-<option value="no">Назначить позже</option>
-<option value="yes">Записать сразу</option>
-</select>
-
-<div id="firstVisitBlock" class="hidden">
-<input id="visitDate" type="date">
-
-<select id="visitTime">
-<option value="">Выбрать время</option>
-<option>10:00</option>
-<option>11:00</option>
-<option>12:00</option>
-<option>13:00</option>
-<option>14:00</option>
-<option>15:00</option>
-<option>16:00</option>
-<option>17:00</option>
-<option>18:00</option>
-<option>19:00</option>
-</select>
-
-<textarea id="visitPlan" placeholder="Что планируем делать"></textarea>
-</div>
-
-<button class="green" onclick="createTattoo()">🔥 Создать</button>
+<button onclick="openNewRecord()">
+➕ Добавить запись
+</button>
 
 </div>
 
@@ -241,17 +268,12 @@ color:#2962ff;
 
 <div class="card">
 
-<input 
-id="searchClient"
+<input id="clientSearch"
 placeholder="🔎 Найти клиента"
 oninput="renderClients()">
 
-<div id="clientsList">
-
-<p class="small">
-Клиентов пока нет
-</p>
-
+<div id="clientList">
+<p class="small">Клиентов пока нет</p>
 </div>
 
 </div>
@@ -261,191 +283,122 @@ oninput="renderClients()">
 
 <div id="clientPage" class="page">
 
-<div class="card">
-
-<h1 id="clientNameView">
-Клиент
-</h1>
-
-<p id="clientContact">
-</p>
-
-
-<h2>
-🎨 Сейчас делаем
-</h2>
-
-<div id="currentTattoo">
-
-<p class="small">
-Нет активной работы
-</p>
-
-</div>
-
-
-<h2>
-💰 Деньги
-</h2>
-
-<div id="moneyInfo">
-
-<p class="small">
-Нет информации
-</p>
-
-</div>
-
-
-<h2>
-📅 Следующий визит
-</h2>
-
-<div id="nextVisit">
-
-<p class="small">
-Не назначен
-</p>
-
-</div>
-
-
-<h2>
-📷 Последнее фото
-</h2>
-
-<div class="box">
-<p>
-Фото появятся позже
-</p>
-</div>
-
-
-<h2>
-📝 Последняя запись
-</h2>
-
-<div class="box">
-<p>
-История появится позже
-</p>
-</div>
-
-
-<button onclick="quickPayment()">
-💵 Добавить оплату
-</button>
-
-
-<button onclick="scheduleVisit()">
-📅 Назначить визит
-</button>
-
-
-<button onclick="newTattooForClient()">
-➕ Новая тату
-</button>
-
-
-<button class="gray" onclick="openPage('clients')">
-← Назад
-</button>
-
-</div>
-
-</div>
-
-  <div id="visitPage" class="page">
-
-<h1>📅 Визит</h1>
+<h1 id="clientNameView">Клиент</h1>
 
 <div class="card">
 
-<p id="visitClientName" class="small"></p>
+<p id="clientContact" class="small"></p>
 
-<input id="visitNewDate" type="date">
+<h2>🎨 Что хочет</h2>
+<p id="clientIdea"></p>
 
-<select id="visitNewTime">
-<option value="">Выбрать время</option>
-<option>10:00</option>
-<option>11:00</option>
-<option>12:00</option>
-<option>13:00</option>
-<option>14:00</option>
-<option>15:00</option>
-<option>16:00</option>
-<option>17:00</option>
-<option>18:00</option>
-<option>19:00</option>
+<h2>💰 Деньги</h2>
+<p id="clientMoney"></p>
+
+<h2>📅 Следующая запись</h2>
+<p id="clientNext"></p>
+
+<h2>📝 Последняя заметка</h2>
+<p id="clientNote" class="small">Пока нет</p>
+
+<button onclick="addPayment()">💵 Добавить оплату</button>
+<button onclick="addNote()">📝 Добавить заметку</button>
+<button onclick="openNewRecordForClient()">📅 Записать дату</button>
+<button class="gray" onclick="openPage('clients')">← Назад</button>
+
+</div>
+
+</div>
+
+  <div id="recordPage" class="page">
+
+<h1>➕ Запись</h1>
+
+<div class="card">
+
+<select id="recordMode" onchange="switchRecordMode()">
+<option value="new">Новый клиент</option>
+<option value="old">Из картотеки</option>
 </select>
 
-<textarea id="visitNewPlan" placeholder="Что будем делать"></textarea>
+<div id="newClientBlock">
 
-<button class="green" onclick="saveVisit()">📅 Сохранить визит</button>
-<button class="gray" onclick="openClient(currentClientId)">← Назад</button>
+<input id="newName" placeholder="Имя клиента">
+<input id="newPhone" placeholder="Телефон">
+<input id="newInstagram" placeholder="Instagram">
+<textarea id="newIdea" placeholder="Что хочет"></textarea>
+<input id="newPrice" placeholder="Цена">
+
+</div>
+
+<div id="oldClientBlock" class="hidden">
+
+<input id="oldSearch" placeholder="🔎 Найти клиента" oninput="renderOldClientChoices()">
+<div id="oldChoices"></div>
+
+</div>
+
+<input id="recordDate" type="date">
+<input id="recordTime" type="time">
+<textarea id="recordPlan" placeholder="Что делаем"></textarea>
+
+<button class="green" onclick="saveRecord()">💾 Сохранить</button>
+<button class="gray" onclick="openPage('calendar')">← Назад</button>
 
 </div>
 
 </div>
 
 
-<div id="finishVisitPage" class="page">
+<div class="bottom">
 
-<h1>✅ Завершить визит</h1>
-
-<div class="card">
-
-<textarea id="doneText" placeholder="Что сделали"></textarea>
-<input id="finishPayment" placeholder="Сколько заплатил">
-<textarea id="nextPlan" placeholder="Что делать в следующий раз"></textarea>
-
-<button class="green" onclick="finishVisit()">💾 Сохранить</button>
-<button class="gray" onclick="openClient(currentClientId)">← Назад</button>
-
-</div>
-
-</div>
-
-  <div class="bottom">
-
-<div class="nav active" onclick="openPage('home')">
-🏠<br>Главная
-</div>
-
-<div class="nav" onclick="openPage('calendar')">
-📅<br>Календарь
-</div>
-
-<div class="nav plus" onclick="openPage('newTattoo')">
-➕
-</div>
-
-<div class="nav" onclick="openPage('clients')">
-👤<br>Клиенты
-</div>
+<div class="nav active" onclick="openPage('today')">☀️<br>Сегодня</div>
+<div class="nav" onclick="openPage('calendar')">📅<br>Календарь</div>
+<div class="nav" onclick="openPage('clients')">👤<br>Клиенты</div>
 
 </div>
 
   <script>
 
 let clients =
-JSON.parse(localStorage.getItem("ink_clients_v13") || "[]");
+JSON.parse(localStorage.getItem("inkflow_clients_v14") || "[]");
+
+let records =
+JSON.parse(localStorage.getItem("inkflow_records_v14") || "[]");
+
+let payments =
+JSON.parse(localStorage.getItem("inkflow_payments_v14") || "[]");
 
 
+let currentPage = "today";
 let currentClientId = null;
+let selectedClientId = null;
+
+let currentDate = new Date();
+let selectedDate = null;
 
 
 function saveData(){
 
 localStorage.setItem(
-"ink_clients_v13",
+"inkflow_clients_v14",
 JSON.stringify(clients)
+);
+
+localStorage.setItem(
+"inkflow_records_v14",
+JSON.stringify(records)
+);
+
+localStorage.setItem(
+"inkflow_payments_v14",
+JSON.stringify(payments)
 );
 
 }
 
 
-function makeId(){
+function id(){
 
 return Date.now() +
 Math.random()
@@ -455,382 +408,239 @@ Math.random()
 }
 
 
-function openPage(id){
+function clientById(clientId){
+
+return clients.find(
+x => x.id === clientId
+);
+
+}
+
+
+function openPage(page){
 
 document
 .querySelectorAll(".page")
 .forEach(
-p=>p.classList.remove("show")
+p => p.classList.remove("show")
 );
 
-
 document
-.getElementById(id)
+.getElementById(page)
 .classList.add("show");
 
 
 document
 .querySelectorAll(".nav")
 .forEach(
-n=>n.classList.remove("active")
+n => n.classList.remove("active")
 );
 
 
-let map = {
-home:0,
+let tabs = {
+today:0,
 calendar:1,
-newTattoo:2,
-clients:3
+clients:2
 };
 
 
-if(map[id] !== undefined){
+if(tabs[page] !== undefined){
 
 document
 .querySelectorAll(".nav")
-[map[id]]
+[tabs[page]]
 .classList.add("active");
 
 }
 
 
+currentPage = page;
+
 renderAll();
 
 }
 
 
+function formatDate(date){
 
-function clientById(id){
-
-return clients.find(
-c=>c.id === id
-);
+return date.toISOString()
+.split("T")[0];
 
 }
 
-
-
-function createTattoo(){
-
-
-if(!newName.value.trim()){
-
-alert("Введите имя клиента");
-
-return;
-
+    function localDate(d=new Date()){
+  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
 }
+function formatDate(date){return localDate(date)}
 
-
-if(!tattooName.value.trim()){
-
-alert("Введите название тату");
-
-return;
-
+function moneyPaid(clientId){
+  return payments.filter(p=>p.clientId===clientId).reduce((s,p)=>s+Number(p.amount||0),0);
 }
-
-
-if(!tattooPrice.value.trim()){
-
-alert("Введите стоимость");
-
-return;
-
-}
-
-
-let client = {
-
-id: makeId(),
-
-name: newName.value,
-
-phone: newPhone.value,
-
-instagram: newInstagram.value,
-
-
-tattoo: {
-
-name: tattooName.value,
-
-idea: tattooIdea.value,
-
-price: Number(tattooPrice.value),
-
-paid:
-Number(tattooDeposit.value || 0),
-
-visit:
-firstVisit.value === "yes"
-? {
-
-date: visitDate.value,
-
-time: visitTime.value,
-
-plan: visitPlan.value
-
-}
-
-: null,
-
-lastNote:""
-
-}
-
-};
-
-
-clients.push(client);
-
-
-saveData();
-
-
-alert("Клиент создан 🔥");
-
-
-openPage("clients");
-
-}
-
-
-
-function renderClients(){
-
-let search =
-(searchClient?.value || "")
-.toLowerCase();
-
-
-let html = "";
-clients.forEach(c=>{
-
-let text =
-(c.name + " " +
-c.phone + " " +
-c.instagram)
-.toLowerCase();
-
-
-if(!text.includes(search))
-return;
-
-
-html += `
-
-<div class="box clickable"
-onclick="openClient('${c.id}')">
-
-<h2>${c.name}</h2>
-
-<p>
-🎨 ${c.tattoo.name}
-</p>
-
-<p>
-💰 Осталось:
-$${c.tattoo.price - c.tattoo.paid}
-</p>
-
-</div>
-
-`;
-
-});
-
-
-clientsList.innerHTML =
-html || "<p>Ничего не найдено</p>";
-
-}
-
-
-
-function openClient(id){
-
-currentClientId = id;
-
-
-let c = clientById(id);
-
-
-clientNameView.innerText =
-c.name;
-
-
-clientContact.innerText =
-`${c.phone} ${c.instagram}`;
-
-
-currentTattoo.innerHTML = `
-
-<div class="box">
-
-<h2>
-${c.tattoo.name}
-</h2>
-
-<p>
-${c.tattoo.idea}
-</p>
-
-</div>
-
-`;
-
-
-moneyInfo.innerHTML = `
-
-<div class="box">
-
-Цена: $${c.tattoo.price}
-<br>
-Оплачено: $${c.tattoo.paid}
-<br>
-Осталось:
-$${c.tattoo.price - c.tattoo.paid}
-
-</div>
-
-`;
-
-
-nextVisit.innerHTML =
-c.tattoo.visit
-
-?
-
-`
-<div class="box">
-
-📅 ${c.tattoo.visit.date}
-
-<br>
-
-🕒 ${c.tattoo.visit.time}
-
-<br>
-
-${c.tattoo.visit.plan}
-
-</div>
-`
-
-:
-
-"<p class='small'>Не назначен</p>";
-
-
-openPage("clientPage");
-
-}
-
-
-
-function quickPayment(){
-
-let amount =
-prompt("Сколько оплатил?");
-
-
-if(!amount)
-return;
-
-
-let c =
-clientById(currentClientId);
-
-
-c.tattoo.paid +=
-Number(amount);
-
-
-saveData();
-
-
-openClient(currentClientId);
-
-}
-
-
-
-function scheduleVisit(){
-
-openPage("visitPage");
-
-
-let c =
-clientById(currentClientId);
-
-
-visitClientName.innerText =
-c.name;
-
-}
-
-
-
-function saveVisit(){
-
-let c =
-clientById(currentClientId);
-
-
-c.tattoo.visit = {
-
-date: visitNewDate.value,
-
-time: visitNewTime.value,
-
-plan: visitNewPlan.value
-
-};
-
-
-saveData();
-
-
-openClient(currentClientId);
-
-}
-
-
-
-function newTattooForClient(){
-
-alert(
-"Несколько татуировок добавим следующим обновлением"
-);
-
-}
-
-
-
-function renderHome(){
-
-todayList.innerHTML =
-"<p class='small'>Тестируем главную</p>";
-
-}
-
-
+function moneyLeft(c){return Number(c.price||0)-moneyPaid(c.id)}
 
 function renderAll(){
-
-renderClients();
-
-renderHome();
-
+  renderToday();
+  renderCalendar();
+  renderClients();
 }
 
+function renderToday(){
+  let today=localDate();
+  let todays=records.filter(r=>r.date===today).sort((a,b)=>a.time.localeCompare(b.time));
+  let income=payments.filter(p=>p.date===today).reduce((s,p)=>s+Number(p.amount||0),0);
+  document.getElementById("incomeToday").innerText="$"+income;
 
+  todayList.innerHTML=todays.map(r=>{
+    let c=clientById(r.clientId);
+    return `<div class="item click" onclick="openClient('${c.id}')">
+      <h2>${r.time} — ${c.name}</h2>
+      <p>${r.plan||c.idea}</p>
+      <p>💰 Осталось $${moneyLeft(c)}</p>
+    </div>`;
+  }).join("") || `<p class="small">Сегодня свободно</p>`;
+}
 
+function renderCalendar(){
+  let y=currentDate.getFullYear(), m=currentDate.getMonth();
+  monthTitle.innerText=currentDate.toLocaleDateString("ru-RU",{month:"long",year:"numeric"});
+  let first=new Date(y,m,1).getDay();
+  let offset=first===0?6:first-1;
+  let days=new Date(y,m+1,0).getDate();
+  let html="";
+  for(let i=0;i<offset;i++)html+="<div></div>";
+  for(let d=1;d<=days;d++){
+    let ds=y+"-"+String(m+1).padStart(2,"0")+"-"+String(d).padStart(2,"0");
+    let cls="day click";
+    if(ds===localDate())cls+=" today";
+    if(ds===selectedDate)cls+=" selected";
+    let has=records.some(r=>r.date===ds);
+    html+=`<div class="${cls}" onclick="selectDay('${ds}')">${d}${has?'<div class="dot"></div>':''}</div>`;
+  }
+  calendarDays.innerHTML=html;
+
+  if(!selectedDate)selectedDate=localDate();
+  selectedDay.innerText=selectedDate;
+  let list=records.filter(r=>r.date===selectedDate).sort((a,b)=>a.time.localeCompare(b.time));
+  dayAppointments.innerHTML=list.map(r=>{
+    let c=clientById(r.clientId);
+    return `<div class="item click" onclick="openClient('${c.id}')">
+      <h2>${r.time} — ${c.name}</h2>
+      <p>${r.plan||c.idea}</p>
+      <button class="gray" onclick="event.stopPropagation();editRecord('${r.id}')">Изменить</button>
+      <button class="red" onclick="event.stopPropagation();deleteRecord('${r.id}')">Удалить</button>
+    </div>`;
+  }).join("") || `<p class="small">Нет записей</p>`;
+}
+
+function changeMonth(n){
+  currentDate.setMonth(currentDate.getMonth()+n);
+  renderCalendar();
+}
+function selectDay(ds){
+  selectedDate=ds;
+  renderCalendar();
+}
+function openNewRecord(){
+  recordDate.value=selectedDate||localDate();
+  recordTime.value="";
+  recordPlan.value="";
+  selectedClientId=null;
+  openPage("recordPage");
+}
+
+function switchRecordMode(){
+  newClientBlock.classList.toggle("hidden",recordMode.value!=="new");
+  oldClientBlock.classList.toggle("hidden",recordMode.value!=="old");
+}
+
+function renderOldClientChoices(){
+  let q=oldSearch.value.toLowerCase();
+  oldChoices.innerHTML=clients.filter(c=>(c.name+" "+c.instagram+" "+c.phone).toLowerCase().includes(q)).map(c=>
+    `<div class="item click" onclick="selectedClientId='${c.id}';oldChoices.innerHTML='<p>✅ ${c.name}</p>'">
+      <h2>${c.name}</h2><p>${c.idea}</p><p>💰 Осталось $${moneyLeft(c)}</p>
+    </div>`
+  ).join("") || `<p class="small">Не найдено</p>`;
+}
+
+function saveRecord(){
+  let clientId=selectedClientId;
+
+  if(recordMode.value==="new"){
+    if(!newName.value.trim()){alert("Введите имя");return}
+    if(!newIdea.value.trim()){alert("Введите что хочет");return}
+    if(!newPrice.value.trim()){alert("Введите цену");return}
+    let c={id:id(),name:newName.value.trim(),phone:newPhone.value.trim(),instagram:newInstagram.value.trim(),idea:newIdea.value.trim(),price:Number(newPrice.value),note:""};
+    clients.push(c); clientId=c.id;
+  }
+
+  if(!clientId){alert("Выберите клиента");return}
+  if(!recordDate.value||!recordTime.value){alert("Выберите дату и время");return}
+
+  records.push({id:id(),clientId,date:recordDate.value,time:recordTime.value,plan:recordPlan.value.trim()});
+  saveData();
+  openPage("calendar");
+}
+
+function renderClients(){
+  let q=(clientSearch.value||"").toLowerCase();
+  clientList.innerHTML=clients.filter(c=>(c.name+" "+c.phone+" "+c.instagram+" "+c.idea).toLowerCase().includes(q)).map(c=>
+    `<div class="item click" onclick="openClient('${c.id}')">
+      <h2>${c.name}</h2><p>${c.idea}</p><p>💰 Осталось $${moneyLeft(c)}</p>
+    </div>`
+  ).join("") || `<p class="small">Клиентов пока нет</p>`;
+}
+
+function openClient(id){
+  currentClientId=id;
+  let c=clientById(id);
+  clientNameView.innerText=c.name;
+  clientContact.innerText=[c.phone,c.instagram].filter(Boolean).join(" • ");
+  clientIdea.innerText=c.idea;
+  clientMoney.innerText=`Цена $${c.price} / Заплатил $${moneyPaid(c.id)} / Осталось $${moneyLeft(c)}`;
+  let next=records.filter(r=>r.clientId===id && r.date>=localDate()).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time))[0];
+  clientNext.innerText=next?`${next.date} ${next.time} — ${next.plan}`:"Не назначена";
+  clientNote.innerText=c.note||"Пока нет";
+  openPage("clientPage");
+}
+
+function addPayment(){
+  let amount=prompt("Сколько заплатил?");
+  if(!amount)return;
+  payments.push({id:id(),clientId:currentClientId,amount:Number(amount),date:localDate()});
+  saveData();openClient(currentClientId);
+}
+function addNote(){
+  let c=clientById(currentClientId);
+  let note=prompt("Заметка:",c.note||"");
+  if(note===null)return;
+  c.note=note;
+  saveData();openClient(currentClientId);
+}
+function openNewRecordForClient(){
+  recordMode.value="old";switchRecordMode();
+  selectedClientId=currentClientId;
+  oldChoices.innerHTML="<p>✅ "+clientById(currentClientId).name+"</p>";
+  recordDate.value=selectedDate||localDate();
+  openPage("recordPage");
+}
+function editRecord(idr){
+  let r=records.find(x=>x.id===idr);
+  records=records.filter(x=>x.id!==idr);
+  selectedClientId=r.clientId;
+  recordMode.value="old";switchRecordMode();
+  oldChoices.innerHTML="<p>✅ "+clientById(r.clientId).name+"</p>";
+  recordDate.value=r.date;recordTime.value=r.time;recordPlan.value=r.plan;
+  openPage("recordPage");
+}
+function deleteRecord(idr){
+  if(confirm("Удалить запись?")){
+    records=records.filter(r=>r.id!==idr);
+    saveData();renderAll();
+  }
+}
+
+selectedDate=localDate();
 renderAll();
-
 </script>
-
 </body>
 </html>
