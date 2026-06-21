@@ -3,79 +3,68 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>InkFlow Pro</title>
-
+<title>InkFlow</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;-webkit-tap-highlight-color:transparent}
-:root{--bg:#050505;--card:#141416;--card2:#1b1b1f;--line:#2b2b31;--text:#fff;--muted:#8e8e93;--accent:#ff6a00;--green:#22c55e;--red:#ef4444}
-body{background:radial-gradient(circle at top right,#201103 0,#060606 42%,#000 100%);color:var(--text);padding:24px 20px 130px;min-height:100vh}
-.page{display:none;animation:fade .18s ease}.show{display:block}
-@keyframes fade{from{opacity:.3;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-h1{font-size:42px;letter-spacing:-1.6px;margin:18px 0 6px;font-weight:850}
-.sub{color:var(--muted);font-size:17px;margin-bottom:24px}
-.sectionTitle{color:#aaa;font-size:20px;font-weight:800;margin:28px 0 12px}
-.card{background:linear-gradient(180deg,rgba(28,28,32,.92),rgba(15,15,18,.92));border:1px solid var(--line);border-radius:28px;padding:18px;margin-top:14px;box-shadow:0 18px 45px rgba(0,0,0,.55);backdrop-filter:blur(20px)}
-.hero{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:center}
-.hero div{padding:6px 12px}.hero div+div{border-left:1px solid #333}
-.label{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.8px;font-weight:700}
-.big{font-size:31px;font-weight:850;letter-spacing:-1px}.orange{color:var(--accent)}
-.item{background:linear-gradient(180deg,#1b1b20,#111114);border:1px solid var(--line);border-radius:24px;padding:18px;margin-top:12px}
-.nextCard{border:1.4px solid var(--accent);box-shadow:0 0 25px rgba(255,106,0,.16)}
-.row{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
-.time{font-size:34px;font-weight:850;letter-spacing:-1px}
-.name{font-size:31px;font-weight:850;letter-spacing:-.8px;text-transform:uppercase;margin-top:22px}
-.idea{color:#b9b9bd;font-size:18px;margin-top:8px}
-.debt{text-align:right}.debt .amount{font-size:31px;font-weight:850;color:var(--accent)}
-.muted{color:var(--muted)}
-button{width:100%;border:none;border-radius:20px;padding:16px;margin-top:12px;font-size:16px;font-weight:750;color:#fff;background:linear-gradient(135deg,#ff6a00,#ff8a00);box-shadow:0 10px 25px rgba(255,106,0,.32)}
-button.gray{background:#2c2c2e;box-shadow:none}button.red{background:linear-gradient(135deg,#ef4444,#b91c1c)}button.green{background:linear-gradient(135deg,#22c55e,#16a34a)}
-input,textarea,select{width:100%;max-width:100%;background:#1d1d21;color:#fff;border:1px solid var(--line);border-radius:18px;padding:15px;margin-top:10px;font-size:16px;outline:none}
-textarea{min-height:92px;resize:none}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.grid7{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:14px}
-.day{background:#121216;border:1px solid var(--line);border-radius:18px;min-height:56px;display:flex;align-items:center;justify-content:center;flex-direction:column;font-size:16px}
-.day.today{border-color:var(--accent);box-shadow:0 0 18px rgba(255,106,0,.35)}.day.selected{background:linear-gradient(135deg,#ff6a00,#ff8a00);border:none}
-.dots{font-size:11px;color:#22c55e;letter-spacing:1px;margin-top:4px}
-.bottom{position:fixed;left:12px;right:12px;bottom:12px;height:76px;background:rgba(18,18,20,.9);border:1px solid var(--line);border-radius:28px;display:flex;align-items:center;justify-content:space-around;backdrop-filter:blur(25px);box-shadow:0 15px 45px rgba(0,0,0,.6);z-index:50}
-.nav{flex:1;text-align:center;color:var(--muted);font-size:12px;font-weight:750}.nav.active{color:var(--accent);transform:translateY(-2px)}
-.hidden{display:none}.click:active{transform:scale(.97);opacity:.85}.thumb{width:100%;border-radius:18px;margin-top:10px;max-height:220px;object-fit:cover}.fullImg{width:100%;border-radius:24px;margin-top:10px}
-.avatar{width:46px;height:46px;border-radius:50%;background:rgba(255,106,0,.14);display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:850;margin-bottom:10px}
-.clientName{font-size:24px;font-weight:850}.incomeBox{text-align:center;padding:26px}.incomeBox h2{font-size:42px;color:var(--accent);letter-spacing:-1px}
+*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+body{background:#000;color:#fff;padding:18px;padding-bottom:120px}
+.page{display:none}.show{display:block}
+h1{font-size:31px;margin-bottom:14px}h2{font-size:20px;margin-bottom:10px}
+p{line-height:1.35}.small{color:#888;font-size:14px}
+.card{background:#111;border-radius:22px;padding:18px;margin-top:14px}
+.item{background:#181818;border-radius:16px;padding:15px;margin-top:10px}
+.item p{color:#bbb;margin-top:5px}
+button{width:100%;border:none;border-radius:16px;padding:15px;margin-top:12px;font-size:17px;color:white;background:#2563eb}
+button.gray{background:#2a2a2a}button.green{background:#15803d}button.red{background:#991b1b}
+input,textarea,select{width:100%;max-width:100%;min-width:0;background:#1d1d1d;color:white;border:none;border-radius:14px;padding:14px;margin-top:10px;font-size:16px}
+input[type="date"]{width:100%;max-width:100%;-webkit-appearance:none;appearance:none}
+textarea{min-height:90px;resize:none}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grid7{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;margin-top:12px}
+.day{background:#181818;border-radius:14px;min-height:48px;display:flex;align-items:center;justify-content:center;flex-direction:column;font-size:15px}
+.day.today{outline:2px solid #2563eb}.day.selected{background:#2563eb}
+.dots{font-size:12px;color:#4ade80;line-height:10px;margin-top:3px}
+.hidden{display:none}.click{cursor:pointer}.click:active{transform:scale(.97);opacity:.85}
+.bottom{position:fixed;left:0;right:0;bottom:0;background:#050505;border-top:1px solid #222;display:flex;justify-content:space-around;padding:10px 6px}
+.nav{flex:1;text-align:center;font-size:13px;color:#888}.nav.active{color:white}
+.thumb{width:100%;border-radius:14px;margin-top:10px;max-height:220px;object-fit:cover}
+.fullImg{width:100%;border-radius:18px;margin-top:10px}
 </style>
 </head>
-
 <body>
 
 <div id="today" class="page show">
-<h1>Сегодня</h1>
-<p class="sub" id="todayDate"></p>
-<div class="card hero">
-<div><p class="label">Записей сегодня</p><p class="big" id="todayCount">0</p></div>
-<div><p class="label">Общая сумма</p><p class="big orange" id="todayTotal">$0</p></div>
+<h1>☀️ Сегодня</h1>
+<div class="card">
+<h2>📅 Записи на сегодня</h2>
+<div id="todayList"><p class="small">Сегодня свободно</p></div>
 </div>
-<div id="todayList"></div>
 </div>
 
 <div id="calendar" class="page">
-<h1>Календарь</h1>
-<p class="sub">План работы</p>
+<h1>📅 Календарь</h1>
 <div class="card">
-<div class="grid2"><button class="gray" onclick="changeMonth(-1)">← Месяц</button><button class="gray" onclick="changeMonth(1)">Месяц →</button></div>
-<h2 id="monthTitle" style="margin-top:18px"></h2>
-<div class="grid7"><div class="muted">ПН</div><div class="muted">ВТ</div><div class="muted">СР</div><div class="muted">ЧТ</div><div class="muted">ПТ</div><div class="muted">СБ</div><div class="muted">ВС</div></div>
+<div class="grid2">
+<button class="gray" onclick="changeMonth(-1)">← Месяц</button>
+<button class="gray" onclick="changeMonth(1)">Месяц →</button>
+</div>
+<h2 id="monthTitle"></h2>
+<div class="grid7">
+<div class="small">ПН</div><div class="small">ВТ</div><div class="small">СР</div><div class="small">ЧТ</div><div class="small">ПТ</div><div class="small">СБ</div><div class="small">ВС</div>
+</div>
 <div id="calendarDays" class="grid7"></div>
 </div>
+
 <div class="card">
 <h2 id="selectedDayTitle">День</h2>
 <div id="dayRecords"></div>
-<button onclick="openRecord()">＋ Новая запись</button>
+<button onclick="openRecord()">➕ Добавить запись</button>
 </div>
 </div>
 
 <div id="clients" class="page">
-<h1>Клиенты</h1>
-<p class="sub">Картотека мастера</p>
+<h1>👤 Клиенты</h1>
 <div class="card">
-<input id="clientSearch" placeholder="Поиск клиента" oninput="renderClients()">
+<input id="clientSearch" placeholder="🔎 Найти клиента" oninput="renderClients()">
 <div id="clientList"></div>
 </div>
 </div>
@@ -83,24 +72,35 @@ textarea{min-height:92px;resize:none}
 <div id="clientPage" class="page">
 <h1 id="clientNameView">Клиент</h1>
 <div class="card">
-<p id="clientContact" class="muted"></p>
-<div class="sectionTitle">Что хочет</div><p id="clientIdea"></p>
-<div class="sectionTitle">Деньги</div><p id="clientMoney" class="orange"></p>
-<div class="sectionTitle">Следующая запись</div><p id="clientNext"></p>
-<div class="sectionTitle">Заметка</div><p id="clientNote" class="muted"></p>
-<div class="grid2"><button onclick="addPayment()">Оплата</button><button onclick="openSketchPage()">Эскиз</button></div>
-<div class="grid2"><button onclick="addNote()">Заметка</button><button onclick="openRecordForClient()">Записать</button></div>
-<button class="red" onclick="deleteClient()">Удалить клиента</button>
+<p id="clientContact" class="small"></p>
+
+<h2>🎨 Что хочет</h2>
+<p id="clientIdea"></p>
+
+<h2>💰 Деньги</h2>
+<p id="clientMoney"></p>
+
+<h2>📅 Следующая запись</h2>
+<p id="clientNext"></p>
+
+<h2>📝 Заметка</h2>
+<p id="clientNote" class="small">Пока нет</p>
+
+<button onclick="addPayment()">💵 Добавить оплату</button>
+<button onclick="openSketchPage()">🎨 Эскиз</button>
+<button onclick="addNote()">📝 Добавить заметку</button>
+<button onclick="openRecordForClient()">📅 Записать дату</button>
+<button class="red" onclick="deleteClient()">🗑 Удалить клиента</button>
 <button class="gray" onclick="openPage('clients')">← Назад</button>
 </div>
 </div>
 
 <div id="sketchPage" class="page">
-<h1 id="sketchTitle">Эскиз</h1>
+<h1 id="sketchTitle">🎨 Эскиз</h1>
 <div class="card">
-<input id="sketchName" placeholder="Название">
+<input id="sketchName" placeholder="Название эскиза / фото">
 <input id="sketchFile" type="file" accept="image/*">
-<button class="green" onclick="addSketch()">Добавить</button>
+<button class="green" onclick="addSketch()">➕ Добавить</button>
 <div id="sketchList"></div>
 <button class="gray" onclick="openClient(currentClientId)">← Назад</button>
 </div>
@@ -110,26 +110,30 @@ textarea{min-height:92px;resize:none}
 <h1 id="sketchViewTitle">Эскиз</h1>
 <div class="card">
 <img id="sketchViewImg" class="fullImg">
-<button class="red" onclick="deleteSketch()">Удалить</button>
+<button class="red" onclick="deleteSketch()">🗑 Удалить</button>
 <button class="gray" onclick="openSketchPage()">← Назад</button>
 </div>
 </div>
 
 <div id="income" class="page">
-<h1>Доходы</h1>
-<p class="sub">Автоматически из оплат</p>
+<h1>💵 Доходы</h1>
 <div class="card">
-<div class="item incomeBox"><h2 id="incomeToday">$0</h2><p class="muted">Сегодня</p></div>
-<div class="item incomeBox"><h2 id="incomeWeek">$0</h2><p class="muted">Эта неделя</p></div>
-<div class="item incomeBox"><h2 id="incomeMonth">$0</h2><p class="muted">Этот месяц</p></div>
-<div class="item incomeBox"><h2 id="incomeYear">$0</h2><p class="muted">Этот год</p></div>
+<div class="item"><h2 id="incomeToday">$0</h2><p>Сегодня</p></div>
+<div class="item"><h2 id="incomeWeek">$0</h2><p>Эта неделя</p></div>
+<div class="item"><h2 id="incomeMonth">$0</h2><p>Этот месяц</p></div>
+<div class="item"><h2 id="incomeYear">$0</h2><p>Этот год</p></div>
 </div>
 </div>
 
 <div id="recordPage" class="page">
-<h1>Запись</h1>
+<h1>➕ Запись</h1>
 <div class="card">
-<select id="recordMode" onchange="switchRecordMode()"><option value="new">Новый клиент</option><option value="old">Из картотеки</option></select>
+
+<select id="recordMode" onchange="switchRecordMode()">
+<option value="new">Новый клиент</option>
+<option value="old">Из картотеки</option>
+</select>
+
 <div id="newClientBlock">
 <input id="newName" placeholder="Имя клиента">
 <input id="newPhone" placeholder="Телефон">
@@ -137,23 +141,31 @@ textarea{min-height:92px;resize:none}
 <textarea id="newIdea" placeholder="Что хочет"></textarea>
 <input id="newPrice" placeholder="Цена">
 </div>
+
 <div id="oldClientBlock" class="hidden">
-<input id="oldSearch" placeholder="Найти клиента" oninput="renderOldChoices()">
+<input id="oldSearch" placeholder="🔎 Найти клиента" oninput="renderOldChoices()">
 <div id="oldChoices"></div>
 </div>
+
 <input id="recordDate" type="date">
-<div class="grid2"><select id="recordHour"></select><select id="recordMinute"></select></div>
+
+<div class="grid2">
+<select id="recordHour"></select>
+<select id="recordMinute"></select>
+</div>
+
 <textarea id="recordPlan" placeholder="Что делаем"></textarea>
-<button class="green" onclick="saveRecord()">Сохранить</button>
+
+<button class="green" onclick="saveRecord()">💾 Сохранить</button>
 <button class="gray" onclick="openPage('calendar')">← Назад</button>
 </div>
 </div>
 
 <div class="bottom">
 <div class="nav active" onclick="openPage('today')">☀️<br>Сегодня</div>
-<div class="nav" onclick="openPage('calendar')">▣<br>Календарь</div>
-<div class="nav" onclick="openPage('clients')">◉<br>Клиенты</div>
-<div class="nav" onclick="openPage('income')">▤<br>Доходы</div>
+<div class="nav" onclick="openPage('calendar')">📅<br>Календарь</div>
+<div class="nav" onclick="openPage('clients')">👤<br>Клиенты</div>
+<div class="nav" onclick="openPage('income')">💵<br>Доходы</div>
 </div>
 
 <script>
@@ -162,76 +174,307 @@ let records=JSON.parse(localStorage.getItem("ink_records_v141")||"[]");
 let payments=JSON.parse(localStorage.getItem("ink_payments_v141")||"[]");
 let sketches=JSON.parse(localStorage.getItem("ink_sketches_v142")||"[]");
 
-let currentDate=new Date(),selectedDate=localDate(),currentClientId=null,selectedClientId=null,editRecordId=null,currentSketchId=null,saving=false;
+let currentDate=new Date();
+let selectedDate=localDate();
+let currentClientId=null;
+let selectedClientId=null;
+let editRecordId=null;
+let currentSketchId=null;
+let saving=false;
 
-function localDate(d=new Date()){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function localDate(d=new Date()){
+ return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+}
 function makeId(){return Date.now()+"_"+Math.random().toString(36).slice(2,7)}
-function saveData(){localStorage.setItem("ink_clients_v141",JSON.stringify(clients));localStorage.setItem("ink_records_v141",JSON.stringify(records));localStorage.setItem("ink_payments_v141",JSON.stringify(payments));localStorage.setItem("ink_sketches_v142",JSON.stringify(sketches))}
+function saveData(){
+ localStorage.setItem("ink_clients_v141",JSON.stringify(clients));
+ localStorage.setItem("ink_records_v141",JSON.stringify(records));
+ localStorage.setItem("ink_payments_v141",JSON.stringify(payments));
+ localStorage.setItem("ink_sketches_v142",JSON.stringify(sketches));
+}
 function clientById(id){return clients.find(c=>c.id===id)}
 function paid(id){return payments.filter(p=>p.clientId===id).reduce((s,p)=>s+Number(p.amount||0),0)}
 function left(c){return Number(c.price||0)-paid(c.id)}
 
-function setupTime(){recordHour.innerHTML="";recordMinute.innerHTML="";for(let h=0;h<24;h++)recordHour.innerHTML+=`<option>${String(h).padStart(2,"0")}</option>`;for(let m=0;m<60;m++)recordMinute.innerHTML+=`<option>${String(m).padStart(2,"0")}</option>`;recordHour.value="12";recordMinute.value="00"}
+function setupTime(){
+ recordHour.innerHTML="";
+ recordMinute.innerHTML="";
+ for(let h=0;h<24;h++)recordHour.innerHTML+=`<option>${String(h).padStart(2,"0")}</option>`;
+ for(let m=0;m<60;m++)recordMinute.innerHTML+=`<option>${String(m).padStart(2,"0")}</option>`;
+ recordHour.value="12";recordMinute.value="00";
+}
 
-function openPage(id){document.querySelectorAll(".page").forEach(p=>p.classList.remove("show"));document.getElementById(id).classList.add("show");document.querySelectorAll(".nav").forEach(n=>n.classList.remove("active"));let map={today:0,calendar:1,clients:2,income:3};if(map[id]!==undefined)document.querySelectorAll(".nav")[map[id]].classList.add("active");renderAll()}
+function openPage(id){
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("show"));
+ document.getElementById(id).classList.add("show");
+ document.querySelectorAll(".nav").forEach(n=>n.classList.remove("active"));
+ let map={today:0,calendar:1,clients:2,income:3};
+ if(map[id]!==undefined)document.querySelectorAll(".nav")[map[id]].classList.add("active");
+ renderAll();
+}
 
-function renderAll(){renderToday();renderCalendar();renderClients();renderIncome()}
+function renderAll(){
+ renderToday();
+ renderCalendar();
+ renderClients();
+ renderIncome();
+}
 
 function renderToday(){
-let today=localDate(),list=records.filter(r=>r.date===today).sort((a,b)=>a.time.localeCompare(b.time));
-todayDate.innerText=new Date().toLocaleDateString("ru-RU",{day:"numeric",month:"long",year:"numeric"});
-todayCount.innerText=list.length+" записи";
-let total=list.reduce((s,r)=>{let c=clientById(r.clientId);return s+(c?left(c):0)},0);todayTotal.innerText="$"+total;
-if(!list.length){todayList.innerHTML=`<div class="card"><p class="muted">Сегодня свободно</p></div>`;return}
-let first=list[0],fc=clientById(first.clientId);
-let html=`<div class="sectionTitle">Следующий клиент</div>`;
-if(fc)html+=`<div class="item nextCard click" onclick="openClient('${fc.id}')"><div class="row"><div><div class="time">${first.time}</div><div class="name">${fc.name}</div><div class="idea">${first.plan||fc.idea}</div></div><div class="debt"><p class="label">Осталось</p><div class="amount">$${left(fc)}</div></div></div></div>`;
-html+=`<div class="sectionTitle">Все записи на сегодня</div>`;
-list.slice(1).forEach(r=>{let c=clientById(r.clientId);if(c)html+=`<div class="item click" onclick="openClient('${c.id}')"><div class="row"><div><h2>${r.time} — ${c.name}</h2><p>${r.plan||c.idea}</p></div><div class="orange">$${left(c)}</div></div></div>`});
-todayList.innerHTML=html;
+ let list=records.filter(r=>r.date===localDate()).sort((a,b)=>a.time.localeCompare(b.time));
+ todayList.innerHTML=list.map(r=>{
+  let c=clientById(r.clientId);
+  if(!c)return "";
+  return `<div class="item click" onclick="openClient('${c.id}')">
+   <h2>${r.time} — ${c.name}</h2>
+   <p>${r.plan||c.idea}</p>
+   <p>💰 Осталось $${left(c)}</p>
+  </div>`;
+ }).join("")||`<p class="small">Сегодня свободно</p>`;
 }
 
 function renderCalendar(){
-let y=currentDate.getFullYear(),m=currentDate.getMonth();monthTitle.innerText=currentDate.toLocaleDateString("ru-RU",{month:"long",year:"numeric"});
-let first=new Date(y,m,1).getDay(),offset=first===0?6:first-1,days=new Date(y,m+1,0).getDate(),html="";
-for(let i=0;i<offset;i++)html+="<div></div>";
-for(let d=1;d<=days;d++){let ds=y+"-"+String(m+1).padStart(2,"0")+"-"+String(d).padStart(2,"0"),count=records.filter(r=>r.date===ds).length,dots=count>4?"••••+":"•".repeat(count),cls="day click";if(ds===localDate())cls+=" today";if(ds===selectedDate)cls+=" selected";html+=`<div class="${cls}" onclick="selectDay('${ds}')">${d}${count?`<div class="dots">${dots}</div>`:""}</div>`}
-calendarDays.innerHTML=html;selectedDayTitle.innerText=selectedDate;
-let list=records.filter(r=>r.date===selectedDate).sort((a,b)=>a.time.localeCompare(b.time));
-dayRecords.innerHTML=list.map(r=>{let c=clientById(r.clientId);if(!c)return "";return `<div class="item"><h2>${r.time} — ${c.name}</h2><p>${r.plan||c.idea}</p><div class="grid2"><button class="gray" onclick="openClient('${c.id}')">Клиент</button><button class="gray" onclick="editRecord('${r.id}')">Перенести</button></div><button class="red" onclick="deleteRecord('${r.id}')">Удалить запись</button></div>`}).join("")||`<p class="muted">Нет записей</p>`;
+ let y=currentDate.getFullYear(),m=currentDate.getMonth();
+ monthTitle.innerText=currentDate.toLocaleDateString("ru-RU",{month:"long",year:"numeric"});
+ let first=new Date(y,m,1).getDay();
+ let offset=first===0?6:first-1;
+ let days=new Date(y,m+1,0).getDate();
+ let html="";
+ for(let i=0;i<offset;i++)html+="<div></div>";
+ for(let d=1;d<=days;d++){
+  let ds=y+"-"+String(m+1).padStart(2,"0")+"-"+String(d).padStart(2,"0");
+  let count=records.filter(r=>r.date===ds).length;
+  let dots=count>4?"••••+":"•".repeat(count);
+  let cls="day click";
+  if(ds===localDate())cls+=" today";
+  if(ds===selectedDate)cls+=" selected";
+  html+=`<div class="${cls}" onclick="selectDay('${ds}')">${d}${count?`<div class="dots">${dots}</div>`:""}</div>`;
+ }
+ calendarDays.innerHTML=html;
+ selectedDayTitle.innerText=selectedDate;
+ let list=records.filter(r=>r.date===selectedDate).sort((a,b)=>a.time.localeCompare(b.time));
+ dayRecords.innerHTML=list.map(r=>{
+  let c=clientById(r.clientId);
+  if(!c)return "";
+  return `<div class="item">
+   <h2>${r.time} — ${c.name}</h2>
+   <p>${r.plan||c.idea}</p>
+   <div class="grid2">
+    <button class="gray" onclick="openClient('${c.id}')">Клиент</button>
+    <button class="gray" onclick="editRecord('${r.id}')">Перенести</button>
+   </div>
+   <button class="red" onclick="deleteRecord('${r.id}')">Удалить запись</button>
+  </div>`;
+ }).join("")||`<p class="small">Нет записей</p>`;
 }
 
 function changeMonth(n){currentDate.setMonth(currentDate.getMonth()+n);renderCalendar()}
 function selectDay(ds){selectedDate=ds;renderCalendar()}
-function openRecord(){editRecordId=null;selectedClientId=null;recordMode.value="new";switchRecordMode();clearRecordForm();recordDate.value=selectedDate||localDate();openPage("recordPage")}
-function openRecordForClient(){editRecordId=null;selectedClientId=currentClientId;recordMode.value="old";switchRecordMode();clearRecordForm();oldChoices.innerHTML=`<div class="item">✅ ${clientById(currentClientId).name}</div>`;recordDate.value=selectedDate||localDate();openPage("recordPage")}
-function clearRecordForm(){newName.value="";newPhone.value="";newInstagram.value="";newIdea.value="";newPrice.value="";oldSearch.value="";oldChoices.innerHTML="";recordPlan.value="";recordHour.value="12";recordMinute.value="00"}
-function switchRecordMode(){newClientBlock.classList.toggle("hidden",recordMode.value!=="new");oldClientBlock.classList.toggle("hidden",recordMode.value!=="old")}
-function renderOldChoices(){let q=oldSearch.value.toLowerCase();oldChoices.innerHTML=clients.filter(c=>(c.name+" "+c.phone+" "+c.instagram+" "+c.idea).toLowerCase().includes(q)).map(c=>`<div class="item click" onclick="selectedClientId='${c.id}';oldChoices.innerHTML='<div class=&quot;item&quot;>✅ ${c.name}</div>'"><h2>${c.name}</h2><p>${c.idea}</p><p class="orange">$${left(c)} осталось</p></div>`).join("")||`<p class="muted">Не найдено</p>`}
-function similarClient(name,idea,price){return clients.find(c=>c.name.trim().toLowerCase()===name.trim().toLowerCase()&&c.idea.trim().toLowerCase()===idea.trim().toLowerCase()&&Number(c.price)===Number(price))}
+
+function openRecord(){
+ editRecordId=null;selectedClientId=null;recordMode.value="new";
+ switchRecordMode();clearRecordForm();recordDate.value=selectedDate||localDate();openPage("recordPage");
+}
+function openRecordForClient(){
+ editRecordId=null;selectedClientId=currentClientId;recordMode.value="old";
+ switchRecordMode();clearRecordForm();
+ oldChoices.innerHTML=`<div class="item">✅ ${clientById(currentClientId).name}</div>`;
+ recordDate.value=selectedDate||localDate();openPage("recordPage");
+}
+function clearRecordForm(){
+ newName.value="";newPhone.value="";newInstagram.value="";newIdea.value="";newPrice.value="";
+ oldSearch.value="";oldChoices.innerHTML="";recordPlan.value="";
+ recordHour.value="12";recordMinute.value="00";
+}
+function switchRecordMode(){
+ newClientBlock.classList.toggle("hidden",recordMode.value!=="new");
+ oldClientBlock.classList.toggle("hidden",recordMode.value!=="old");
+}
+function renderOldChoices(){
+ let q=oldSearch.value.toLowerCase();
+ oldChoices.innerHTML=clients.filter(c=>(c.name+" "+c.phone+" "+c.instagram+" "+c.idea).toLowerCase().includes(q)).map(c=>
+ `<div class="item click" onclick="selectedClientId='${c.id}';oldChoices.innerHTML='<div class=&quot;item&quot;>✅ ${c.name}</div>'">
+  <h2>${c.name}</h2><p>${c.idea}</p><p>💰 Осталось $${left(c)}</p>
+ </div>`).join("")||`<p class="small">Не найдено</p>`;
+}
+function similarClient(name,idea,price){
+ return clients.find(c=>
+  c.name.trim().toLowerCase()===name.trim().toLowerCase() &&
+  c.idea.trim().toLowerCase()===idea.trim().toLowerCase() &&
+  Number(c.price)===Number(price)
+ );
+}
 function saveRecord(){
-if(saving)return;saving=true;setTimeout(()=>saving=false,600);let clientId=selectedClientId;
-if(recordMode.value==="new"){let name=newName.value.trim(),idea=newIdea.value.trim(),price=newPrice.value.trim();if(!name){alert("Введите имя");saving=false;return}if(!idea){alert("Введите что хочет");saving=false;return}if(!price){alert("Введите цену");saving=false;return}let existing=similarClient(name,idea,price);if(existing){if(confirm("Похожий клиент уже есть. Использовать его?"))clientId=existing.id;else{let c={id:makeId(),name,phone:newPhone.value.trim(),instagram:newInstagram.value.trim(),idea,price:Number(price),note:""};clients.push(c);clientId=c.id}}else{let c={id:makeId(),name,phone:newPhone.value.trim(),instagram:newInstagram.value.trim(),idea,price:Number(price),note:""};clients.push(c);clientId=c.id}}
-if(!clientId){alert("Выберите клиента");saving=false;return}if(!recordDate.value){alert("Выберите дату");saving=false;return}
-let time=recordHour.value+":"+recordMinute.value;if(editRecordId){let r=records.find(x=>x.id===editRecordId);r.clientId=clientId;r.date=recordDate.value;r.time=time;r.plan=recordPlan.value.trim()}else records.push({id:makeId(),clientId,date:recordDate.value,time,plan:recordPlan.value.trim()});saveData();openPage("calendar")}
-function editRecord(id){let r=records.find(x=>x.id===id);if(!r)return;editRecordId=id;selectedClientId=r.clientId;recordMode.value="old";switchRecordMode();clearRecordForm();oldChoices.innerHTML=`<div class="item">✅ ${clientById(r.clientId).name}</div>`;recordDate.value=r.date;let [h,m]=r.time.split(":");recordHour.value=h;recordMinute.value=m;recordPlan.value=r.plan||"";openPage("recordPage")}
-function deleteRecord(id){if(confirm("Удалить запись?")){records=records.filter(r=>r.id!==id);saveData();renderAll()}}
+ if(saving)return;
+ saving=true;
+ setTimeout(()=>saving=false,600);
 
-function renderClients(){let q=(clientSearch.value||"").toLowerCase();clientList.innerHTML=clients.filter(c=>(c.name+" "+c.phone+" "+c.instagram+" "+c.idea).toLowerCase().includes(q)).map(c=>`<div class="item click" onclick="openClient('${c.id}')"><div class="avatar">${c.name.slice(0,2).toUpperCase()}</div><div class="clientName">${c.name}</div><p>${c.idea}</p><p class="orange">$${left(c)} осталось</p></div>`).join("")||`<p class="muted">Клиентов пока нет</p>`}
-function openClient(id){currentClientId=id;let c=clientById(id);clientNameView.innerText=c.name;clientContact.innerText=[c.phone,c.instagram].filter(Boolean).join(" • ");clientIdea.innerText=c.idea;clientMoney.innerText=`Цена $${c.price} / Заплатил $${paid(c.id)} / Осталось $${left(c)}`;let next=records.filter(r=>r.clientId===id&&r.date>=localDate()).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time))[0];clientNext.innerText=next?`${next.date} ${next.time} — ${next.plan||c.idea}`:"Не назначена";clientNote.innerText=c.note||"Пока нет";openPage("clientPage")}
-function addPayment(){let amount=prompt("Сколько заплатил?");if(!amount)return;payments.push({id:makeId(),clientId:currentClientId,amount:Number(amount),date:localDate()});saveData();openClient(currentClientId)}
-function addNote(){let c=clientById(currentClientId),note=prompt("Заметка:",c.note||"");if(note===null)return;c.note=note;saveData();openClient(currentClientId)}
-function deleteClient(){let c=clientById(currentClientId);if(!c)return;if(confirm("Удалить клиента "+c.name+"? Удалятся его записи, оплаты и эскизы.")){clients=clients.filter(x=>x.id!==currentClientId);records=records.filter(r=>r.clientId!==currentClientId);payments=payments.filter(p=>p.clientId!==currentClientId);sketches=sketches.filter(s=>s.clientId!==currentClientId);saveData();currentClientId=null;openPage("clients")}}
+ let clientId=selectedClientId;
 
-function openSketchPage(){let c=clientById(currentClientId);sketchTitle.innerText="Эскиз — "+c.name;sketchName.value="";sketchFile.value="";renderSketches();openPage("sketchPage")}
-function renderSketches(){let list=sketches.filter(s=>s.clientId===currentClientId).sort((a,b)=>b.created.localeCompare(a.created));sketchList.innerHTML=list.map(s=>`<div class="item click" onclick="openSketch('${s.id}')"><h2>${s.name||"Эскиз"}</h2><p>${s.created}</p><img class="thumb" src="${s.data}"></div>`).join("")||`<p class="muted">Эскизов пока нет</p>`}
-function addSketch(){let file=sketchFile.files[0];if(!file){alert("Выберите изображение");return}let reader=new FileReader();reader.onload=function(e){sketches.push({id:makeId(),clientId:currentClientId,name:sketchName.value.trim()||"Эскиз",data:e.target.result,created:localDate()});saveData();openSketchPage()};reader.readAsDataURL(file)}
-function openSketch(id){currentSketchId=id;let s=sketches.find(x=>x.id===id);if(!s)return;sketchViewTitle.innerText=s.name||"Эскиз";sketchViewImg.src=s.data;openPage("sketchView")}
-function deleteSketch(){if(!currentSketchId)return;if(confirm("Удалить эскиз?")){sketches=sketches.filter(s=>s.id!==currentSketchId);saveData();currentSketchId=null;openSketchPage()}}
+ if(recordMode.value==="new"){
+  let name=newName.value.trim(),idea=newIdea.value.trim(),price=newPrice.value.trim();
+  if(!name){alert("Введите имя");saving=false;return}
+  if(!idea){alert("Введите что хочет");saving=false;return}
+  if(!price){alert("Введите цену");saving=false;return}
 
-function renderIncome(){let now=new Date(),today=localDate(),weekStart=new Date(now);weekStart.setDate(now.getDate()-((now.getDay()+6)%7));weekStart.setHours(0,0,0,0);let a=0,b=0,c=0,d=0;payments.forEach(p=>{let dt=new Date(p.date+"T00:00"),v=Number(p.amount||0);if(p.date===today)a+=v;if(dt>=weekStart)b+=v;if(dt.getMonth()===now.getMonth()&&dt.getFullYear()===now.getFullYear())c+=v;if(dt.getFullYear()===now.getFullYear())d+=v});incomeToday.innerText="$"+a;incomeWeek.innerText="$"+b;incomeMonth.innerText="$"+c;incomeYear.innerText="$"+d}
+  let existing=similarClient(name,idea,price);
+  if(existing){
+   if(confirm("Похожий клиент уже есть. Использовать его?")){
+    clientId=existing.id;
+   }else{
+    let c={id:makeId(),name,phone:newPhone.value.trim(),instagram:newInstagram.value.trim(),idea,price:Number(price),note:""};
+    clients.push(c);clientId=c.id;
+   }
+  }else{
+   let c={id:makeId(),name,phone:newPhone.value.trim(),instagram:newInstagram.value.trim(),idea,price:Number(price),note:""};
+   clients.push(c);clientId=c.id;
+  }
+ }
+ if(!clientId){alert("Выберите клиента");saving=false;return}
+ if(!recordDate.value){alert("Выберите дату");saving=false;return}
 
-setupTime();selectedDate=localDate();renderAll();
+ let time=recordHour.value+":"+recordMinute.value;
+
+ if(editRecordId){
+  let r=records.find(x=>x.id===editRecordId);
+  r.clientId=clientId;r.date=recordDate.value;r.time=time;r.plan=recordPlan.value.trim();
+ }else{
+  records.push({id:makeId(),clientId,date:recordDate.value,time,plan:recordPlan.value.trim()});
+ }
+
+ saveData();
+ openPage("calendar");
+}
+function editRecord(id){
+ let r=records.find(x=>x.id===id);
+ if(!r)return;
+ editRecordId=id;selectedClientId=r.clientId;recordMode.value="old";
+ switchRecordMode();clearRecordForm();
+ oldChoices.innerHTML=`<div class="item">✅ ${clientById(r.clientId).name}</div>`;
+ recordDate.value=r.date;
+ let [h,m]=r.time.split(":");
+ recordHour.value=h;recordMinute.value=m;recordPlan.value=r.plan||"";
+ openPage("recordPage");
+}
+function deleteRecord(id){
+ if(confirm("Удалить запись?")){
+  records=records.filter(r=>r.id!==id);
+  saveData();renderAll();
+ }
+}
+
+function renderClients(){
+ let q=(clientSearch.value||"").toLowerCase();
+ clientList.innerHTML=clients.filter(c=>(c.name+" "+c.phone+" "+c.instagram+" "+c.idea).toLowerCase().includes(q)).map(c=>
+ `<div class="item click" onclick="openClient('${c.id}')">
+  <h2>${c.name}</h2><p>${c.idea}</p><p>💰 Осталось $${left(c)}</p>
+ </div>`).join("")||`<p class="small">Клиентов пока нет</p>`;
+}
+function openClient(id){
+ currentClientId=id;
+ let c=clientById(id);
+ clientNameView.innerText=c.name;
+ clientContact.innerText=[c.phone,c.instagram].filter(Boolean).join(" • ");
+ clientIdea.innerText=c.idea;
+ clientMoney.innerText=`Цена $${c.price} / Заплатил $${paid(c.id)} / Осталось $${left(c)}`;
+ let next=records.filter(r=>r.clientId===id && r.date>=localDate()).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time))[0];
+ clientNext.innerText=next?`${next.date} ${next.time} — ${next.plan||c.idea}`:"Не назначена";
+ clientNote.innerText=c.note||"Пока нет";
+ openPage("clientPage");
+}
+function addPayment(){
+ let amount=prompt("Сколько заплатил?");
+ if(!amount)return;
+ payments.push({id:makeId(),clientId:currentClientId,amount:Number(amount),date:localDate()});
+ saveData();openClient(currentClientId);
+}
+function addNote(){
+ let c=clientById(currentClientId);
+ let note=prompt("Заметка:",c.note||"");
+ if(note===null)return;
+ c.note=note;
+ saveData();openClient(currentClientId);
+}
+function deleteClient(){
+ let c=clientById(currentClientId);
+ if(!c)return;
+ if(confirm("Удалить клиента "+c.name+"? Удалятся его записи, оплаты и эскизы.")){
+  clients=clients.filter(x=>x.id!==currentClientId);
+  records=records.filter(r=>r.clientId!==currentClientId);
+  payments=payments.filter(p=>p.clientId!==currentClientId);
+  sketches=sketches.filter(s=>s.clientId!==currentClientId);
+  saveData();currentClientId=null;openPage("clients");
+ }
+}
+
+function openSketchPage(){
+ let c=clientById(currentClientId);
+ sketchTitle.innerText="🎨 Эскиз — "+c.name;
+ sketchName.value="";
+ sketchFile.value="";
+ renderSketches();
+ openPage("sketchPage");
+}
+function renderSketches(){
+ let list=sketches.filter(s=>s.clientId===currentClientId).sort((a,b)=>b.created.localeCompare(a.created));
+ sketchList.innerHTML=list.map(s=>
+ `<div class="item click" onclick="openSketch('${s.id}')">
+  <h2>${s.name||"Эскиз"}</h2>
+  <p>${s.created}</p>
+  <img class="thumb" src="${s.data}">
+ </div>`).join("")||`<p class="small">Эскизов пока нет</p>`;
+}
+function addSketch(){
+ let file=sketchFile.files[0];
+ if(!file){alert("Выберите изображение");return}
+ let reader=new FileReader();
+ reader.onload=function(e){
+  sketches.push({id:makeId(),clientId:currentClientId,name:sketchName.value.trim()||"Эскиз",data:e.target.result,created:localDate()});
+  saveData();openSketchPage();
+ };
+ reader.readAsDataURL(file);
+}
+function openSketch(id){
+ currentSketchId=id;
+ let s=sketches.find(x=>x.id===id);
+ if(!s)return;
+ sketchViewTitle.innerText=s.name||"Эскиз";
+ sketchViewImg.src=s.data;
+ openPage("sketchView");
+}
+function deleteSketch(){
+ if(!currentSketchId)return;
+ if(confirm("Удалить эскиз?")){
+  sketches=sketches.filter(s=>s.id!==currentSketchId);
+  saveData();
+  currentSketchId=null;
+  openSketchPage();
+ }
+}
+
+function renderIncome(){
+ let now=new Date(),today=localDate();
+ let weekStart=new Date(now);
+ weekStart.setDate(now.getDate()-((now.getDay()+6)%7));
+ weekStart.setHours(0,0,0,0);
+
+ let sumToday=0,sumWeek=0,sumMonth=0,sumYear=0;
+ payments.forEach(p=>{
+  let d=new Date(p.date+"T00:00"),a=Number(p.amount||0);
+  if(p.date===today)sumToday+=a;
+  if(d>=weekStart)sumWeek+=a;
+  if(d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear())sumMonth+=a;
+  if(d.getFullYear()===now.getFullYear())sumYear+=a;
+ });
+ incomeToday.innerText="$"+sumToday;
+ incomeWeek.innerText="$"+sumWeek;
+ incomeMonth.innerText="$"+sumMonth;
+ incomeYear.innerText="$"+sumYear;
+}
+
+setupTime();
+selectedDate=localDate();
+renderAll();
 </script>
 </body>
 </html>
