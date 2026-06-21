@@ -4,289 +4,71 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>InkFlow</title>
-
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-}
-
-body{
-  background:#000;
-  color:#fff;
-  padding:18px;
-  padding-bottom:90px;
-}
-
-.page{display:none}
-.show{display:block}
-
-h1{
-  font-size:31px;
-  margin-bottom:14px;
-}
-
-h2{
-  font-size:20px;
-  margin-bottom:10px;
-}
-
-p{
-  line-height:1.35;
-}
-
-.small{
-  color:#888;
-  font-size:14px;
-}
-
-.card{
-  background:#111;
-  border-radius:22px;
-  padding:18px;
-  margin-top:14px;
-}
-
-.item{
-  background:#181818;
-  border-radius:16px;
-  padding:15px;
-  margin-top:10px;
-}
-
-.item p{
-  color:#bbb;
-  margin-top:5px;
-}
-
-  button{
-  width:100%;
-  border:none;
-  border-radius:16px;
-  padding:15px;
-  margin-top:12px;
-  font-size:17px;
-  color:white;
-  background:#2563eb;
-}
-
-button.gray{background:#2a2a2a}
-button.green{background:#15803d}
-button.red{background:#991b1b}
-
-input,
-textarea,
-select{
-  width:100%;
-  background:#1d1d1d;
-  color:white;
-  border:none;
-  border-radius:14px;
-  padding:14px;
-  margin-top:10px;
-  font-size:16px;
-}
-
-textarea{
-  min-height:90px;
-  resize:none;
-}
-
-.grid2{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
-
-.grid7{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:7px;
-  margin-top:12px;
-}
-
-.day{
-  background:#181818;
-  border-radius:14px;
-  min-height:46px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  font-size:15px;
-}
-
-.day.today{outline:2px solid #2563eb}
-.day.selected{background:#2563eb}
-
-.dot{
-  width:5px;
-  height:5px;
-  background:#4ade80;
-  border-radius:50%;
-  margin-top:4px;
-}
-
-.hidden{display:none}
-
-  .bottom{
-  position:fixed;
-  left:0;
-  right:0;
-  bottom:0;
-  background:#050505;
-  border-top:1px solid #222;
-  display:flex;
-  justify-content:space-around;
-  padding:10px 6px;
-}
-
-.nav{
-  flex:1;
-  text-align:center;
-  font-size:13px;
-  color:#888;
-}
-
-.nav.active{
-  color:white;
-}
-
-.click{
-  cursor:pointer;
-}
-
+*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+body{background:#000;color:#fff;padding:18px;padding-bottom:115px}
+.page{display:none}.show{display:block}
+h1{font-size:31px;margin-bottom:14px}h2{font-size:20px;margin-bottom:10px}
+p{line-height:1.35}.small{color:#888;font-size:14px}
+.card{background:#111;border-radius:22px;padding:18px;margin-top:14px}
+.item{background:#181818;border-radius:16px;padding:15px;margin-top:10px}
+.item p{color:#bbb;margin-top:5px}
+button{width:100%;border:none;border-radius:16px;padding:15px;margin-top:12px;font-size:17px;color:white;background:#2563eb}
+button.gray{background:#2a2a2a}button.green{background:#15803d}button.red{background:#991b1b}
+input,textarea,select{width:100%;background:#1d1d1d;color:white;border:none;border-radius:14px;padding:14px;margin-top:10px;font-size:16px}
+textarea{min-height:90px;resize:none}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grid7{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;margin-top:12px}
+.day{background:#181818;border-radius:14px;min-height:48px;display:flex;align-items:center;justify-content:center;flex-direction:column;font-size:15px}
+.day.today{outline:2px solid #2563eb}.day.selected{background:#2563eb}
+.dots{font-size:12px;color:#4ade80;line-height:10px;margin-top:3px}
+.hidden{display:none}.click{cursor:pointer}.click:active{transform:scale(.97);opacity:.85}
+.bottom{position:fixed;left:0;right:0;bottom:0;background:#050505;border-top:1px solid #222;display:flex;justify-content:space-around;padding:10px 6px}
+.nav{flex:1;text-align:center;font-size:13px;color:#888}.nav.active{color:white}
 </style>
 </head>
-
 <body>
 
 <div id="today" class="page show">
-
 <h1>☀️ Сегодня</h1>
-
 <div class="card">
-
-<h2>
-💵 Заработано сегодня
-</h2>
-
-<p id="incomeToday">
-$0
-</p>
-
+<h2>📅 Записи на сегодня</h2>
+<div id="todayList"><p class="small">Сегодня свободно</p></div>
+</div>
 </div>
 
-
-<div class="card">
-
-<h2>
-📅 Записи на сегодня
-</h2>
-
-<div id="todayList">
-
-<p class="small">
-Сегодня свободно
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-  <div id="calendar" class="page">
-
+<div id="calendar" class="page">
 <h1>📅 Календарь</h1>
-
 <div class="card">
-
 <div class="grid2">
-
-<button class="gray" onclick="changeMonth(-1)">
-← Месяц
-</button>
-
-<button class="gray" onclick="changeMonth(1)">
-Месяц →
-</button>
-
+<button class="gray" onclick="changeMonth(-1)">← Месяц</button>
+<button class="gray" onclick="changeMonth(1)">Месяц →</button>
 </div>
-
-<h2 id="monthTitle">
-Июль 2026
-</h2>
-
+<h2 id="monthTitle"></h2>
 <div class="grid7">
-
-<div class="small">ПН</div>
-<div class="small">ВТ</div>
-<div class="small">СР</div>
-<div class="small">ЧТ</div>
-<div class="small">ПТ</div>
-<div class="small">СБ</div>
-<div class="small">ВС</div>
-
+<div class="small">ПН</div><div class="small">ВТ</div><div class="small">СР</div><div class="small">ЧТ</div><div class="small">ПТ</div><div class="small">СБ</div><div class="small">ВС</div>
 </div>
-
-<div id="calendarDays"
-class="grid7">
-
+<div id="calendarDays" class="grid7"></div>
 </div>
-
-</div>
-
 
 <div class="card">
-
-<h2 id="selectedDay">
-Выберите дату
-</h2>
-
-<div id="dayAppointments">
-
-<p class="small">
-Нет записей
-</p>
-
+<h2 id="selectedDayTitle">День</h2>
+<div id="dayRecords"></div>
+<button onclick="openRecord()">➕ Добавить запись</button>
+</div>
 </div>
 
-<button onclick="openNewRecord()">
-➕ Добавить запись
-</button>
-
-</div>
-
-</div>
-
-  <div id="clients" class="page">
-
+<div id="clients" class="page">
 <h1>👤 Клиенты</h1>
-
 <div class="card">
-
-<input id="clientSearch"
-placeholder="🔎 Найти клиента"
-oninput="renderClients()">
-
-<div id="clientList">
-<p class="small">Клиентов пока нет</p>
+<input id="clientSearch" placeholder="🔎 Найти клиента" oninput="renderClients()">
+<div id="clientList"></div>
 </div>
-
 </div>
-
-</div>
-
 
 <div id="clientPage" class="page">
-
 <h1 id="clientNameView">Клиент</h1>
-
 <div class="card">
-
 <p id="clientContact" class="small"></p>
 
 <h2>🎨 Что хочет</h2>
@@ -298,22 +80,29 @@ oninput="renderClients()">
 <h2>📅 Следующая запись</h2>
 <p id="clientNext"></p>
 
-<h2>📝 Последняя заметка</h2>
+<h2>📝 Заметка</h2>
 <p id="clientNote" class="small">Пока нет</p>
 
 <button onclick="addPayment()">💵 Добавить оплату</button>
 <button onclick="addNote()">📝 Добавить заметку</button>
-<button onclick="openNewRecordForClient()">📅 Записать дату</button>
+<button onclick="openRecordForClient()">📅 Записать дату</button>
+<button class="red" onclick="deleteClient()">🗑 Удалить клиента</button>
 <button class="gray" onclick="openPage('clients')">← Назад</button>
-
+</div>
 </div>
 
+<div id="income" class="page">
+<h1>💵 Доходы</h1>
+<div class="card">
+<div class="item"><h2 id="incomeToday">$0</h2><p>Сегодня</p></div>
+<div class="item"><h2 id="incomeWeek">$0</h2><p>Эта неделя</p></div>
+<div class="item"><h2 id="incomeMonth">$0</h2><p>Этот месяц</p></div>
+<div class="item"><h2 id="incomeYear">$0</h2><p>Этот год</p></div>
+</div>
 </div>
 
-  <div id="recordPage" class="page">
-
+<div id="recordPage" class="page">
 <h1>➕ Запись</h1>
-
 <div class="card">
 
 <select id="recordMode" onchange="switchRecordMode()">
@@ -322,323 +111,327 @@ oninput="renderClients()">
 </select>
 
 <div id="newClientBlock">
-
 <input id="newName" placeholder="Имя клиента">
 <input id="newPhone" placeholder="Телефон">
 <input id="newInstagram" placeholder="Instagram">
 <textarea id="newIdea" placeholder="Что хочет"></textarea>
 <input id="newPrice" placeholder="Цена">
-
 </div>
 
 <div id="oldClientBlock" class="hidden">
-
-<input id="oldSearch" placeholder="🔎 Найти клиента" oninput="renderOldClientChoices()">
+<input id="oldSearch" placeholder="🔎 Найти клиента" oninput="renderOldChoices()">
 <div id="oldChoices"></div>
-
 </div>
 
 <input id="recordDate" type="date">
-<input id="recordTime" type="time">
+
+<div class="grid2">
+<select id="recordHour"></select>
+<select id="recordMinute"></select>
+</div>
+
 <textarea id="recordPlan" placeholder="Что делаем"></textarea>
 
 <button class="green" onclick="saveRecord()">💾 Сохранить</button>
 <button class="gray" onclick="openPage('calendar')">← Назад</button>
-
 </div>
-
 </div>
-
 
 <div class="bottom">
-
 <div class="nav active" onclick="openPage('today')">☀️<br>Сегодня</div>
 <div class="nav" onclick="openPage('calendar')">📅<br>Календарь</div>
 <div class="nav" onclick="openPage('clients')">👤<br>Клиенты</div>
-
+<div class="nav" onclick="openPage('income')">💵<br>Доходы</div>
 </div>
 
-  <script>
+<script>
+let clients=JSON.parse(localStorage.getItem("ink_clients_v141")||"[]");
+let records=JSON.parse(localStorage.getItem("ink_records_v141")||"[]");
+let payments=JSON.parse(localStorage.getItem("ink_payments_v141")||"[]");
 
-let clients =
-JSON.parse(localStorage.getItem("inkflow_clients_v14") || "[]");
+let currentDate=new Date();
+let selectedDate=localDate();
+let currentClientId=null;
+let selectedClientId=null;
+let editRecordId=null;
 
-let records =
-JSON.parse(localStorage.getItem("inkflow_records_v14") || "[]");
-
-let payments =
-JSON.parse(localStorage.getItem("inkflow_payments_v14") || "[]");
-
-
-let currentPage = "today";
-let currentClientId = null;
-let selectedClientId = null;
-
-let currentDate = new Date();
-let selectedDate = null;
-
-
+function localDate(d=new Date()){
+ return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+}
+function makeId(){return Date.now()+"_"+Math.random().toString(36).slice(2,7)}
 function saveData(){
+ localStorage.setItem("ink_clients_v141",JSON.stringify(clients));
+ localStorage.setItem("ink_records_v141",JSON.stringify(records));
+ localStorage.setItem("ink_payments_v141",JSON.stringify(payments));
+}
+function clientById(id){return clients.find(c=>c.id===id)}
+function paid(id){return payments.filter(p=>p.clientId===id).reduce((s,p)=>s+Number(p.amount||0),0)}
+function left(c){return Number(c.price||0)-paid(c.id)}
 
-localStorage.setItem(
-"inkflow_clients_v14",
-JSON.stringify(clients)
-);
-
-localStorage.setItem(
-"inkflow_records_v14",
-JSON.stringify(records)
-);
-
-localStorage.setItem(
-"inkflow_payments_v14",
-JSON.stringify(payments)
-);
-
+function setupTime(){
+ recordHour.innerHTML="";
+ recordMinute.innerHTML="";
+ for(let h=0;h<24;h++)recordHour.innerHTML+=`<option>${String(h).padStart(2,"0")}</option>`;
+ for(let m=0;m<60;m++)recordMinute.innerHTML+=`<option>${String(m).padStart(2,"0")}</option>`;
+ recordHour.value="12";recordMinute.value="00";
 }
 
-
-function id(){
-
-return Date.now() +
-Math.random()
-.toString(36)
-.slice(2,6);
-
+function openPage(id){
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("show"));
+ document.getElementById(id).classList.add("show");
+ document.querySelectorAll(".nav").forEach(n=>n.classList.remove("active"));
+ let map={today:0,calendar:1,clients:2,income:3};
+ if(map[id]!==undefined)document.querySelectorAll(".nav")[map[id]].classList.add("active");
+ renderAll();
 }
-
-
-function clientById(clientId){
-
-return clients.find(
-x => x.id === clientId
-);
-
-}
-
-
-function openPage(page){
-
-document
-.querySelectorAll(".page")
-.forEach(
-p => p.classList.remove("show")
-);
-
-document
-.getElementById(page)
-.classList.add("show");
-
-
-document
-.querySelectorAll(".nav")
-.forEach(
-n => n.classList.remove("active")
-);
-
-
-let tabs = {
-today:0,
-calendar:1,
-clients:2
-};
-
-
-if(tabs[page] !== undefined){
-
-document
-.querySelectorAll(".nav")
-[tabs[page]]
-.classList.add("active");
-
-}
-
-
-currentPage = page;
-
-renderAll();
-
-}
-
-
-function formatDate(date){
-
-return date.toISOString()
-.split("T")[0];
-
-}
-
-    function localDate(d=new Date()){
-  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
-}
-function formatDate(date){return localDate(date)}
-
-function moneyPaid(clientId){
-  return payments.filter(p=>p.clientId===clientId).reduce((s,p)=>s+Number(p.amount||0),0);
-}
-function moneyLeft(c){return Number(c.price||0)-moneyPaid(c.id)}
 
 function renderAll(){
-  renderToday();
-  renderCalendar();
-  renderClients();
+ renderToday();
+ renderCalendar();
+ renderClients();
+ renderIncome();
 }
 
 function renderToday(){
-  let today=localDate();
-  let todays=records.filter(r=>r.date===today).sort((a,b)=>a.time.localeCompare(b.time));
-  let income=payments.filter(p=>p.date===today).reduce((s,p)=>s+Number(p.amount||0),0);
-  document.getElementById("incomeToday").innerText="$"+income;
-
-  todayList.innerHTML=todays.map(r=>{
-    let c=clientById(r.clientId);
-    return `<div class="item click" onclick="openClient('${c.id}')">
-      <h2>${r.time} — ${c.name}</h2>
-      <p>${r.plan||c.idea}</p>
-      <p>💰 Осталось $${moneyLeft(c)}</p>
-    </div>`;
-  }).join("") || `<p class="small">Сегодня свободно</p>`;
+ let list=records.filter(r=>r.date===localDate()).sort((a,b)=>a.time.localeCompare(b.time));
+ todayList.innerHTML=list.map(r=>{
+  let c=clientById(r.clientId);
+  if(!c)return "";
+  return `<div class="item click" onclick="openClient('${c.id}')">
+   <h2>${r.time} — ${c.name}</h2>
+   <p>${r.plan||c.idea}</p>
+   <p>💰 Осталось $${left(c)}</p>
+  </div>`;
+ }).join("")||`<p class="small">Сегодня свободно</p>`;
 }
 
 function renderCalendar(){
-  let y=currentDate.getFullYear(), m=currentDate.getMonth();
-  monthTitle.innerText=currentDate.toLocaleDateString("ru-RU",{month:"long",year:"numeric"});
-  let first=new Date(y,m,1).getDay();
-  let offset=first===0?6:first-1;
-  let days=new Date(y,m+1,0).getDate();
-  let html="";
-  for(let i=0;i<offset;i++)html+="<div></div>";
-  for(let d=1;d<=days;d++){
-    let ds=y+"-"+String(m+1).padStart(2,"0")+"-"+String(d).padStart(2,"0");
-    let cls="day click";
-    if(ds===localDate())cls+=" today";
-    if(ds===selectedDate)cls+=" selected";
-    let has=records.some(r=>r.date===ds);
-    html+=`<div class="${cls}" onclick="selectDay('${ds}')">${d}${has?'<div class="dot"></div>':''}</div>`;
-  }
-  calendarDays.innerHTML=html;
-
-  if(!selectedDate)selectedDate=localDate();
-  selectedDay.innerText=selectedDate;
-  let list=records.filter(r=>r.date===selectedDate).sort((a,b)=>a.time.localeCompare(b.time));
-  dayAppointments.innerHTML=list.map(r=>{
-    let c=clientById(r.clientId);
-    return `<div class="item click" onclick="openClient('${c.id}')">
-      <h2>${r.time} — ${c.name}</h2>
-      <p>${r.plan||c.idea}</p>
-      <button class="gray" onclick="event.stopPropagation();editRecord('${r.id}')">Изменить</button>
-      <button class="red" onclick="event.stopPropagation();deleteRecord('${r.id}')">Удалить</button>
-    </div>`;
-  }).join("") || `<p class="small">Нет записей</p>`;
+ let y=currentDate.getFullYear(),m=currentDate.getMonth();
+ monthTitle.innerText=currentDate.toLocaleDateString("ru-RU",{month:"long",year:"numeric"});
+ let first=new Date(y,m,1).getDay();
+ let offset=first===0?6:first-1;
+ let days=new Date(y,m+1,0).getDate();
+ let html="";
+ for(let i=0;i<offset;i++)html+="<div></div>";
+ for(let d=1;d<=days;d++){
+  let ds=y+"-"+String(m+1).padStart(2,"0")+"-"+String(d).padStart(2,"0");
+  let count=records.filter(r=>r.date===ds).length;
+  let dots=count>4?"••••+": "•".repeat(count);
+  let cls="day click";
+  if(ds===localDate())cls+=" today";
+  if(ds===selectedDate)cls+=" selected";
+  html+=`<div class="${cls}" onclick="selectDay('${ds}')">${d}${count?`<div class="dots">${dots}</div>`:""}</div>`;
+ }
+ calendarDays.innerHTML=html;
+ selectedDayTitle.innerText=selectedDate;
+ let list=records.filter(r=>r.date===selectedDate).sort((a,b)=>a.time.localeCompare(b.time));
+ dayRecords.innerHTML=list.map(r=>{
+  let c=clientById(r.clientId);
+  if(!c)return "";
+  return `<div class="item">
+   <h2>${r.time} — ${c.name}</h2>
+   <p>${r.plan||c.idea}</p>
+   <div class="grid2">
+    <button class="gray" onclick="openClient('${c.id}')">Клиент</button>
+    <button class="gray" onclick="editRecord('${r.id}')">Перенести</button>
+   </div>
+   <button class="red" onclick="deleteRecord('${r.id}')">Удалить запись</button>
+  </div>`;
+ }).join("")||`<p class="small">Нет записей</p>`;
 }
 
 function changeMonth(n){
-  currentDate.setMonth(currentDate.getMonth()+n);
-  renderCalendar();
+ currentDate.setMonth(currentDate.getMonth()+n);
+ renderCalendar();
 }
 function selectDay(ds){
-  selectedDate=ds;
-  renderCalendar();
+ selectedDate=ds;
+ renderCalendar();
 }
-function openNewRecord(){
-  recordDate.value=selectedDate||localDate();
-  recordTime.value="";
-  recordPlan.value="";
-  selectedClientId=null;
-  openPage("recordPage");
+
+function openRecord(){
+ editRecordId=null;
+ selectedClientId=null;
+ recordMode.value="new";
+ switchRecordMode();
+ clearRecordForm();
+ recordDate.value=selectedDate||localDate();
+ openPage("recordPage");
+}
+
+function openRecordForClient(){
+ editRecordId=null;
+ selectedClientId=currentClientId;
+ recordMode.value="old";
+ switchRecordMode();
+ clearRecordForm();
+ oldChoices.innerHTML=`<div class="item">✅ ${clientById(currentClientId).name}</div>`;
+ recordDate.value=selectedDate||localDate();
+ openPage("recordPage");
+}
+
+function clearRecordForm(){
+ newName.value="";newPhone.value="";newInstagram.value="";newIdea.value="";newPrice.value="";
+ oldSearch.value="";oldChoices.innerHTML="";
+ recordPlan.value="";
+ recordHour.value="12";recordMinute.value="00";
 }
 
 function switchRecordMode(){
-  newClientBlock.classList.toggle("hidden",recordMode.value!=="new");
-  oldClientBlock.classList.toggle("hidden",recordMode.value!=="old");
+ newClientBlock.classList.toggle("hidden",recordMode.value!=="new");
+ oldClientBlock.classList.toggle("hidden",recordMode.value!=="old");
 }
 
-function renderOldClientChoices(){
-  let q=oldSearch.value.toLowerCase();
-  oldChoices.innerHTML=clients.filter(c=>(c.name+" "+c.instagram+" "+c.phone).toLowerCase().includes(q)).map(c=>
-    `<div class="item click" onclick="selectedClientId='${c.id}';oldChoices.innerHTML='<p>✅ ${c.name}</p>'">
-      <h2>${c.name}</h2><p>${c.idea}</p><p>💰 Осталось $${moneyLeft(c)}</p>
-    </div>`
-  ).join("") || `<p class="small">Не найдено</p>`;
+function renderOldChoices(){
+ let q=oldSearch.value.toLowerCase();
+ oldChoices.innerHTML=clients.filter(c=>(c.name+" "+c.phone+" "+c.instagram+" "+c.idea).toLowerCase().includes(q)).map(c=>
+ `<div class="item click" onclick="selectedClientId='${c.id}';oldChoices.innerHTML='<div class=&quot;item&quot;>✅ ${c.name}</div>'">
+  <h2>${c.name}</h2><p>${c.idea}</p><p>💰 Осталось $${left(c)}</p>
+ </div>`).join("")||`<p class="small">Не найдено</p>`;
+}
+
+function similarClient(name,idea,price){
+ return clients.find(c=>
+  c.name.trim().toLowerCase()===name.trim().toLowerCase() &&
+  c.idea.trim().toLowerCase()===idea.trim().toLowerCase() &&
+  Number(c.price)===Number(price)
+ );
 }
 
 function saveRecord(){
-  let clientId=selectedClientId;
+ let clientId=selectedClientId;
 
-  if(recordMode.value==="new"){
-    if(!newName.value.trim()){alert("Введите имя");return}
-    if(!newIdea.value.trim()){alert("Введите что хочет");return}
-    if(!newPrice.value.trim()){alert("Введите цену");return}
-    let c={id:id(),name:newName.value.trim(),phone:newPhone.value.trim(),instagram:newInstagram.value.trim(),idea:newIdea.value.trim(),price:Number(newPrice.value),note:""};
-    clients.push(c); clientId=c.id;
+ if(recordMode.value==="new"){
+  let name=newName.value.trim(),idea=newIdea.value.trim(),price=newPrice.value.trim();
+  if(!name){alert("Введите имя");return}
+  if(!idea){alert("Введите что хочет");return}
+  if(!price){alert("Введите цену");return}
+
+  let existing=similarClient(name,idea,price);
+  if(existing){
+   if(confirm("Похожий клиент уже есть. Использовать его?")){
+    clientId=existing.id;
+   }else{
+    let c={id:makeId(),name,phone:newPhone.value.trim(),instagram:newInstagram.value.trim(),idea,price:Number(price),note:""};
+    clients.push(c);clientId=c.id;
+   }
+  }else{
+   let c={id:makeId(),name,phone:newPhone.value.trim(),instagram:newInstagram.value.trim(),idea,price:Number(price),note:""};
+   clients.push(c);clientId=c.id;
   }
+ }
 
-  if(!clientId){alert("Выберите клиента");return}
-  if(!recordDate.value||!recordTime.value){alert("Выберите дату и время");return}
+ if(!clientId){alert("Выберите клиента");return}
+ if(!recordDate.value){alert("Выберите дату");return}
 
-  records.push({id:id(),clientId,date:recordDate.value,time:recordTime.value,plan:recordPlan.value.trim()});
-  saveData();
-  openPage("calendar");
+ let time=recordHour.value+":"+recordMinute.value;
+
+ if(editRecordId){
+  let r=records.find(x=>x.id===editRecordId);
+  r.clientId=clientId;r.date=recordDate.value;r.time=time;r.plan=recordPlan.value.trim();
+ }else{
+  records.push({id:makeId(),clientId,date:recordDate.value,time,plan:recordPlan.value.trim()});
+ }
+
+ saveData();
+ openPage("calendar");
+}
+
+function editRecord(id){
+ let r=records.find(x=>x.id===id);
+ if(!r)return;
+ editRecordId=id;
+ selectedClientId=r.clientId;
+ recordMode.value="old";
+ switchRecordMode();
+ clearRecordForm();
+ oldChoices.innerHTML=`<div class="item">✅ ${clientById(r.clientId).name}</div>`;
+ recordDate.value=r.date;
+ let [h,m]=r.time.split(":");
+ recordHour.value=h;recordMinute.value=m;
+ recordPlan.value=r.plan||"";
+ openPage("recordPage");
+}
+
+function deleteRecord(id){
+ if(confirm("Удалить запись?")){
+  records=records.filter(r=>r.id!==id);
+  saveData();renderAll();
+ }
 }
 
 function renderClients(){
-  let q=(clientSearch.value||"").toLowerCase();
-  clientList.innerHTML=clients.filter(c=>(c.name+" "+c.phone+" "+c.instagram+" "+c.idea).toLowerCase().includes(q)).map(c=>
-    `<div class="item click" onclick="openClient('${c.id}')">
-      <h2>${c.name}</h2><p>${c.idea}</p><p>💰 Осталось $${moneyLeft(c)}</p>
-    </div>`
-  ).join("") || `<p class="small">Клиентов пока нет</p>`;
+ let q=(clientSearch.value||"").toLowerCase();
+ clientList.innerHTML=clients.filter(c=>(c.name+" "+c.phone+" "+c.instagram+" "+c.idea).toLowerCase().includes(q)).map(c=>
+ `<div class="item click" onclick="openClient('${c.id}')">
+  <h2>${c.name}</h2><p>${c.idea}</p><p>💰 Осталось $${left(c)}</p>
+ </div>`).join("")||`<p class="small">Клиентов пока нет</p>`;
 }
 
 function openClient(id){
-  currentClientId=id;
-  let c=clientById(id);
-  clientNameView.innerText=c.name;
-  clientContact.innerText=[c.phone,c.instagram].filter(Boolean).join(" • ");
-  clientIdea.innerText=c.idea;
-  clientMoney.innerText=`Цена $${c.price} / Заплатил $${moneyPaid(c.id)} / Осталось $${moneyLeft(c)}`;
-  let next=records.filter(r=>r.clientId===id && r.date>=localDate()).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time))[0];
-  clientNext.innerText=next?`${next.date} ${next.time} — ${next.plan}`:"Не назначена";
-  clientNote.innerText=c.note||"Пока нет";
-  openPage("clientPage");
+ currentClientId=id;
+ let c=clientById(id);
+ clientNameView.innerText=c.name;
+ clientContact.innerText=[c.phone,c.instagram].filter(Boolean).join(" • ");
+ clientIdea.innerText=c.idea;
+ clientMoney.innerText=`Цена $${c.price} / Заплатил $${paid(c.id)} / Осталось $${left(c)}`;
+ let next=records.filter(r=>r.clientId===id && r.date>=localDate()).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time))[0];
+ clientNext.innerText=next?`${next.date} ${next.time} — ${next.plan||c.idea}`:"Не назначена";
+ clientNote.innerText=c.note||"Пока нет";
+ openPage("clientPage");
 }
 
 function addPayment(){
-  let amount=prompt("Сколько заплатил?");
-  if(!amount)return;
-  payments.push({id:id(),clientId:currentClientId,amount:Number(amount),date:localDate()});
-  saveData();openClient(currentClientId);
-}
-function addNote(){
-  let c=clientById(currentClientId);
-  let note=prompt("Заметка:",c.note||"");
-  if(note===null)return;
-  c.note=note;
-  saveData();openClient(currentClientId);
-}
-function openNewRecordForClient(){
-  recordMode.value="old";switchRecordMode();
-  selectedClientId=currentClientId;
-  oldChoices.innerHTML="<p>✅ "+clientById(currentClientId).name+"</p>";
-  recordDate.value=selectedDate||localDate();
-  openPage("recordPage");
-}
-function editRecord(idr){
-  let r=records.find(x=>x.id===idr);
-  records=records.filter(x=>x.id!==idr);
-  selectedClientId=r.clientId;
-  recordMode.value="old";switchRecordMode();
-  oldChoices.innerHTML="<p>✅ "+clientById(r.clientId).name+"</p>";
-  recordDate.value=r.date;recordTime.value=r.time;recordPlan.value=r.plan;
-  openPage("recordPage");
-}
-function deleteRecord(idr){
-  if(confirm("Удалить запись?")){
-    records=records.filter(r=>r.id!==idr);
-    saveData();renderAll();
-  }
+ let amount=prompt("Сколько заплатил?");
+ if(!amount)return;
+ payments.push({id:makeId(),clientId:currentClientId,amount:Number(amount),date:localDate()});
+ saveData();openClient(currentClientId);
 }
 
+function addNote(){
+ let c=clientById(currentClientId);
+ let note=prompt("Заметка:",c.note||"");
+ if(note===null)return;
+ c.note=note;
+ saveData();openClient(currentClientId);
+}
+
+function deleteClient(){
+ let c=clientById(currentClientId);
+ if(!c)return;
+ if(confirm("Удалить клиента "+c.name+"? Удалятся его записи и оплаты.")){
+  clients=clients.filter(x=>x.id!==currentClientId);
+  records=records.filter(r=>r.clientId!==currentClientId);
+  payments=payments.filter(p=>p.clientId!==currentClientId);
+  saveData();
+  currentClientId=null;
+  openPage("clients");
+ }
+}
+
+function renderIncome(){
+ let now=new Date();
+ let today=localDate();
+ let weekStart=new Date(now);
+ weekStart.setDate(now.getDate()-((now.getDay()+6)%7));
+ weekStart.setHours(0,0,0,0);
+
+ let sumToday=0,sumWeek=0,sumMonth=0,sumYear=0;
+ payments.forEach(p=>{
+  let d=new Date(p.date+"T00:00");
+  let a=Number(p.amount||0);
+  if(p.date===today)sumToday+=a;
+  if(d>=weekStart)sumWeek+=a;
+  if(d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear())sumMonth+=a;
+  if(d.getFullYear()===now.getFullYear())sumYear+=a;
+ });
+ incomeToday.innerText="$"+sumToday;
+ incomeWeek.innerText="$"+sumWeek;
+ incomeMonth.innerText="$"+sumMonth;
+ incomeYear.innerText="$"+sumYear;
+}
+
+setupTime();
 selectedDate=localDate();
 renderAll();
 </script>
