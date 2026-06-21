@@ -7,28 +7,12 @@
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,sans-serif}
-
-body{
-background:#000;
-color:white;
-padding:20px;
-padding-bottom:110px;
-}
-
+body{background:#000;color:white;padding:20px;padding-bottom:110px}
 h1{font-size:28px;margin-bottom:15px}
 h2{font-size:21px;margin-bottom:10px}
 p{line-height:1.35}
-
-.logo{
-font-size:34px;
-font-weight:800;
-}
-
-.sub{
-color:#888;
-margin-top:5px;
-margin-bottom:18px;
-}
+.logo{font-size:34px;font-weight:800}
+.sub{color:#888;margin-top:5px;margin-bottom:18px}
 
 .card{
 background:#111;
@@ -37,6 +21,15 @@ padding:18px;
 margin-top:14px;
 box-shadow:0 0 24px #041d66;
 }
+
+.box{
+background:#181818;
+padding:15px;
+border-radius:18px;
+margin-top:12px;
+}
+
+.box p{color:#bbb;margin-top:5px}
 
 button{
 width:100%;
@@ -70,15 +63,6 @@ textarea{height:90px}
 .page{display:none}
 .show{display:block}
 
-.box{
-background:#181818;
-padding:15px;
-border-radius:18px;
-margin-top:12px;
-}
-
-.box p{color:#bbb;margin-top:5px}
-
 .small{
 color:#888;
 font-size:14px;
@@ -106,10 +90,10 @@ border-top:1px solid #222;
 }
 
 .nav{
-color:#999;
-text-align:center;
-font-size:13px;
 flex:1;
+text-align:center;
+color:#999;
+font-size:13px;
 }
 
 .nav.active{
@@ -122,39 +106,20 @@ font-weight:700;
 color:#2962ff;
 }
 
-.calendarDay{
-width:40px;
-height:40px;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-background:#181818;
-}
-
-.badge{
-display:inline-block;
-padding:6px 12px;
-border-radius:12px;
-background:#222;
-color:#9bbcff;
-font-size:14px;
-margin-top:8px;
-}
-
 </style>
 </head>
 
 <body>
 
-  <div id="home" class="page show">
+
+<div id="home" class="page show">
 
 <div class="logo">
 🖋 InkFlow
 </div>
 
 <div class="sub">
-Вся рабочая жизнь тату-мастера
+Вся память тату-мастера
 </div>
 
 
@@ -178,39 +143,16 @@ margin-top:8px;
 <div class="card">
 
 <h2>
-🚨 Требует внимания
+⚠️ Требует внимания
 </h2>
 
-
-<div id="attentionList">
-
-<div class="box">
-<p>
-Нет задач
-</p>
-</div>
-
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<h2>
-📌 Ближайшие записи
-</h2>
-
-
-<div id="nextSessions">
+<div id="alerts">
 
 <p class="small">
-Нет ближайших сеансов
+Пока всё спокойно
 </p>
 
 </div>
-
 
 </div>
 
@@ -222,294 +164,56 @@ margin-top:8px;
 <h1>📅 Календарь</h1>
 
 <div class="card">
-
 <div class="grid2">
 <button class="gray" onclick="changeMonth(-1)">← Месяц</button>
 <button class="gray" onclick="changeMonth(1)">Месяц →</button>
 </div>
 
 <h2 id="calendarTitle">Месяц</h2>
-
-<div id="calendarGrid" class="grid2"></div>
-
+<div id="calendarGrid"></div>
 </div>
 
 <div class="card">
-
-<h2 id="selectedDayTitle">📌 День</h2>
-
-<div id="selectedDaySessions"></div>
-
-<button onclick="openCreateSessionFromDay()">
-➕ Добавить сеанс
-</button>
-
+<h2 id="selectedDateTitle">📌 День</h2>
+<div id="dayList"></div>
 </div>
 
 </div>
 
-  <div id="create" class="page">
+  <div id="newTattoo" class="page">
 
-<h1>➕ Создать</h1>
-
-<div class="card">
-<button onclick="openPage('newClient')">👤 Новый клиент</button>
-<button onclick="openPage('newProject')">🎨 Новый проект</button>
-</div>
-
-</div>
-
-
-<div id="newClient" class="page">
-
-<h1>👤 Новый клиент</h1>
-
-<div class="card">
-<input id="clientName" placeholder="Имя клиента">
-<input id="clientPhone" placeholder="Телефон">
-<input id="clientInstagram" placeholder="Instagram">
-<textarea id="clientNotes" placeholder="Заметки о клиенте"></textarea>
-
-<button class="green" onclick="createClient()">💾 Сохранить клиента</button>
-<button class="gray" onclick="openPage('create')">← Назад</button>
-</div>
-
-</div>
-
-  <div id="newProject" class="page">
-
-<h1>🎨 Новый проект</h1>
+<h1>➕ Новая тату</h1>
 
 <div class="card">
 
-<h2>
-Кому принадлежит проект?
-</h2>
+<h2>👤 Клиент</h2>
 
-<select id="projectClientSelect">
-<option value="">
-Выберите клиента
-</option>
+<input id="newName" placeholder="Имя клиента *">
+<input id="newPhone" placeholder="Телефон">
+<input id="newInstagram" placeholder="Instagram">
+
+<h2>🎨 Что хочет</h2>
+
+<input id="tattooName" placeholder="Название / тема тату *">
+<textarea id="tattooIdea" placeholder="Описание, пожелания, детали"></textarea>
+
+<h2>💰 Деньги</h2>
+
+<input id="tattooPrice" placeholder="Стоимость проекта *">
+<input id="tattooDeposit" placeholder="Депозит">
+
+<h2>📅 Первый визит</h2>
+
+<select id="firstVisit">
+<option value="no">Назначить позже</option>
+<option value="yes">Записать сразу</option>
 </select>
 
-
-<input id="projectName"
-placeholder="Название работы (например Lion Sleeve)">
-
-
-<textarea id="projectIdea"
-placeholder="Что хочет клиент? Идея, пожелания, детали">
-</textarea>
-
-
-<select id="projectStatus">
-
-<option value="idea">
-💡 Идея
-</option>
-
-<option value="waiting">
-📌 Ждёт материалы
-</option>
-
-<option value="sketch">
-✏️ Эскиз
-</option>
-
-<option value="deposit">
-💰 Ждёт депозит
-</option>
-
-<option value="session">
-📅 Ждёт первый сеанс
-</option>
-
-<option value="progress">
-🟡 В работе
-</option>
-
-<option value="pause">
-⏸ Пауза
-</option>
-
-<option value="done">
-🏆 Завершён
-</option>
-
-</select>
-
-
-<input id="projectPrice"
-placeholder="Цена проекта (не обязательно)">
-
-
-
-<button class="green"
-onclick="createProject()">
-
-🔥 Создать проект
-
-</button>
-
-
-<button class="gray"
-onclick="openPage('create')">
-
-← Назад
-
-</button>
-
-
-</div>
-
-</div>
-
-  <div id="clients" class="page">
-
-<h1>👥 Клиенты</h1>
-
-<div class="card">
-
-<input id="clientSearch"
-placeholder="🔎 Найти клиента или работу"
-oninput="renderClients()">
-
-<div id="clientsList">
-</div>
-
-</div>
-
-</div>
-
-
-
-<div id="clientPage" class="page">
-
-<div class="card">
-
-<h1 id="clientTitle">
-Клиент
-</h1>
-
-<p id="clientInfo">
-</p>
-
-<p id="clientNotesView"
-class="small">
-</p>
-
-
-<h2>
-🎨 Работы клиента
-</h2>
-
-
-<div id="clientProjectsList">
-</div>
-
-
-<button onclick="openNewProjectForClient()">
-🎨 Добавить новую работу
-</button>
-
-
-<button class="gray"
-onclick="openPage('clients')">
-← Назад
-</button>
-
-
-</div>
-
-</div>
-
-<div id="projectPage" class="page">
-
-<div class="card">
-
-<h1 id="projectTitleView">
-🦁 Проект
-</h1>
-
-<p id="projectStatusView">
-</p>
-
-<p id="projectMoneyView">
-</p>
-
-
-<div class="grid2">
-
-<button onclick="openNewSession()">
-📅 Новый сеанс
-</button>
-
-<button onclick="addPayment()">
-💵 Оплата
-</button>
-
-</div>
-
-
-<div class="grid2">
-
-<button onclick="addPhoto()">
-📷 Фото
-</button>
-
-<button onclick="editProject()">
-✏️ Изменить
-</button>
-
-</div>
-
-
-<h2>
-📜 История работы
-</h2>
-
-<div id="projectTimeline">
-</div>
-
-
-<button class="gray"
-onclick="backToClient()">
-
-← Назад к клиенту
-
-</button>
-
-</div>
-
-</div>
-
-
-
-<div id="sessionPage" class="page">
-
-<div class="card">
-
-<h1>
-📅 Новый сеанс
-</h1>
-
-<p id="sessionProjectName">
-Проект
-</p>
-
-
-<input 
-id="sessionDate"
-type="date">
-
-
-<h2>
-🕒 Время прихода
-</h2>
-
-
-<select id="sessionHour">
-
+<div id="firstVisitBlock" class="hidden">
+<input id="visitDate" type="date">
+
+<select id="visitTime">
+<option value="">Выбрать время</option>
 <option>10:00</option>
 <option>11:00</option>
 <option>12:00</option>
@@ -520,31 +224,183 @@ type="date">
 <option>17:00</option>
 <option>18:00</option>
 <option>19:00</option>
-
 </select>
 
+<textarea id="visitPlan" placeholder="Что планируем делать"></textarea>
+</div>
 
-<textarea 
-id="sessionPlan"
-placeholder="Что будем делать">
-</textarea>
+<button class="green" onclick="createTattoo()">🔥 Создать</button>
+
+</div>
+
+</div>
+
+  <div id="clients" class="page">
+
+<h1>👤 Клиенты</h1>
+
+<div class="card">
+
+<input 
+id="searchClient"
+placeholder="🔎 Найти клиента"
+oninput="renderClients()">
+
+<div id="clientsList">
+
+<p class="small">
+Клиентов пока нет
+</p>
+
+</div>
+
+</div>
+
+</div>
 
 
-<button class="green"
-onclick="createSession()">
+<div id="clientPage" class="page">
 
-📅 Записать клиента
+<div class="card">
 
+<h1 id="clientNameView">
+Клиент
+</h1>
+
+<p id="clientContact">
+</p>
+
+
+<h2>
+🎨 Сейчас делаем
+</h2>
+
+<div id="currentTattoo">
+
+<p class="small">
+Нет активной работы
+</p>
+
+</div>
+
+
+<h2>
+💰 Деньги
+</h2>
+
+<div id="moneyInfo">
+
+<p class="small">
+Нет информации
+</p>
+
+</div>
+
+
+<h2>
+📅 Следующий визит
+</h2>
+
+<div id="nextVisit">
+
+<p class="small">
+Не назначен
+</p>
+
+</div>
+
+
+<h2>
+📷 Последнее фото
+</h2>
+
+<div class="box">
+<p>
+Фото появятся позже
+</p>
+</div>
+
+
+<h2>
+📝 Последняя запись
+</h2>
+
+<div class="box">
+<p>
+История появится позже
+</p>
+</div>
+
+
+<button onclick="quickPayment()">
+💵 Добавить оплату
 </button>
 
 
-<button class="gray"
-onclick="openProject(currentProjectId)">
+<button onclick="scheduleVisit()">
+📅 Назначить визит
+</button>
 
+
+<button onclick="newTattooForClient()">
+➕ Новая тату
+</button>
+
+
+<button class="gray" onclick="openPage('clients')">
 ← Назад
-
 </button>
 
+</div>
+
+</div>
+
+  <div id="visitPage" class="page">
+
+<h1>📅 Визит</h1>
+
+<div class="card">
+
+<p id="visitClientName" class="small"></p>
+
+<input id="visitNewDate" type="date">
+
+<select id="visitNewTime">
+<option value="">Выбрать время</option>
+<option>10:00</option>
+<option>11:00</option>
+<option>12:00</option>
+<option>13:00</option>
+<option>14:00</option>
+<option>15:00</option>
+<option>16:00</option>
+<option>17:00</option>
+<option>18:00</option>
+<option>19:00</option>
+</select>
+
+<textarea id="visitNewPlan" placeholder="Что будем делать"></textarea>
+
+<button class="green" onclick="saveVisit()">📅 Сохранить визит</button>
+<button class="gray" onclick="openClient(currentClientId)">← Назад</button>
+
+</div>
+
+</div>
+
+
+<div id="finishVisitPage" class="page">
+
+<h1>✅ Завершить визит</h1>
+
+<div class="card">
+
+<textarea id="doneText" placeholder="Что сделали"></textarea>
+<input id="finishPayment" placeholder="Сколько заплатил">
+<textarea id="nextPlan" placeholder="Что делать в следующий раз"></textarea>
+
+<button class="green" onclick="finishVisit()">💾 Сохранить</button>
+<button class="gray" onclick="openClient(currentClientId)">← Назад</button>
 
 </div>
 
@@ -552,98 +408,49 @@ onclick="openProject(currentProjectId)">
 
   <div class="bottom">
 
-<div class="nav active"
-onclick="openPage('home')">
-
-🏠<br>
-Сегодня
-
+<div class="nav active" onclick="openPage('home')">
+🏠<br>Главная
 </div>
 
-
-<div class="nav"
-onclick="openPage('calendar')">
-
-📅<br>
-Календарь
-
+<div class="nav" onclick="openPage('calendar')">
+📅<br>Календарь
 </div>
 
-
-<div class="nav plus"
-onclick="openPage('create')">
-
+<div class="nav plus" onclick="openPage('newTattoo')">
 ➕
-
 </div>
 
-
-<div class="nav"
-onclick="openPage('clients')">
-
-👤<br>
-Клиенты
-
+<div class="nav" onclick="openPage('clients')">
+👤<br>Клиенты
 </div>
-
 
 </div>
 
   <script>
 
 let clients =
-JSON.parse(localStorage.getItem("ink_clients") || "[]");
-
-let projects =
-JSON.parse(localStorage.getItem("ink_projects") || "[]");
-
-let sessions =
-JSON.parse(localStorage.getItem("ink_sessions") || "[]");
-
-let payments =
-JSON.parse(localStorage.getItem("ink_payments") || "[]");
-
-let photos =
-JSON.parse(localStorage.getItem("ink_photos") || "[]");
+JSON.parse(localStorage.getItem("ink_clients_v13") || "[]");
 
 
 let currentClientId = null;
-let currentProjectId = null;
-
-
-function makeId(prefix){
-return prefix + "_" +
-Date.now() +
-Math.random().toString(36).slice(2,6);
-}
 
 
 function saveData(){
 
 localStorage.setItem(
-"ink_clients",
+"ink_clients_v13",
 JSON.stringify(clients)
 );
 
-localStorage.setItem(
-"ink_projects",
-JSON.stringify(projects)
-);
+}
 
-localStorage.setItem(
-"ink_sessions",
-JSON.stringify(sessions)
-);
 
-localStorage.setItem(
-"ink_payments",
-JSON.stringify(payments)
-);
+function makeId(){
 
-localStorage.setItem(
-"ink_photos",
-JSON.stringify(photos)
-);
+return Date.now() +
+Math.random()
+.toString(36)
+.slice(2,6);
 
 }
 
@@ -653,7 +460,7 @@ function openPage(id){
 document
 .querySelectorAll(".page")
 .forEach(
-p => p.classList.remove("show")
+p=>p.classList.remove("show")
 );
 
 
@@ -665,14 +472,14 @@ document
 document
 .querySelectorAll(".nav")
 .forEach(
-n => n.classList.remove("active")
+n=>n.classList.remove("active")
 );
 
 
 let map = {
 home:0,
 calendar:1,
-create:2,
+newTattoo:2,
 clients:3
 };
 
@@ -693,123 +500,112 @@ renderAll();
 
 
 
-function projectById(id){
-
-return projects.find(
-p => p.id === id
-);
-
-}
-
-
 function clientById(id){
 
 return clients.find(
-c => c.id === id
+c=>c.id === id
 );
 
 }
 
 
-function moneyLeft(project){
 
-let paid = payments
-.filter(
-p => p.projectId === project.id
-)
-.reduce(
-(a,b)=>a+Number(b.amount||0),
-0
-);
+function createTattoo(){
 
-return Number(project.price||0) - paid;
+
+if(!newName.value.trim()){
+
+alert("Введите имя клиента");
+
+return;
 
 }
 
 
-function statusText(status){
+if(!tattooName.value.trim()){
 
-let map = {
+alert("Введите название тату");
 
-idea:"💡 Идея",
+return;
 
-waiting:"📌 Ждёт материалы",
+}
 
-sketch:"✏️ Эскиз",
 
-deposit:"💰 Ждёт депозит",
+if(!tattooPrice.value.trim()){
 
-session:"📅 Ждёт первый сеанс",
+alert("Введите стоимость");
 
-progress:"🟡 В работе",
+return;
 
-pause:"⏸ Пауза",
+}
 
-done:"🏆 Завершён"
+
+let client = {
+
+id: makeId(),
+
+name: newName.value,
+
+phone: newPhone.value,
+
+instagram: newInstagram.value,
+
+
+tattoo: {
+
+name: tattooName.value,
+
+idea: tattooIdea.value,
+
+price: Number(tattooPrice.value),
+
+paid:
+Number(tattooDeposit.value || 0),
+
+visit:
+firstVisit.value === "yes"
+? {
+
+date: visitDate.value,
+
+time: visitTime.value,
+
+plan: visitPlan.value
+
+}
+
+: null,
+
+lastNote:""
+
+}
 
 };
 
-return map[status] || status;
 
-}
-
-    function renderAll(){
-
-renderHome();
-renderClients();
-renderProjectSelect();
-renderCalendar();
-
-}
-
-
-function createClient(){
-
-let name = clientName.value.trim();
-
-if(!name){
-alert("Введите имя клиента");
-return;
-}
-
-
-clients.push({
-
-id: makeId("cl"),
-
-name: name,
-
-phone: clientPhone.value.trim(),
-
-instagram: clientInstagram.value.trim(),
-
-notes: clientNotes.value.trim()
-
-});
+clients.push(client);
 
 
 saveData();
 
-clientName.value = "";
-clientPhone.value = "";
-clientInstagram.value = "";
-clientNotes.value = "";
+
+alert("Клиент создан 🔥");
+
 
 openPage("clients");
 
 }
 
 
+
 function renderClients(){
 
 let search =
-(clientSearch?.value || "")
+(searchClient?.value || "")
 .toLowerCase();
 
 
 let html = "";
-
-
 clients.forEach(c=>{
 
 let text =
@@ -819,22 +615,8 @@ c.instagram)
 .toLowerCase();
 
 
-let myProjects =
-projects.filter(
-p => p.clientId === c.id
-);
-
-
-let projectText =
-myProjects.map(
-p=>p.name
-).join(" ").toLowerCase();
-
-
-if(
-!text.includes(search) &&
-!projectText.includes(search)
-) return;
+if(!text.includes(search))
+return;
 
 
 html += `
@@ -845,7 +627,12 @@ onclick="openClient('${c.id}')">
 <h2>${c.name}</h2>
 
 <p>
-🎨 Работ: ${myProjects.length}
+🎨 ${c.tattoo.name}
+</p>
+
+<p>
+💰 Осталось:
+$${c.tattoo.price - c.tattoo.paid}
 </p>
 
 </div>
@@ -856,73 +643,85 @@ onclick="openClient('${c.id}')">
 
 
 clientsList.innerHTML =
-html || "<p>Клиентов пока нет</p>";
+html || "<p>Ничего не найдено</p>";
 
 }
+
 
 
 function openClient(id){
 
 currentClientId = id;
 
+
 let c = clientById(id);
 
 
-clientTitle.innerText =
+clientNameView.innerText =
 c.name;
 
 
-clientInfo.innerText =
+clientContact.innerText =
 `${c.phone} ${c.instagram}`;
 
 
-clientNotesView.innerText =
-c.notes;
+currentTattoo.innerHTML = `
 
-
-let html = "";
-
-
-projects
-.filter(
-p=>p.clientId===id
-)
-.forEach(p=>{
-
-
-html += `
-
-<div class="box clickable"
-onclick="openProject('${p.id}')">
-
+<div class="box">
 
 <h2>
-${p.name}
+${c.tattoo.name}
 </h2>
 
-
 <p>
-${statusText(p.status)}
+${c.tattoo.idea}
 </p>
-
-
-<p>
-💰 Осталось:
-$${moneyLeft(p)}
-</p>
-
 
 </div>
 
 `;
 
 
-});
+moneyInfo.innerHTML = `
+
+<div class="box">
+
+Цена: $${c.tattoo.price}
+<br>
+Оплачено: $${c.tattoo.paid}
+<br>
+Осталось:
+$${c.tattoo.price - c.tattoo.paid}
+
+</div>
+
+`;
 
 
-clientProjectsList.innerHTML =
-html ||
-"<p>Работ пока нет</p>";
+nextVisit.innerHTML =
+c.tattoo.visit
+
+?
+
+`
+<div class="box">
+
+📅 ${c.tattoo.visit.date}
+
+<br>
+
+🕒 ${c.tattoo.visit.time}
+
+<br>
+
+${c.tattoo.visit.plan}
+
+</div>
+`
+
+:
+
+"<p class='small'>Не назначен</p>";
 
 
 openPage("clientPage");
@@ -930,184 +729,108 @@ openPage("clientPage");
 }
 
 
-function renderProjectSelect(){
 
-projectClientSelect.innerHTML =
-'<option value="">Выберите клиента</option>';
+function quickPayment(){
 
-
-clients.forEach(c=>{
-
-projectClientSelect.innerHTML +=
-`<option value="${c.id}">
-${c.name}
-</option>`;
-
-});
+let amount =
+prompt("Сколько оплатил?");
 
 
-}
-
-
-function createProject(){
-
-if(!projectClientSelect.value){
-alert("Выберите клиента");
+if(!amount)
 return;
-}
 
 
-projects.push({
+let c =
+clientById(currentClientId);
 
-id: makeId("pr"),
 
-clientId:
-projectClientSelect.value,
-
-name:
-projectName.value.trim(),
-
-idea:
-projectIdea.value.trim(),
-
-status:
-projectStatus.value,
-
-price:
-projectPrice.value
-
-});
+c.tattoo.paid +=
+Number(amount);
 
 
 saveData();
 
 
-openClient(
-projectClientSelect.value
-);
+openClient(currentClientId);
 
 }
 
 
-function openProject(id){
 
-currentProjectId = id;
+function scheduleVisit(){
 
-
-let p =
-projectById(id);
+openPage("visitPage");
 
 
-projectTitleView.innerText =
-p.name;
+let c =
+clientById(currentClientId);
 
 
-projectStatusView.innerText =
-statusText(p.status);
-
-
-projectMoneyView.innerText =
-"💰 Осталось $" +
-moneyLeft(p);
-
-
-projectTimeline.innerHTML =
-"<p>История скоро появится</p>";
-
-
-openPage("projectPage");
+visitClientName.innerText =
+c.name;
 
 }
 
 
-function openNewProjectForClient(){
 
-openPage("newProject");
+function saveVisit(){
 
-projectClientSelect.value =
-currentClientId;
+let c =
+clientById(currentClientId);
+
+
+c.tattoo.visit = {
+
+date: visitNewDate.value,
+
+time: visitNewTime.value,
+
+plan: visitNewPlan.value
+
+};
+
+
+saveData();
+
+
+openClient(currentClientId);
 
 }
 
 
-function openNewSession(){
 
-openPage("sessionPage");
-
-sessionProjectName.innerText =
-projectById(
-currentProjectId
-).name;
-
-}
-
-
-function createSession(){
+function newTattooForClient(){
 
 alert(
-"Сеансы будут следующим большим обновлением"
+"Несколько татуировок добавим следующим обновлением"
 );
 
 }
 
-
-function addPayment(){
-
-alert(
-"Оплаты добавим следующим шагом"
-);
-
-}
-
-
-function addPhoto(){
-
-alert(
-"Фото добавим следующим шагом"
-);
-
-}
-
-
-function editProject(){
-
-alert(
-"Редактирование скоро будет"
-);
-
-}
 
 
 function renderHome(){
 
 todayList.innerHTML =
-"<p>Список сегодняшних клиентов скоро появится</p>";
+"<p class='small'>Тестируем главную</p>";
 
 }
 
 
-function renderCalendar(){
 
-calendarGrid.innerHTML =
-"<p>Настоящий календарь будет следующим шагом</p>";
+function renderAll(){
 
-}
+renderClients();
 
-
-function openCreateSessionFromDay(){
-
-alert(
-"Создавайте сеанс через проект клиента"
-);
+renderHome();
 
 }
+
 
 
 renderAll();
 
 </script>
 
-
 </body>
-
 </html>
