@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>InkFlow v12</title>
+<title>InkFlow</title>
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,sans-serif}
@@ -15,6 +15,10 @@ padding:20px;
 padding-bottom:110px;
 }
 
+h1{font-size:28px;margin-bottom:15px}
+h2{font-size:21px;margin-bottom:10px}
+p{line-height:1.35}
+
 .logo{
 font-size:34px;
 font-weight:800;
@@ -24,20 +28,6 @@ font-weight:800;
 color:#888;
 margin-top:5px;
 margin-bottom:18px;
-}
-
-h1{
-font-size:28px;
-margin-bottom:15px;
-}
-
-h2{
-font-size:21px;
-margin-bottom:10px;
-}
-
-p{
-line-height:1.35;
 }
 
 .card{
@@ -63,9 +53,7 @@ button.green{background:#148a34}
 button.red{background:#a51818}
 button.gray{background:#2a2a2a}
 
-  input,
-textarea,
-select{
+  input,textarea,select{
 width:100%;
 background:#222;
 color:white;
@@ -76,65 +64,28 @@ margin-top:10px;
 font-size:16px;
 }
 
-textarea{
-height:90px;
-}
+textarea{height:90px}
 
-.hidden{
-display:none;
-}
+.hidden{display:none}
+.page{display:none}
+.show{display:block}
 
-.page{
-display:none;
-}
-
-.show{
-display:block;
-}
-
-.client,
-.project,
-.session,
-.moneyBox,
-.dayBox{
+.box{
 background:#181818;
 padding:15px;
 border-radius:18px;
 margin-top:12px;
 }
 
-.client p,
-.project p,
-.session p,
-.moneyBox p,
-.dayBox p{
-color:#bbb;
-margin-top:5px;
-}
+.box p{color:#bbb;margin-top:5px}
 
-.clickable{
-cursor:pointer;
-}
-
-.clickable:active{
-transform:scale(0.97);
-opacity:0.85;
-}
-
-  .small{
+.small{
 color:#888;
 font-size:14px;
 }
 
-.badge{
-display:inline-block;
-background:#222;
-color:#9bbcff;
-padding:6px 12px;
-border-radius:12px;
-font-size:14px;
-margin-top:8px;
-}
+.clickable{cursor:pointer}
+.clickable:active{transform:scale(0.97);opacity:0.85}
 
 .grid2{
 display:grid;
@@ -142,26 +93,7 @@ grid-template-columns:1fr 1fr;
 gap:12px;
 }
 
-.moneyBox h2{
-font-size:24px;
-margin-bottom:4px;
-}
-
-.progress{
-height:12px;
-background:#222;
-border-radius:10px;
-overflow:hidden;
-margin-top:10px;
-}
-
-.progressBar{
-height:100%;
-background:#2962ff;
-width:0%;
-}
-
-.bottom{
+  .bottom{
 position:fixed;
 bottom:0;
 left:0;
@@ -177,10 +109,37 @@ border-top:1px solid #222;
 color:#999;
 text-align:center;
 font-size:13px;
+flex:1;
 }
 
 .nav.active{
 color:white;
+}
+
+.plus{
+font-size:26px;
+font-weight:700;
+color:#2962ff;
+}
+
+.calendarDay{
+width:40px;
+height:40px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+background:#181818;
+}
+
+.badge{
+display:inline-block;
+padding:6px 12px;
+border-radius:12px;
+background:#222;
+color:#9bbcff;
+font-size:14px;
+margin-top:8px;
 }
 
 </style>
@@ -190,184 +149,67 @@ color:white;
 
   <div id="home" class="page show">
 
-<div class="logo">🖋 InkFlow</div>
-<div class="sub">История каждой татуировки</div>
-
-<div class="card">
-<h2>☀️ Сегодня</h2>
-<div id="todayList"></div>
+<div class="logo">
+🖋 InkFlow
 </div>
 
-<div class="card">
-<h2>🚨 Требует внимания</h2>
-<div id="attentionList"></div>
-</div>
-
-<div class="card">
-<h2>⚡ Быстрые действия</h2>
-
-<button onclick="openPage('newWork')">
-➕ Новая работа
-</button>
-
-<button onclick="openPage('calendar')">
-📅 Календарь
-</button>
-
-<button onclick="openPage('projects')">
-🎨 Проекты
-</button>
-
-</div>
-
-</div>
-
-  <div id="newWork" class="page">
-
-<h1>➕ Новая работа</h1>
-
-<div class="card">
-
-<h2>1️⃣ Клиент</h2>
-
-<select id="workClient" onchange="toggleNewClientFields()">
-<option value="new">➕ Новый клиент</option>
-</select>
-
-<div id="newClientFields">
-<input id="clientName" placeholder="Имя клиента">
-<input id="clientInstagram" placeholder="Instagram">
-<input id="clientPhone" placeholder="Телефон">
-<textarea id="clientNotes" placeholder="Общие заметки о клиенте"></textarea>
-</div>
-
+<div class="sub">
+Вся рабочая жизнь тату-мастера
 </div>
 
 
 <div class="card">
-
-<h2>2️⃣ Проект</h2>
-
-<input id="projectTitle" placeholder="Название проекта / татуировки">
-
-<select id="projectStatus">
-<option value="idea">💡 Идея</option>
-<option value="sketch">✏️ Эскиз</option>
-<option value="progress">🟡 В процессе</option>
-<option value="pause">⏸ Пауза</option>
-<option value="done">✅ Завершён</option>
-</select>
-
-<textarea id="projectDescription" placeholder="Описание идеи"></textarea>
-<textarea id="projectWishes" placeholder="Хотелки клиента / пожелания"></textarea>
-
-<input id="projectPrice" placeholder="Стоимость проекта $">
-<input id="projectDeposit" placeholder="Депозит $">
-
-</div>
-
-    <div class="card">
-
-<h2>3️⃣ Первый сеанс</h2>
-
-<select id="createSessionNow">
-<option value="yes">
-📅 Назначить первый сеанс сейчас
-</option>
-
-<option value="no">
-⏳ Назначить позже
-</option>
-</select>
-
-
-<div id="firstSessionBlock">
-
-<input id="firstSessionDate"
-type="date">
-
 
 <h2>
-🕒 Выберите время
+☀️ Сегодня
+</h2>
+
+<div id="todayList">
+
+<p class="small">
+Сегодня записей нет
+</p>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>
+🚨 Требует внимания
 </h2>
 
 
-<div id="timeSlots"
-class="grid2">
+<div id="attentionList">
 
-<button type="button"
-class="gray"
-onclick="selectTime('10:00')">
-10:00
-</button>
-
-<button type="button"
-class="gray"
-onclick="selectTime('12:00')">
-12:00
-</button>
-
-<button type="button"
-class="gray"
-onclick="selectTime('14:00')">
-14:00
-</button>
-
-<button type="button"
-class="gray"
-onclick="selectTime('16:00')">
-16:00
-</button>
-
-<button type="button"
-class="gray"
-onclick="selectTime('17:00')">
-17:00
-</button>
-
-<button type="button"
-class="gray"
-onclick="selectTime('18:00')">
-18:00
-</button>
-
-<button type="button"
-class="gray"
-onclick="selectTime('19:00')">
-19:00
-</button>
-
-<button type="button"
-class="gray"
-onclick="selectTime('20:00')">
-20:00
-</button>
-
+<div class="box">
+<p>
+Нет задач
+</p>
 </div>
-
-
-<input id="selectedTime"
-type="hidden">
-
-
-<input id="sessionHours"
-placeholder="Длительность (часов)">
-
-
-<textarea id="sessionPlan"
-placeholder="Что делаем на первом сеансе">
-</textarea>
 
 
 </div>
 
+</div>
 
-<button class="green"
-onclick="createNewWork()">
 
-🔥 Создать работу
+<div class="card">
 
-</button>
+<h2>
+📌 Ближайшие записи
+</h2>
+
+
+<div id="nextSessions">
+
+<p class="small">
+Нет ближайших сеансов
+</p>
+
+</div>
 
 
 </div>
@@ -381,147 +223,109 @@ onclick="createNewWork()">
 
 <div class="card">
 
-<h2 id="calendarTitle">Сегодня</h2>
+<div class="grid2">
+<button class="gray" onclick="changeMonth(-1)">← Месяц</button>
+<button class="gray" onclick="changeMonth(1)">Месяц →</button>
+</div>
 
-<button class="gray" onclick="prevDay()">← День назад</button>
-<button class="gray" onclick="goToday()">📍 Сегодня</button>
-<button class="gray" onclick="nextDay()">День вперёд →</button>
+<h2 id="calendarTitle">Месяц</h2>
+
+<div id="calendarGrid" class="grid2"></div>
 
 </div>
 
 <div class="card">
 
-<h2>📌 Сеансы дня</h2>
-<div id="daySessions"></div>
+<h2 id="selectedDayTitle">📌 День</h2>
 
-<button onclick="openPage('newWork')">
-➕ Новая работа
+<div id="selectedDaySessions"></div>
+
+<button onclick="openCreateSessionFromDay()">
+➕ Добавить сеанс
 </button>
 
 </div>
 
 </div>
 
-  <div id="clients" class="page">
+  <div id="create" class="page">
 
-<h1>👤 Клиенты</h1>
-
-
-<div class="card">
-
-<input id="clientSearch"
-placeholder="🔎 Имя, телефон, Instagram"
-oninput="renderClients()">
-
-<div id="clientsList">
-</div>
-
-</div>
-
-
-</div>
-
-
-
-<div id="clientProfile" class="page">
+<h1>➕ Создать</h1>
 
 <div class="card">
-
-<h1 id="profileName">
-Клиент
-</h1>
-
-
-<p id="profilePhone">
-</p>
-
-
-<p id="profileInstagram"
-class="small">
-</p>
-
-
-<p id="profileNotes">
-</p>
-
-
-<div class="grid2">
-
-<div class="moneyBox">
-
-<h2 id="clientProjectsCount">
-0
-</h2>
-
-<p>
-Проектов
-</p>
+<button onclick="openPage('newClient')">👤 Новый клиент</button>
+<button onclick="openPage('newProject')">🎨 Новый проект</button>
+</div>
 
 </div>
 
 
-<div class="moneyBox">
+<div id="newClient" class="page">
 
-<h2 id="clientHours">
-0
-</h2>
+<h1>👤 Новый клиент</h1>
 
-<p>
-Часов всего
-</p>
+<div class="card">
+<input id="clientName" placeholder="Имя клиента">
+<input id="clientPhone" placeholder="Телефон">
+<input id="clientInstagram" placeholder="Instagram">
+<textarea id="clientNotes" placeholder="Заметки о клиенте"></textarea>
+
+<button class="green" onclick="createClient()">💾 Сохранить клиента</button>
+<button class="gray" onclick="openPage('create')">← Назад</button>
+</div>
 
 </div>
 
+  <div id="newProject" class="page">
 
-</div>
+<h1>🎨 Новый проект</h1>
 
+<div class="card">
 
 <h2>
-🎨 Проекты клиента
+Кому принадлежит проект?
 </h2>
 
-
-<div id="clientProjects">
-</div>
-
-
-<button class="gray"
-onclick="openPage('clients')">
-
-← Назад
-
-</button>
-
-
-</div>
-
-
-</div>
-
-  <div id="projects" class="page">
-
-<h1>🎨 Проекты</h1>
-
-
-<div class="card">
-
-<select id="projectFilter"
-onchange="renderProjects()">
-
-<option value="all">
-Все проекты
+<select id="projectClientSelect">
+<option value="">
+Выберите клиента
 </option>
+</select>
+
+
+<input id="projectName"
+placeholder="Название работы (например Lion Sleeve)">
+
+
+<textarea id="projectIdea"
+placeholder="Что хочет клиент? Идея, пожелания, детали">
+</textarea>
+
+
+<select id="projectStatus">
 
 <option value="idea">
-💡 Идеи
+💡 Идея
+</option>
+
+<option value="waiting">
+📌 Ждёт материалы
 </option>
 
 <option value="sketch">
-✏️ Эскизы
+✏️ Эскиз
+</option>
+
+<option value="deposit">
+💰 Ждёт депозит
+</option>
+
+<option value="session">
+📅 Ждёт первый сеанс
 </option>
 
 <option value="progress">
-🟡 В процессе
+🟡 В работе
 </option>
 
 <option value="pause">
@@ -529,106 +333,27 @@ onchange="renderProjects()">
 </option>
 
 <option value="done">
-✅ Завершённые
+🏆 Завершён
 </option>
 
 </select>
 
 
-<div id="projectsList">
-</div>
-
-
-</div>
-
-
-</div>
+<input id="projectPrice"
+placeholder="Цена проекта (не обязательно)">
 
 
 
-<div id="projectPage" class="page">
+<button class="green"
+onclick="createProject()">
 
-
-<div class="card">
-
-<h1 id="projectName">
-Проект
-</h1>
-
-
-<p id="projectClient">
-</p>
-
-
-<p id="projectStatusText">
-</p>
-
-
-<div class="progress">
-
-<div id="projectProgressBar"
-class="progressBar">
-</div>
-
-</div>
-
-
-<p id="projectMoney">
-</p>
-
-
-<div class="grid2">
-
-
-<button onclick="openNewSession()">
-
-📅 Новый сеанс
+🔥 Создать проект
 
 </button>
-
-
-<button onclick="openAddPayment()">
-
-💵 Оплата
-
-</button>
-
-
-</div>
-
-
-<div class="grid2">
-
-
-<button onclick="openPhotoGallery()">
-
-📸 Фото
-
-</button>
-
-
-<button onclick="editProject()">
-
-✏️ Изменить
-
-</button>
-
-
-</div>
-
-
-<h2>
-📜 История проекта
-</h2>
-
-
-<div id="projectTimeline">
-
-</div>
 
 
 <button class="gray"
-onclick="openPage('projects')">
+onclick="openPage('create')">
 
 ← Назад
 
@@ -637,529 +362,752 @@ onclick="openPage('projects')">
 
 </div>
 
+</div>
+
+  <div id="clients" class="page">
+
+<h1>👥 Клиенты</h1>
+
+<div class="card">
+
+<input id="clientSearch"
+placeholder="🔎 Найти клиента или работу"
+oninput="renderClients()">
+
+<div id="clientsList">
+</div>
 
 </div>
 
-  <div id="money" class="page">
+</div>
 
-<h1>💰 Финансы</h1>
+
+
+<div id="clientPage" class="page">
 
 <div class="card">
+
+<h1 id="clientTitle">
+Клиент
+</h1>
+
+<p id="clientInfo">
+</p>
+
+<p id="clientNotesView"
+class="small">
+</p>
+
+
+<h2>
+🎨 Работы клиента
+</h2>
+
+
+<div id="clientProjectsList">
+</div>
+
+
+<button onclick="openNewProjectForClient()">
+🎨 Добавить новую работу
+</button>
+
+
+<button class="gray"
+onclick="openPage('clients')">
+← Назад
+</button>
+
+
+</div>
+
+</div>
+
+<div id="projectPage" class="page">
+
+<div class="card">
+
+<h1 id="projectTitleView">
+🦁 Проект
+</h1>
+
+<p id="projectStatusView">
+</p>
+
+<p id="projectMoneyView">
+</p>
+
+
 <div class="grid2">
 
-<div class="moneyBox">
-<h2 id="totalReceived">$0</h2>
-<p>Получено</p>
-</div>
+<button onclick="openNewSession()">
+📅 Новый сеанс
+</button>
 
-<div class="moneyBox">
-<h2 id="totalDebt">$0</h2>
-<p>Осталось</p>
-</div>
-
-<div class="moneyBox">
-<h2 id="totalProjects">0</h2>
-<p>Проектов</p>
-</div>
-
-<div class="moneyBox">
-<h2 id="totalSessions">0</h2>
-<p>Сеансов</p>
-</div>
+<button onclick="addPayment()">
+💵 Оплата
+</button>
 
 </div>
+
+
+<div class="grid2">
+
+<button onclick="addPhoto()">
+📷 Фото
+</button>
+
+<button onclick="editProject()">
+✏️ Изменить
+</button>
+
 </div>
+
+
+<h2>
+📜 История работы
+</h2>
+
+<div id="projectTimeline">
+</div>
+
+
+<button class="gray"
+onclick="backToClient()">
+
+← Назад к клиенту
+
+</button>
+
+</div>
+
+</div>
+
+
+
+<div id="sessionPage" class="page">
 
 <div class="card">
-<h2>💵 История оплат</h2>
-<div id="paymentsList"></div>
-</div>
+
+<h1>
+📅 Новый сеанс
+</h1>
+
+<p id="sessionProjectName">
+Проект
+</p>
+
+
+<input 
+id="sessionDate"
+type="date">
+
+
+<h2>
+🕒 Время прихода
+</h2>
+
+
+<select id="sessionHour">
+
+<option>10:00</option>
+<option>11:00</option>
+<option>12:00</option>
+<option>13:00</option>
+<option>14:00</option>
+<option>15:00</option>
+<option>16:00</option>
+<option>17:00</option>
+<option>18:00</option>
+<option>19:00</option>
+
+</select>
+
+
+<textarea 
+id="sessionPlan"
+placeholder="Что будем делать">
+</textarea>
+
+
+<button class="green"
+onclick="createSession()">
+
+📅 Записать клиента
+
+</button>
+
+
+<button class="gray"
+onclick="openProject(currentProjectId)">
+
+← Назад
+
+</button>
+
 
 </div>
 
-
-<div id="photos" class="page">
-
-<h1>📸 Фото проекта</h1>
-
-<div class="card">
-<p>Сюда позже добавим референсы, эскизы, процесс и зажившие фото.</p>
-<button class="gray" onclick="openPage('projectPage')">← Назад</button>
 </div>
 
+  <div class="bottom">
+
+<div class="nav active"
+onclick="openPage('home')">
+
+🏠<br>
+Сегодня
+
 </div>
 
 
-<div class="bottom">
+<div class="nav"
+onclick="openPage('calendar')">
 
-<div class="nav active" onclick="openPage('home')">
-🏠<br>Главная
+📅<br>
+Календарь
+
 </div>
 
-<div class="nav" onclick="openPage('calendar')">
-📅<br>Календарь
+
+<div class="nav plus"
+onclick="openPage('create')">
+
+➕
+
 </div>
 
-<div class="nav" onclick="openPage('clients')">
-👤<br>Клиенты
+
+<div class="nav"
+onclick="openPage('clients')">
+
+👤<br>
+Клиенты
+
 </div>
 
-<div class="nav" onclick="openPage('projects')">
-🎨<br>Проекты
-</div>
-
-<div class="nav" onclick="openPage('money')">
-💰<br>Финансы
-</div>
 
 </div>
 
   <script>
-let clients = JSON.parse(localStorage.getItem("v12_clients") || "[]");
-let projects = JSON.parse(localStorage.getItem("v12_projects") || "[]");
-let sessions = JSON.parse(localStorage.getItem("v12_sessions") || "[]");
-let payments = JSON.parse(localStorage.getItem("v12_payments") || "[]");
-let photos = JSON.parse(localStorage.getItem("v12_photos") || "[]");
+
+let clients =
+JSON.parse(localStorage.getItem("ink_clients") || "[]");
+
+let projects =
+JSON.parse(localStorage.getItem("ink_projects") || "[]");
+
+let sessions =
+JSON.parse(localStorage.getItem("ink_sessions") || "[]");
+
+let payments =
+JSON.parse(localStorage.getItem("ink_payments") || "[]");
+
+let photos =
+JSON.parse(localStorage.getItem("ink_photos") || "[]");
+
 
 let currentClientId = null;
 let currentProjectId = null;
-let currentDate = localDate();
-let selectedTime = "";
+
 
 function makeId(prefix){
-return prefix + "_" + Date.now() + "_" + Math.random().toString(36).slice(2,8);
+return prefix + "_" +
+Date.now() +
+Math.random().toString(36).slice(2,6);
 }
 
-function localDate(date = new Date()){
-return date.getFullYear() + "-" +
-String(date.getMonth()+1).padStart(2,"0") + "-" +
-String(date.getDate()).padStart(2,"0");
-}
 
 function saveData(){
-localStorage.setItem("v12_clients", JSON.stringify(clients));
-localStorage.setItem("v12_projects", JSON.stringify(projects));
-localStorage.setItem("v12_sessions", JSON.stringify(sessions));
-localStorage.setItem("v12_payments", JSON.stringify(payments));
-localStorage.setItem("v12_photos", JSON.stringify(photos));
+
+localStorage.setItem(
+"ink_clients",
+JSON.stringify(clients)
+);
+
+localStorage.setItem(
+"ink_projects",
+JSON.stringify(projects)
+);
+
+localStorage.setItem(
+"ink_sessions",
+JSON.stringify(sessions)
+);
+
+localStorage.setItem(
+"ink_payments",
+JSON.stringify(payments)
+);
+
+localStorage.setItem(
+"ink_photos",
+JSON.stringify(photos)
+);
+
 }
+
 
 function openPage(id){
-document.querySelectorAll(".page").forEach(p=>p.classList.remove("show"));
-document.getElementById(id).classList.add("show");
 
-document.querySelectorAll(".nav").forEach(n=>n.classList.remove("active"));
+document
+.querySelectorAll(".page")
+.forEach(
+p => p.classList.remove("show")
+);
 
-let navMap = {
+
+document
+.getElementById(id)
+.classList.add("show");
+
+
+document
+.querySelectorAll(".nav")
+.forEach(
+n => n.classList.remove("active")
+);
+
+
+let map = {
 home:0,
 calendar:1,
-clients:2,
-projects:3,
-money:4
+create:2,
+clients:3
 };
 
-if(navMap[id] !== undefined){
-document.querySelectorAll(".nav")[navMap[id]].classList.add("active");
+
+if(map[id] !== undefined){
+
+document
+.querySelectorAll(".nav")
+[map[id]]
+.classList.add("active");
+
 }
+
 
 renderAll();
+
 }
 
-function formatDate(dateString){
-let d = new Date(dateString + "T00:00");
-let t = new Date();
-t.setHours(0,0,0,0);
 
-let z = new Date(t);
-z.setDate(t.getDate()+1);
 
-if(d.getTime() === t.getTime()) return "☀️ Сегодня";
-if(d.getTime() === z.getTime()) return "🌿 Завтра";
+function projectById(id){
 
-return d.toLocaleDateString("ru-RU",{
-weekday:"long",
-day:"numeric",
-month:"long"
-});
+return projects.find(
+p => p.id === id
+);
+
+}
+
+
+function clientById(id){
+
+return clients.find(
+c => c.id === id
+);
+
+}
+
+
+function moneyLeft(project){
+
+let paid = payments
+.filter(
+p => p.projectId === project.id
+)
+.reduce(
+(a,b)=>a+Number(b.amount||0),
+0
+);
+
+return Number(project.price||0) - paid;
+
+}
+
+
+function statusText(status){
+
+let map = {
+
+idea:"💡 Идея",
+
+waiting:"📌 Ждёт материалы",
+
+sketch:"✏️ Эскиз",
+
+deposit:"💰 Ждёт депозит",
+
+session:"📅 Ждёт первый сеанс",
+
+progress:"🟡 В работе",
+
+pause:"⏸ Пауза",
+
+done:"🏆 Завершён"
+
+};
+
+return map[status] || status;
+
 }
 
     function renderAll(){
+
 renderHome();
-renderCalendar();
 renderClients();
-renderProjects();
-renderMoney();
-renderClientOptions();
+renderProjectSelect();
+renderCalendar();
+
 }
 
-function renderClientOptions(){
-let html = '<option value="new">➕ Новый клиент</option>';
-clients.forEach(c=>{
-html += `<option value="${c.id}">${c.name}</option>`;
-});
-workClient.innerHTML = html;
-}
 
-function toggleNewClientFields(){
-newClientFields.classList.toggle("hidden", workClient.value !== "new");
-}
+function createClient(){
 
-function selectTime(time){
-selectedTime = time;
-document.getElementById("selectedTime").value = time;
-document.querySelectorAll("#timeSlots button").forEach(b=>b.classList.remove("green"));
-event.target.classList.add("green");
-}
-
-function createNewWork(){
-let clientId = workClient.value;
-
-if(clientId === "new"){
 let name = clientName.value.trim();
-if(!name){alert("Введите имя клиента");return;}
 
-let client = {
-id: makeId("cl"),
-name,
-instagram: clientInstagram.value.trim(),
-phone: clientPhone.value.trim(),
-notes: clientNotes.value.trim(),
-status: "active",
-createdAt: localDate()
-};
-
-clients.push(client);
-clientId = client.id;
-}
-
-let title = projectTitle.value.trim();
-if(!title){alert("Введите название проекта");return;}
-
-let project = {
-id: makeId("pr"),
-clientId,
-title,
-status: projectStatus.value,
-description: projectDescription.value.trim(),
-wishes: projectWishes.value.trim(),
-price: Number(projectPrice.value || 0),
-createdAt: localDate()
-};
-
-projects.push(project);
-
-let deposit = Number(projectDeposit.value || 0);
-if(deposit > 0){
-payments.push({
-id: makeId("pay"),
-projectId: project.id,
-date: localDate(),
-amount: deposit,
-type: "deposit",
-method: "",
-note: "Депозит"
-});
-}
-
-if(createSessionNow.value === "yes"){
-if(!firstSessionDate.value || !selectedTime){
-alert("Введите дату и выберите время");
+if(!name){
+alert("Введите имя клиента");
 return;
 }
 
-sessions.push({
-id: makeId("ss"),
-projectId: project.id,
-date: firstSessionDate.value,
-time: selectedTime,
-hours: Number(sessionHours.value || 0),
-plan: sessionPlan.value.trim(),
-done: "",
-next: "",
-status: "planned"
+
+clients.push({
+
+id: makeId("cl"),
+
+name: name,
+
+phone: clientPhone.value.trim(),
+
+instagram: clientInstagram.value.trim(),
+
+notes: clientNotes.value.trim()
+
 });
-}
+
 
 saveData();
-clearNewWorkForm();
-currentProjectId = project.id;
-renderAll();
-openProject(project.id);
+
+clientName.value = "";
+clientPhone.value = "";
+clientInstagram.value = "";
+clientNotes.value = "";
+
+openPage("clients");
+
 }
 
-function clearNewWorkForm(){
-[
-"clientName","clientInstagram","clientPhone","clientNotes",
-"projectTitle","projectDescription","projectWishes","projectPrice",
-"projectDeposit","firstSessionDate","sessionHours","sessionPlan"
-].forEach(id=>document.getElementById(id).value="");
-
-selectedTime = "";
-document.querySelectorAll("#timeSlots button").forEach(b=>b.classList.remove("green"));
-}
-
-function clientNameById(id){
-return clients.find(c=>c.id===id)?.name || "Клиент";
-}
-
-function projectById(id){
-return projects.find(p=>p.id===id);
-}
-
-function projectPaid(projectId){
-return payments
-.filter(p=>p.projectId===projectId)
-.reduce((sum,p)=>sum+Number(p.amount||0),0);
-}
-
-function projectDebt(project){
-return Number(project.price||0) - projectPaid(project.id);
-}
-
-function renderHome(){
-let today = localDate();
-
-let todaySessions = sessions
-.filter(s=>s.date===today)
-.sort((a,b)=>a.time.localeCompare(b.time));
-
-todayList.innerHTML = todaySessions.map(s=>{
-let p = projectById(s.projectId);
-return `
-<div class="dayBox clickable" onclick="openProject('${p.id}')">
-<div class="small">${s.time}</div>
-<h2>${clientNameById(p.clientId)}</h2>
-<p>🎨 ${p.title}</p>
-${s.plan?`<p>📝 ${s.plan}</p>`:""}
-</div>`;
-}).join("") || "<p>Сегодня сеансов нет</p>";
-
-let debt = projects.reduce((sum,p)=>sum+projectDebt(p),0);
-let noNext = projects.filter(p=>!sessions.some(s=>s.projectId===p.id && s.date>=today)).length;
-
-attentionList.innerHTML = `
-<div class="dayBox"><p>💰 Нужно получить: <strong>$${debt}</strong></p></div>
-<div class="dayBox"><p>🕒 Проектов без следующего сеанса: <strong>${noNext}</strong></p></div>
-`;
-}
-
-function renderCalendar(){
-calendarTitle.innerText = formatDate(currentDate);
-
-let list = sessions
-.filter(s=>s.date===currentDate)
-.sort((a,b)=>a.time.localeCompare(b.time));
-
-daySessions.innerHTML = list.map(s=>{
-let p = projectById(s.projectId);
-return `
-<div class="session clickable" onclick="openProject('${p.id}')">
-<div class="small">${s.time} · ${s.hours || "?"} ч</div>
-<h2>${clientNameById(p.clientId)}</h2>
-<p>🎨 ${p.title}</p>
-${s.plan?`<p>📝 ${s.plan}</p>`:""}
-</div>`;
-}).join("") || "<p>На этот день сеансов нет</p>";
-}
-
-function prevDay(){
-let d = new Date(currentDate+"T00:00");
-d.setDate(d.getDate()-1);
-currentDate = localDate(d);
-renderAll();
-}
-
-function nextDay(){
-let d = new Date(currentDate+"T00:00");
-d.setDate(d.getDate()+1);
-currentDate = localDate(d);
-renderAll();
-}
-
-function goToday(){
-currentDate = localDate();
-renderAll();
-}
 
 function renderClients(){
-let q = (clientSearch?.value || "").toLowerCase();
+
+let search =
+(clientSearch?.value || "")
+.toLowerCase();
+
+
 let html = "";
 
-clients.filter(c=>c.status!=="archived").forEach(c=>{
-let text = `${c.name} ${c.phone} ${c.instagram} ${c.notes}`.toLowerCase();
-if(!text.includes(q))return;
 
-let count = projects.filter(p=>p.clientId===c.id).length;
+clients.forEach(c=>{
+
+let text =
+(c.name + " " +
+c.phone + " " +
+c.instagram)
+.toLowerCase();
+
+
+let myProjects =
+projects.filter(
+p => p.clientId === c.id
+);
+
+
+let projectText =
+myProjects.map(
+p=>p.name
+).join(" ").toLowerCase();
+
+
+if(
+!text.includes(search) &&
+!projectText.includes(search)
+) return;
+
 
 html += `
-<div class="client clickable" onclick="openClient('${c.id}')">
+
+<div class="box clickable"
+onclick="openClient('${c.id}')">
+
 <h2>${c.name}</h2>
-${c.phone?`<p>📞 ${c.phone}</p>`:""}
-${c.instagram?`<p>📸 ${c.instagram}</p>`:""}
-<p>🎨 Проектов: ${count}</p>
-</div>`;
+
+<p>
+🎨 Работ: ${myProjects.length}
+</p>
+
+</div>
+
+`;
+
 });
 
-clientsList.innerHTML = html || "<p>Клиентов пока нет</p>";
+
+clientsList.innerHTML =
+html || "<p>Клиентов пока нет</p>";
+
 }
+
 
 function openClient(id){
+
 currentClientId = id;
-let c = clients.find(x=>x.id===id);
 
-profileName.innerText = c.name;
-profilePhone.innerText = c.phone ? "📞 " + c.phone : "";
-profileInstagram.innerText = c.instagram ? "📸 " + c.instagram : "";
-profileNotes.innerText = c.notes ? "📝 " + c.notes : "";
+let c = clientById(id);
 
-let clientProjectsArray = projects.filter(p=>p.clientId===id);
-clientProjectsCount.innerText = clientProjectsArray.length;
 
-let hours = sessions
-.filter(s=>clientProjectsArray.some(p=>p.id===s.projectId))
-.reduce((sum,s)=>sum+Number(s.hours||0),0);
+clientTitle.innerText =
+c.name;
 
-clientHours.innerText = hours;
 
-clientProjects.innerHTML = clientProjectsArray.map(p=>`
-<div class="project clickable" onclick="openProject('${p.id}')">
-<h2>${p.title}</h2>
-<p>${statusText(p.status)}</p>
-<p>💰 Осталось: $${projectDebt(p)}</p>
-</div>
-`).join("") || "<p>Проектов пока нет</p>";
+clientInfo.innerText =
+`${c.phone} ${c.instagram}`;
 
-openPage("clientProfile");
-}
 
-function renderProjects(){
-let filter = projectFilter?.value || "all";
+clientNotesView.innerText =
+c.notes;
+
+
 let html = "";
 
-projects.forEach(p=>{
-if(filter !== "all" && p.status !== filter)return;
+
+projects
+.filter(
+p=>p.clientId===id
+)
+.forEach(p=>{
+
 
 html += `
-<div class="project clickable" onclick="openProject('${p.id}')">
-<h2>${p.title}</h2>
-<p>👤 ${clientNameById(p.clientId)}</p>
-<p>${statusText(p.status)}</p>
-<p>💰 Осталось: $${projectDebt(p)}</p>
-</div>`;
+
+<div class="box clickable"
+onclick="openProject('${p.id}')">
+
+
+<h2>
+${p.name}
+</h2>
+
+
+<p>
+${statusText(p.status)}
+</p>
+
+
+<p>
+💰 Осталось:
+$${moneyLeft(p)}
+</p>
+
+
+</div>
+
+`;
+
+
 });
 
-projectsList.innerHTML = html || "<p>Проектов пока нет</p>";
+
+clientProjectsList.innerHTML =
+html ||
+"<p>Работ пока нет</p>";
+
+
+openPage("clientPage");
+
 }
 
-function statusText(status){
-let map = {
-idea:"💡 Идея",
-sketch:"✏️ Эскиз",
-progress:"🟡 В процессе",
-pause:"⏸ Пауза",
-done:"✅ Завершён"
-};
-return map[status] || status;
-}
 
-function openProject(id){
-currentProjectId = id;
-let p = projectById(id);
+function renderProjectSelect(){
 
-projectName.innerText = p.title;
-projectClient.innerText = "👤 " + clientNameById(p.clientId);
-projectStatusText.innerText = statusText(p.status);
+projectClientSelect.innerHTML =
+'<option value="">Выберите клиента</option>';
 
-let paid = projectPaid(p.id);
-let debt = projectDebt(p);
 
-projectMoney.innerText = `💰 Цена: $${p.price || 0} | Получено: $${paid} | Осталось: $${debt}`;
+clients.forEach(c=>{
 
-let percent = p.price ? Math.min(100, Math.round((paid / p.price) * 100)) : 0;
-projectProgressBar.style.width = percent + "%";
+projectClientSelect.innerHTML +=
+`<option value="${c.id}">
+${c.name}
+</option>`;
 
-let projectSessions = sessions.filter(s=>s.projectId===id);
-let projectPayments = payments.filter(pay=>pay.projectId===id);
-
-let timeline = "";
-
-projectSessions.forEach(s=>{
-timeline += `
-<div class="dayBox">
-<div class="small">${formatDate(s.date)} · ${s.time}</div>
-<h2>📅 Сеанс</h2>
-${s.plan?`<p>📝 ${s.plan}</p>`:""}
-${s.hours?`<p>⏱ ${s.hours} часов</p>`:""}
-</div>`;
 });
 
-projectPayments.forEach(pay=>{
-timeline += `
-<div class="dayBox">
-<div class="small">${formatDate(pay.date)}</div>
-<h2>💵 Оплата $${pay.amount}</h2>
-${pay.note?`<p>${pay.note}</p>`:""}
-</div>`;
-});
 
-projectTimeline.innerHTML = timeline || "<p>Истории пока нет</p>";
-
-openPage("projectPage");
 }
 
-function openNewSession(){
-alert("Скоро добавим отдельное создание сеанса внутри проекта");
+
+function createProject(){
+
+if(!projectClientSelect.value){
+alert("Выберите клиента");
+return;
 }
 
-function openAddPayment(){
-let amount = prompt("Сумма оплаты:");
-if(!amount)return;
 
-payments.push({
-id: makeId("pay"),
-projectId: currentProjectId,
-date: localDate(),
-amount: Number(amount),
-type: "session",
-method: "",
-note: "Оплата"
+projects.push({
+
+id: makeId("pr"),
+
+clientId:
+projectClientSelect.value,
+
+name:
+projectName.value.trim(),
+
+idea:
+projectIdea.value.trim(),
+
+status:
+projectStatus.value,
+
+price:
+projectPrice.value
+
 });
+
 
 saveData();
-renderAll();
-openProject(currentProjectId);
+
+
+openClient(
+projectClientSelect.value
+);
+
 }
 
-function openPhotoGallery(){
-openPage("photos");
+
+function openProject(id){
+
+currentProjectId = id;
+
+
+let p =
+projectById(id);
+
+
+projectTitleView.innerText =
+p.name;
+
+
+projectStatusView.innerText =
+statusText(p.status);
+
+
+projectMoneyView.innerText =
+"💰 Осталось $" +
+moneyLeft(p);
+
+
+projectTimeline.innerHTML =
+"<p>История скоро появится</p>";
+
+
+openPage("projectPage");
+
 }
+
+
+function openNewProjectForClient(){
+
+openPage("newProject");
+
+projectClientSelect.value =
+currentClientId;
+
+}
+
+
+function openNewSession(){
+
+openPage("sessionPage");
+
+sessionProjectName.innerText =
+projectById(
+currentProjectId
+).name;
+
+}
+
+
+function createSession(){
+
+alert(
+"Сеансы будут следующим большим обновлением"
+);
+
+}
+
+
+function addPayment(){
+
+alert(
+"Оплаты добавим следующим шагом"
+);
+
+}
+
+
+function addPhoto(){
+
+alert(
+"Фото добавим следующим шагом"
+);
+
+}
+
 
 function editProject(){
-alert("Редактирование проекта добавим следующим шагом");
+
+alert(
+"Редактирование скоро будет"
+);
+
 }
 
-function renderMoney(){
-let received = payments.reduce((sum,p)=>sum+Number(p.amount||0),0);
-let totalPrice = projects.reduce((sum,p)=>sum+Number(p.price||0),0);
 
-totalReceived.innerText = "$" + received;
-totalDebt.innerText = "$" + (totalPrice - received);
-totalProjects.innerText = projects.length;
-totalSessions.innerText = sessions.length;
+function renderHome(){
 
-paymentsList.innerHTML = payments.map(p=>{
-let project = projectById(p.projectId);
-return `
-<div class="dayBox">
-<div class="small">${formatDate(p.date)}</div>
-<h2>+$${p.amount}</h2>
-<p>🎨 ${project?.title || "Проект"}</p>
-</div>`;
-}).join("") || "<p>Оплат пока нет</p>";
+todayList.innerHTML =
+"<p>Список сегодняшних клиентов скоро появится</p>";
+
 }
+
+
+function renderCalendar(){
+
+calendarGrid.innerHTML =
+"<p>Настоящий календарь будет следующим шагом</p>";
+
+}
+
+
+function openCreateSessionFromDay(){
+
+alert(
+"Создавайте сеанс через проект клиента"
+);
+
+}
+
 
 renderAll();
+
 </script>
 
+
 </body>
+
 </html>
