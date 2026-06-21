@@ -1,67 +1,18 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>
-InkFlow CRM
-</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InkFlow CRM</title>
 
 <style>
-
-*{
-box-sizing:border-box;
-margin:0;
-padding:0;
-font-family:-apple-system,
-BlinkMacSystemFont,
-sans-serif;
-}
-
-
-body{
-background:#000;
-color:white;
-padding:20px;
-padding-bottom:110px;
-}
-
-
-.logo{
-font-size:34px;
-font-weight:800;
-}
-
-
-.sub{
-color:#888;
-margin-top:5px;
-margin-bottom:18px;
-}
-
-
-h1{
-font-size:28px;
-margin-bottom:15px;
-}
-
-
-h2{
-font-size:21px;
-margin-bottom:10px;
-}
-
-
-p{
-line-height:1.35;
-}
-
+*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,sans-serif}
+body{background:#000;color:#fff;padding:20px;padding-bottom:110px}
+.logo{font-size:34px;font-weight:800}
+.sub{color:#888;margin-top:5px;margin-bottom:18px}
+h1{font-size:28px;margin-bottom:15px}
+h2{font-size:21px;margin-bottom:10px}
+p{line-height:1.35}
 
 .card{
 background:#111;
@@ -70,7 +21,6 @@ padding:18px;
 margin-top:14px;
 box-shadow:0 0 24px #041d66;
 }
-
 
 button{
 width:100%;
@@ -83,25 +33,11 @@ color:white;
 background:#2962ff;
 }
 
+button.green{background:#148a34}
+button.red{background:#a51818}
+button.gray{background:#2a2a2a}
 
-button.green{
-background:#148a34;
-}
-
-
-button.red{
-background:#a51818;
-}
-
-
-button.gray{
-background:#2a2a2a;
-}
-
-
-input,
-textarea,
-select{
+  input,textarea,select{
 width:100%;
 background:#222;
 color:white;
@@ -112,59 +48,35 @@ margin-top:10px;
 font-size:16px;
 }
 
-
-textarea{
-height:85px;
-}
-
-
 input[type="date"],
 input[type="time"]{
+color:white;
+background:#222;
 min-height:54px;
 -webkit-appearance:none;
+appearance:none;
 }
 
+textarea{height:85px}
+.hidden{display:none}
 
-.hidden{
-display:none;
-}
-
-  .client,
-.session,
-.moneyBox,
-.dayBox{
+.client,.session,.moneyBox,.dayBox{
 background:#181818;
 padding:15px;
 border-radius:18px;
 margin-top:12px;
 }
 
-
-.client p,
-.session p,
-.moneyBox p,
-.dayBox p{
+.client p,.session p,.moneyBox p,.dayBox p{
 color:#bbb;
 margin-top:5px;
 }
 
+.instagram{color:#9bbcff}
+.page{display:none}
+.show{display:block}
 
-.instagram{
-color:#9bbcff;
-}
-
-
-.page{
-display:none;
-}
-
-
-.show{
-display:block;
-}
-
-
-.bottom{
+  .bottom{
 position:fixed;
 bottom:0;
 left:0;
@@ -176,18 +88,15 @@ padding:13px;
 border-top:1px solid #222;
 }
 
-
 .nav{
 color:#999;
 text-align:center;
 font-size:13px;
 }
 
-
-.active{
+.nav.active{
 color:white;
 }
-
 
 .grid2{
 display:grid;
@@ -195,12 +104,38 @@ grid-template-columns:1fr 1fr;
 gap:12px;
 }
 
-
 .moneyBox h2{
 font-size:24px;
 margin-bottom:4px;
 }
 
+.clickable{
+cursor:pointer;
+transition:0.2s;
+}
+
+.clickable:active{
+transform:scale(0.97);
+opacity:0.8;
+}
+
+.smallDate{
+color:#888;
+font-size:14px;
+margin-bottom:6px;
+}
+
+.success{
+color:#4ade80;
+}
+
+.warning{
+color:#ffb347;
+}
+
+.danger{
+color:#ff6666;
+}
 
 .calendarHeader{
 display:flex;
@@ -209,22 +144,18 @@ justify-content:space-between;
 gap:10px;
 }
 
-
 .calendarHeader button{
 width:auto;
 padding:10px 14px;
 margin-top:0;
-font-size:18px;
 }
 
-
-.calendar{
+  .calendar{
 display:grid;
 grid-template-columns:repeat(7,1fr);
 gap:7px;
 margin-top:14px;
 }
-
 
 .day{
 background:#222;
@@ -235,34 +166,18 @@ font-size:15px;
 min-height:48px;
 }
 
+.day.today{border:2px solid #2962ff}
+.day.selected{outline:2px solid white}
+.day.busy{background:#148a34}
+.day.more{background:#8a5b14}
 
-.day.today{
-border:2px solid #2962ff;
-}
-
-
-.day.selected{
-outline:2px solid white;
-}
-
-
-.day.busy{
-background:#148a34;
-}
-
-
-.day.more{
-background:#8a5b14;
-}
-
-  .homeTabs{
+.homeTabs{
 display:flex;
 background:#181818;
 border-radius:18px;
 padding:4px;
 margin-top:15px;
 }
-
 
 .homeTab{
 flex:1;
@@ -273,12 +188,10 @@ color:#999;
 font-size:15px;
 }
 
-
 .homeTab.active{
 background:#2962ff;
 color:white;
 }
-
 
 .infoLine{
 display:flex;
@@ -288,11 +201,7 @@ padding:12px 0;
 border-bottom:1px solid #222;
 }
 
-
-.infoLine:last-child{
-border:none;
-}
-
+.infoLine:last-child{border:none}
 
 .badge{
 display:inline-block;
@@ -304,48 +213,12 @@ font-size:14px;
 margin-top:8px;
 }
 
-
-.clickable{
-cursor:pointer;
-transition:0.2s;
-}
-
-
-.clickable:active{
-transform:scale(0.97);
-opacity:0.8;
-}
-
-
-.smallDate{
-color:#888;
-font-size:14px;
-margin-bottom:6px;
-}
-
-
-.success{
-color:#4ade80;
-}
-
-
-.warning{
-color:#ffb347;
-}
-
-
-.danger{
-color:#ff6666;
-}
-
-
-.quickHours{
+  .quickHours{
 display:grid;
 grid-template-columns:repeat(4,1fr);
 gap:8px;
 margin-top:10px;
 }
-
 
 .hourBtn{
 background:#1f1f1f;
@@ -355,96 +228,42 @@ text-align:center;
 font-size:14px;
 }
 
-
 .hourBtn.active{
 background:#2962ff;
 }
 
-
 </style>
-
 </head>
 
 <body>
 
-  <div id="home" class="page show">
 
-<div class="logo">
-🖋 InkFlow
-</div>
+<div id="home" class="page show">
 
-<div class="sub">
-Твой тату-ассистент
-</div>
-
+<div class="logo">🖋 InkFlow</div>
+<div class="sub">Твой тату-ассистент</div>
 
 <div class="homeTabs">
-
-<div id="tabToday"
-class="homeTab active"
-onclick="setHomeMode('today')">
-☀️ Сегодня
+<div id="tabToday" class="homeTab active" onclick="setHomeMode('today')">☀️ Сегодня</div>
+<div id="tabWeek" class="homeTab" onclick="setHomeMode('week')">📅 7 дней</div>
+<div id="tabMonth" class="homeTab" onclick="setHomeMode('month')">📊 Месяц</div>
 </div>
-
-
-<div id="tabWeek"
-class="homeTab"
-onclick="setHomeMode('week')">
-📅 7 дней
-</div>
-
-
-<div id="tabMonth"
-class="homeTab"
-onclick="setHomeMode('month')">
-📊 Месяц
-</div>
-
-</div>
-
 
 <div class="card">
-
-<h2 id="homeTitle">
-☀️ Сегодня
-</h2>
-
-<div id="homeContent">
+<h2 id="homeTitle">☀️ Сегодня</h2>
+<div id="homeContent"></div>
 </div>
-
-</div>
-
 
 <div class="card">
-
-<h2>
-🚨 Требует внимания
-</h2>
-
-<div id="attentionList">
+<h2>🚨 Требует внимания</h2>
+<div id="attentionList"></div>
 </div>
-
-</div>
-
 
 <div class="card">
-
-<h2>
-⚡ Быстрые действия
-</h2>
-
-<button onclick="openPage('clients')">
-➕ Новый клиент
-</button>
-
-<button onclick="openPage('sessions')">
-📅 Новая запись
-</button>
-
-<button onclick="openPage('money')">
-💰 Финансы
-</button>
-
+<h2>⚡ Быстрые действия</h2>
+<button onclick="openPage('clients')">➕ Новый клиент</button>
+<button onclick="openPage('sessions')">📅 Новая запись</button>
+<button onclick="openPage('money')">💰 Финансы</button>
 </div>
 
 </div>
@@ -471,17 +290,8 @@ placeholder="Instagram @username">
 <input id="phone"
 placeholder="Телефон">
 
-<input id="style"
-placeholder="Проект / идея">
-
-<input id="price"
-placeholder="Стоимость проекта $">
-
-<input id="paid"
-placeholder="Оплачено $">
-
 <textarea id="notes"
-placeholder="Хотелки клиента, пожелания, важные детали">
+placeholder="Общие заметки о клиенте">
 </textarea>
 
 
@@ -497,19 +307,16 @@ onclick="addClient()">
 
 <div class="card">
 
-<h2>
-📋 База клиентов
-</h2>
+<h2>📋 База клиентов</h2>
 
 
 <input id="search"
-placeholder="🔎 Имя, телефон, Instagram, проект"
+placeholder="🔎 Имя, телефон, Instagram"
 oninput="renderClients()">
 
 
 <div id="clientList">
 </div>
-
 
 </div>
 
@@ -530,20 +337,7 @@ oninput="renderClients()">
 class="instagram">
 </p>
 
-
 <p id="profilePhone">
-</p>
-
-
-<p id="profileStyle">
-</p>
-
-
-<p id="profileMoney">
-</p>
-
-
-<p id="profileNextSession">
 </p>
 
 
@@ -551,16 +345,8 @@ class="instagram">
 </p>
 
 
-<button class="green"
-onclick="openInstagram()">
-📸 Открыть Instagram
-</button>
-
-
-<button class="green"
-onclick="addPayment()">
-💵 Добавить оплату
-</button>
+<div id="clientProjects">
+</div>
 
 
 <button class="gray"
@@ -570,8 +356,8 @@ onclick="editClient()">
 
 
 <button class="red"
-onclick="deleteCurrentClient()">
-🗑 Удалить клиента
+onclick="archiveClient()">
+📦 Архивировать клиента
 </button>
 
 
@@ -579,6 +365,7 @@ onclick="deleteCurrentClient()">
 onclick="openPage('clients')">
 ← Назад
 </button>
+
 
 </div>
 
@@ -586,2141 +373,397 @@ onclick="openPage('clients')">
 
   <div id="sessions" class="page">
 
-<h1>
-📅 Календарь
-</h1>
-
+<h1>📅 Календарь</h1>
 
 <div class="card">
 
 <div class="calendarHeader">
-
-<button onclick="changeMonth(-1)">
-◀️
-</button>
-
-
-<h2 id="calendarTitle">
-Месяц
-</h2>
-
-
-<button onclick="changeMonth(1)">
-▶️
-</button>
-
-
+<button onclick="changeMonth(-1)">◀️</button>
+<h2 id="calendarTitle">Месяц</h2>
+<button onclick="changeMonth(1)">▶️</button>
 </div>
 
+<button class="gray" onclick="goToday()">📍 Сегодня</button>
 
-<button class="gray"
-onclick="goToday()">
-📍 Сегодня
-</button>
-
-
-<div id="calendar"
-class="calendar">
-</div>
-
+<div id="calendar" class="calendar"></div>
 
 </div>
-
 
 
 <div class="card">
 
-<h2 id="selectedDayTitle">
-📌 Выбранный день
-</h2>
+<h2 id="selectedDayTitle">📌 Выбранный день</h2>
 
+<div id="selectedDayList"></div>
 
-<div id="selectedDayList">
+<button onclick="toggleSessionForm()">➕ Добавить запись</button>
+
+<div id="sessionForm" class="hidden">
+
+<select id="sessionClient"></select>
+
+<div id="newClientQuick" class="hidden">
+<input id="quickName" placeholder="Имя нового клиента">
+<input id="quickInstagram" placeholder="Instagram">
+<input id="quickPhone" placeholder="Телефон">
 </div>
 
+<input id="projectName" placeholder="Проект / татуировка">
+<textarea id="projectWishes" placeholder="Хотелки клиента / пожелания"></textarea>
 
-<button onclick="toggleSessionForm()">
-➕ Добавить запись
-</button>
+<input id="projectPrice" placeholder="Стоимость проекта $">
+<input id="projectDeposit" placeholder="Депозит $">
 
-
-<div id="sessionForm"
-class="hidden">
-
-
-<select id="sessionClient">
-<option value="new">
-➕ Новый клиент
-</option>
-</select>
-
-
-<div id="newClientQuick"
-class="hidden">
-
-<input id="quickName"
-placeholder="Имя нового клиента">
-
-<input id="quickInstagram"
-placeholder="Instagram">
-
-<input id="quickPhone"
-placeholder="Телефон">
-
-</div>
-
-
-<input id="sessionDate"
-type="date">
-
-
-<input id="sessionTime"
-type="time">
-
-
-<input id="sessionHours"
-placeholder="Длительность (часов)">
-
-
+<input id="sessionDate" type="date">
+<input id="sessionTime" type="time">
+<input id="sessionHours" placeholder="Длительность (часов)">
 
 <div class="quickHours">
-
-<div class="hourBtn"
-onclick="setHours(1)">
-1ч
+<div class="hourBtn" onclick="setHours(1)">1ч</div>
+<div class="hourBtn" onclick="setHours(2)">2ч</div>
+<div class="hourBtn" onclick="setHours(3)">3ч</div>
+<div class="hourBtn" onclick="setHours(4)">4ч</div>
+<div class="hourBtn" onclick="setHours(5)">5ч</div>
+<div class="hourBtn" onclick="setHours(6)">6ч</div>
+<div class="hourBtn" onclick="setHours(8)">8ч</div>
 </div>
 
-<div class="hourBtn"
-onclick="setHours(2)">
-2ч
-</div>
+<textarea id="sessionIdea" placeholder="Что делаем на этом сеансе"></textarea>
 
-<div class="hourBtn"
-onclick="setHours(3)">
-3ч
-</div>
-
-<div class="hourBtn"
-onclick="setHours(4)">
-4ч
-</div>
-
-<div class="hourBtn"
-onclick="setHours(5)">
-5ч
-</div>
-
-<div class="hourBtn"
-onclick="setHours(6)">
-6ч
-</div>
-
-<div class="hourBtn"
-onclick="setHours(8)">
-8ч
-</div>
+<button class="green" onclick="addSession()">💾 Сохранить запись</button>
 
 </div>
-
-
-<textarea id="sessionIdea"
-placeholder="Что делаем, зона, пожелания клиента">
-</textarea>
-
-
-<button class="green"
-onclick="addSession()">
-💾 Сохранить запись
-</button>
-
-
-</div>
-
 
 </div>
 
 
 <div class="card">
-
-<h2>
-📅 Ближайшие записи
-</h2>
-
-
-<div id="sessionList">
+<h2>📅 Ближайшие записи</h2>
+<div id="sessionList"></div>
 </div>
-
-
-</div>
-
 
 </div>
 
   <div id="edit" class="page">
 
-<h1>
-✏️ Клиент
-</h1>
-
+<h1>✏️ Клиент</h1>
 
 <div class="card">
+<input id="editName" placeholder="Имя клиента">
+<input id="editInstagram" placeholder="Instagram">
+<input id="editPhone" placeholder="Телефон">
+<textarea id="editNotes" placeholder="Общие заметки"></textarea>
 
-<input id="editName"
-placeholder="Имя клиента">
-
-
-<input id="editInstagram"
-placeholder="Instagram">
-
-
-<input id="editPhone"
-placeholder="Телефон">
-
-
-<input id="editStyle"
-placeholder="Проект / идея">
-
-
-<input id="editPrice"
-placeholder="Стоимость проекта $">
-
-
-<input id="editPaid"
-placeholder="Оплачено $">
-
-
-<textarea id="editNotes"
-placeholder="Хотелки клиента, пожелания">
-</textarea>
-
-
-<button class="green"
-onclick="saveEdit()">
-💾 Сохранить изменения
-</button>
-
-
-<button class="gray"
-onclick="showClient(currentClient)">
-← Назад
-</button>
-
+<button class="green" onclick="saveEdit()">💾 Сохранить изменения</button>
+<button class="gray" onclick="showClient(currentClientId)">← Назад</button>
 </div>
 
 </div>
-
 
 
 <div id="editSession" class="page">
 
-<h1>
-✏️ Редактирование сеанса
-</h1>
-
+<h1>✏️ Запись</h1>
 
 <div class="card">
+<select id="editSessionClient"></select>
+<input id="editSessionDate" type="date">
+<input id="editSessionTime" type="time">
+<input id="editSessionHours" placeholder="Длительность (часов)">
+<textarea id="editSessionIdea" placeholder="Что делаем / заметки"></textarea>
 
-
-<select id="editSessionClient">
-</select>
-
-
-<input id="editSessionDate"
-type="date">
-
-
-<input id="editSessionTime"
-type="time">
-
-
-<input id="editSessionHours"
-placeholder="Длительность (часов)">
-
-
-<textarea id="editSessionIdea"
-placeholder="Что сделали / что будем делать / пожелания">
-</textarea>
-
-
-<button class="green"
-onclick="saveSessionEdit()">
-💾 Сохранить запись
-</button>
-
-
-<button class="red"
-onclick="deleteSession(currentSession)">
-🗑 Удалить запись
-</button>
-
-
-<button class="gray"
-onclick="openPage('sessions')">
-← Назад
-</button>
-
-
+<button class="green" onclick="saveSessionEdit()">💾 Сохранить запись</button>
+<button class="red" onclick="deleteSession(currentSessionId)">🗑 Удалить запись</button>
+<button class="gray" onclick="openPage('sessions')">← Назад</button>
 </div>
 
 </div>
 
-  <div id="money" class="page">
 
-<h1>
-💰 Финансы
-</h1>
+<div id="money" class="page">
 
+<h1>💰 Финансы</h1>
 
 <div class="card">
-
-
 <div class="grid2">
 
-
-<div class="moneyBox clickable"
-onclick="openDebtList()">
-
-<h2 id="moneyTotalDebt">
-$0
-</h2>
-
-<p>
-Нужно получить
-</p>
-
+<div class="moneyBox clickable" onclick="openDebtList()">
+<h2 id="moneyTotalDebt">$0</h2>
+<p>Нужно получить</p>
 </div>
 
-
-<div class="moneyBox clickable"
-onclick="openPage('clients')">
-
-<h2 id="moneyTotalClients">
-0
-</h2>
-
-<p>
-Клиентов
-</p>
-
+<div class="moneyBox clickable" onclick="openPage('clients')">
+<h2 id="moneyTotalClients">0</h2>
+<p>Клиентов</p>
 </div>
-
 
 <div class="moneyBox">
-
-<h2 id="moneyTotalPrice">
-$0
-</h2>
-
-<p>
-Стоимость проектов
-</p>
-
+<h2 id="moneyTotalPrice">$0</h2>
+<p>Проекты</p>
 </div>
-
 
 <div class="moneyBox">
-
-<h2 id="moneyTotalPaid">
-$0
-</h2>
-
-<p>
-Получено
-</p>
-
-</div>
-
-
-</div>
-
-
-<div class="moneyBox clickable"
-onclick="openPage('sessions')">
-
-<h2 id="moneyTotalSessions">
-0
-</h2>
-
-<p>
-Записей
-</p>
-
-</div>
-
-
+<h2 id="moneyTotalPaid">$0</h2>
+<p>Получено</p>
 </div>
 
 </div>
 
+<div class="moneyBox clickable" onclick="openPage('sessions')">
+<h2 id="moneyTotalSessions">0</h2>
+<p>Записей</p>
+</div>
+</div>
 
+</div>
 
-<div id="debtList" class="page">
+  <div id="debtList" class="page">
 
-<h1>
-💸 Ожидают оплату
-</h1>
-
+<h1>💸 Ожидают оплату</h1>
 
 <div class="card">
+<div id="debtListContent"></div>
 
-<div id="debtListContent">
-</div>
-
-
-<button class="gray"
-onclick="openPage('money')">
-
+<button class="gray" onclick="openPage('money')">
 ← Назад
-
 </button>
-
-
 </div>
 
 </div>
-
 
 
 <div class="bottom">
-
-
-<div class="nav active"
-onclick="openPage('home')">
-
-🏠<br>
-Главная
-
-</div>
-
-
-<div class="nav"
-onclick="openPage('clients')">
-
-👥<br>
-Клиенты
-
-</div>
-
-
-<div class="nav"
-onclick="openPage('sessions')">
-
-📅<br>
-Записи
-
-</div>
-
-
-<div class="nav"
-onclick="openPage('money')">
-
-💰<br>
-Финансы
-
-</div>
-
-
+<div class="nav active" onclick="openPage('home')">🏠<br>Главная</div>
+<div class="nav" onclick="openPage('clients')">👥<br>Клиенты</div>
+<div class="nav" onclick="openPage('sessions')">📅<br>Записи</div>
+<div class="nav" onclick="openPage('money')">💰<br>Финансы</div>
 </div>
 
   <script>
+let clients=JSON.parse(localStorage.getItem("clients")||"[]");
+let projects=JSON.parse(localStorage.getItem("projects")||"[]");
+let sessions=JSON.parse(localStorage.getItem("sessions")||"[]");
 
-let clients =
-JSON.parse(localStorage.getItem("clients") || "[]");
+let currentClientId=null,currentSessionId=null,homeMode="today";
+let now=new Date(),calendarYear=now.getFullYear(),calendarMonth=now.getMonth();
+let selectedDate=localDate();
 
-let sessions =
-JSON.parse(localStorage.getItem("sessions") || "[]");
-
-
-let currentClient = null;
-let currentSession = null;
-let homeMode = "today";
-
-
-let now = new Date();
-
-let calendarYear =
-now.getFullYear();
-
-let calendarMonth =
-now.getMonth();
-
-let selectedDate =
-now.toISOString().split("T")[0];
-
-
+function localDate(d=new Date()){
+  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+}
+function makeId(p){return p+"_"+Date.now()+"_"+Math.random().toString(36).slice(2,8)}
 function saveData(){
-
- localStorage.setItem(
- "clients",
- JSON.stringify(clients)
- );
-
- localStorage.setItem(
- "sessions",
- JSON.stringify(sessions)
- );
-
+  localStorage.setItem("clients",JSON.stringify(clients));
+  localStorage.setItem("projects",JSON.stringify(projects));
+  localStorage.setItem("sessions",JSON.stringify(sessions));
 }
-
-
-
-function renderAll(){
-
- renderClients();
- renderClientOptions();
- renderSessions();
- renderMoney();
- renderCalendar();
- renderSelectedDay();
- renderHome();
-
-}
-
-
-
-function openPage(id){
-
- document
- .querySelectorAll(".page")
- .forEach(p =>
- p.classList.remove("show"));
-
- document
- .getElementById(id)
- .classList.add("show");
-
-
- document
- .querySelectorAll(".nav")
- .forEach(n =>
- n.classList.remove("active"));
-
-
- if(id==="home")
- document.querySelectorAll(".nav")[0]
- .classList.add("active");
-
-
- if(id==="clients")
- document.querySelectorAll(".nav")[1]
- .classList.add("active");
-
-
- if(id==="sessions")
- document.querySelectorAll(".nav")[2]
- .classList.add("active");
-
-
- if(id==="money")
- document.querySelectorAll(".nav")[3]
- .classList.add("active");
-
-
- renderAll();
-
-}
-
-
-
-function setHomeMode(mode){
-
- homeMode = mode;
-
-
- document
- .querySelectorAll(".homeTab")
- .forEach(t =>
- t.classList.remove("active"));
-
-
- if(mode==="today")
- tabToday.classList.add("active");
-
-
- if(mode==="week")
- tabWeek.classList.add("active");
-
-
- if(mode==="month")
- tabMonth.classList.add("active");
-
-
- renderHome();
-
-}
-
-
-
-function formatDate(dateString){
-
- let date =
- new Date(dateString+"T00:00");
-
-
- let today = new Date();
-
- today.setHours(0,0,0,0);
-
-
- let tomorrow =
- new Date(today);
-
- tomorrow.setDate(
- today.getDate()+1
- );
-
-
- if(date.getTime() === today.getTime())
- return "☀️ Сегодня";
-
-
- if(date.getTime() === tomorrow.getTime())
- return "🌿 Завтра";
-
-
- return date.toLocaleDateString(
- "ru-RU",
- {
-  weekday:"long",
-  day:"numeric",
-  month:"long"
- });
-
-}
-
-    function toggleClientForm(){
-
- clientForm.classList.toggle("hidden");
-
-}
-
-
-function addClient(){
-
- let clientName =
- document.getElementById("name")
- .value.trim();
-
-
- if(!clientName){
-  alert("Введите имя клиента");
-  return;
- }
-
-
- let duplicate =
- clients.some(c =>
- c.name &&
- c.name.toLowerCase().trim()
- ===
- clientName.toLowerCase()
- );
-
-
- if(duplicate){
-
-  let answer = confirm(
-  "Клиент с таким именем уже существует. Создать ещё одного?"
-  );
-
-  if(!answer) return;
-
- }
-
-
- let client = {
-
-  name: clientName,
-
-  instagram:
-  document.getElementById("instagram")
-  .value.trim(),
-
-  phone:
-  document.getElementById("phone")
-  .value.trim(),
-
-  style:
-  document.getElementById("style")
-  .value.trim(),
-
-  price:
-  Number(
-  document.getElementById("price")
-  .value || 0
-  ),
-
-  paid:
-  Number(
-  document.getElementById("paid")
-  .value || 0
-  ),
-
-  notes:
-  document.getElementById("notes")
-  .value.trim()
-
- };
-
-
- clients.push(client);
-
-
- saveData();
-
-
- [
- "name",
- "instagram",
- "phone",
- "style",
- "price",
- "paid",
- "notes"
- ]
- .forEach(id =>
- document.getElementById(id).value=""
- );
-
-
- clientForm.classList.add("hidden");
-
-
- renderAll();
-
-
- alert("Клиент добавлен ✅");
-
-}
-
-
-
-function createQuickClient(){
-
- let name =
- quickName.value.trim();
-
-
- if(!name){
-
-  alert("Введите имя клиента");
-
-  return;
-
- }
-
-
- let client = {
-
-  name:name,
-
-  instagram:
-  quickInstagram.value.trim(),
-
-  phone:
-  quickPhone.value.trim(),
-
-  style:"",
-  price:0,
-  paid:0,
-  notes:""
-
- };
-
-
- clients.push(client);
-
-
- saveData();
-
-
- return clients.length-1;
-
-}
-
-
-
-function toggleQuickClient(){
-
- if(sessionClient.value === "new"){
-
-  newClientQuick.classList.remove("hidden");
-
- } else {
-
-  newClientQuick.classList.add("hidden");
-
- }
-
-}
-
-    function renderClientOptions(){
-
- let selects = [
- sessionClient,
- editSessionClient
- ];
-
- selects.forEach(select => {
-
-  if(!select) return;
-
-
-  let current =
-  select.value;
-
-
-  let html =
-  `<option value="new">
-  ➕ Новый клиент
-  </option>`;
-
-
-  clients.forEach((c,index)=>{
-
-   html += `
-   <option value="${index}">
-   ${c.name}
-   </option>
-   `;
-
+function migrate(){
+  clients.forEach(c=>{if(!c.id)c.id=makeId("cl"); if(!c.status)c.status="active"});
+  sessions.forEach(s=>{
+    if(!s.id)s.id=makeId("ss");
+    if(!s.clientId && s.clientIndex!==undefined && clients[s.clientIndex])s.clientId=clients[s.clientIndex].id;
   });
+  saveData();
+}
+migrate();
 
-
-  select.innerHTML = html;
-
-
-  if(current){
-   select.value = current;
-  }
-
- });
-
-
- if(sessionClient){
-
-  sessionClient.onchange =
-  function(){
-
-   toggleQuickClient();
-
-  };
-
- }
-
+function formatDate(ds){
+  let d=new Date(ds+"T00:00"),t=new Date();t.setHours(0,0,0,0);
+  let z=new Date(t);z.setDate(t.getDate()+1);
+  if(d.getTime()===t.getTime())return"☀️ Сегодня";
+  if(d.getTime()===z.getTime())return"🌿 Завтра";
+  return d.toLocaleDateString("ru-RU",{weekday:"long",day:"numeric",month:"long"});
 }
 
-
-
-function setHours(hours){
-
- sessionHours.value = hours;
-
-
- document
- .querySelectorAll(".hourBtn")
- .forEach(btn =>
- btn.classList.remove("active")
- );
-
-
- let button =
- [...document.querySelectorAll(".hourBtn")]
- .find(btn =>
- btn.innerText === hours + "ч"
- );
-
-
- if(button){
-
-  button.classList.add("active");
-
- }
-
+function renderAll(){renderClients();renderClientOptions();renderCalendar();renderSelectedDay();renderSessions();renderMoney();renderHome()}
+function openPage(id){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("show"));
+  document.getElementById(id).classList.add("show");
+  document.querySelectorAll(".nav").forEach(n=>n.classList.remove("active"));
+  if(id==="home")document.querySelectorAll(".nav")[0].classList.add("active");
+  if(id==="clients")document.querySelectorAll(".nav")[1].classList.add("active");
+  if(id==="sessions")document.querySelectorAll(".nav")[2].classList.add("active");
+  if(id==="money")document.querySelectorAll(".nav")[3].classList.add("active");
+  renderAll();
 }
+function setHomeMode(m){homeMode=m;document.querySelectorAll(".homeTab").forEach(t=>t.classList.remove("active"));document.getElementById("tab"+m[0].toUpperCase()+m.slice(1)).classList.add("active");renderHome()}
 
-
-
-function toggleSessionForm(){
-
- sessionForm.classList.toggle("hidden");
-
-
- sessionDate.value =
- selectedDate;
-
-
- toggleQuickClient();
-
+function toggleClientForm(){clientForm.classList.toggle("hidden")}
+function addClient(){
+  let n=name.value.trim(); if(!n){alert("Введите имя клиента");return}
+  clients.push({id:makeId("cl"),name:n,instagram:instagram.value.trim(),phone:phone.value.trim(),notes:notes.value.trim(),status:"active"});
+  ["name","instagram","phone","notes"].forEach(id=>document.getElementById(id).value="");
+  clientForm.classList.add("hidden"); saveData(); renderAll(); alert("Клиент добавлен ✅");
 }
-
-    function addSession(){
-
- let clientIndex;
-
-
- if(sessionClient.value === "new"){
-
-  clientIndex = createQuickClient();
-
- } else {
-
-  clientIndex =
-  Number(sessionClient.value);
-
- }
-
-
- let client =
- clients[clientIndex];
-
-
- let date =
- sessionDate.value;
-
-
- let time =
- sessionTime.value;
-
-
- let hours =
- Number(sessionHours.value || 0);
-
-
- let idea =
- sessionIdea.value.trim();
-
-
- if(!date || !time){
-
-  alert("Введите дату и время");
-
-  return;
-
- }
-
-
- // Проверка пересечения времени
-
- let start =
- new Date(date + "T" + time);
-
-
- let end =
- new Date(start);
-
-
- end.setHours(
- end.getHours() + hours
- );
-
-
- let conflict =
- sessions.find(s => {
-
-  if(s.date !== date)
-  return false;
-
-
-  let sStart =
-  new Date(
-  s.date + "T" + s.time
-  );
-
-
-  let sEnd =
-  new Date(sStart);
-
-
-  sEnd.setHours(
-  sEnd.getHours() +
-  Number(s.hours || 0)
-  );
-
-
-  return start < sEnd &&
-  end > sStart;
-
- });
-
-
- if(conflict){
-
-  let answer = confirm(
-  "⚠️ Есть пересечение с записью:\n\n" +
-  conflict.clientName +
-  "\n" +
-  conflict.time +
-  " на " +
-  conflict.hours +
-  " ч.\n\n" +
-  "Сохранить всё равно?"
-  );
-
-
-  if(!answer)
-  return;
-
- }
-
-
- sessions.push({
-
-  clientIndex,
-  clientName: client.name,
-  date,
-  time,
-  hours,
-  idea
-
- });
-
-
- saveData();
-
-
- sessionTime.value = "";
- sessionHours.value = "";
- sessionIdea.value = "";
-
-
- document
- .querySelectorAll(".hourBtn")
- .forEach(btn =>
- btn.classList.remove("active")
- );
-
-
- sessionForm.classList.add("hidden");
-
-
- renderAll();
-
-
- alert(
- "Запись добавлена ✅"
- );
-
+function createQuickClient(){
+  let n=quickName.value.trim(); if(!n){alert("Введите имя клиента");return null}
+  let c={id:makeId("cl"),name:n,instagram:quickInstagram.value.trim(),phone:quickPhone.value.trim(),notes:"",status:"active"};
+  clients.push(c); saveData(); return c.id;
 }
-
-    function renderClients(){
-
- let searchText =
- (search?.value || "")
- .toLowerCase()
- .trim();
-
-
- let html = "";
-
-
- clients.forEach((c,index)=>{
-
-
- let text =
- `${c.name}
- ${c.phone}
- ${c.instagram}
- ${c.style}
- ${c.notes}`
- .toLowerCase();
-
-
- if(!text.includes(searchText))
- return;
-
-
- let debt =
- Number(c.price || 0) -
- Number(c.paid || 0);
-
-
- html += `
- <div class="client clickable"
- onclick="showClient(${index})">
-
- <h2>${c.name}</h2>
-
- ${c.instagram
- ? `<p class="instagram">📸 ${c.instagram}</p>`
- : ""}
-
- ${c.phone
- ? `<p>📞 ${c.phone}</p>`
- : ""}
-
- ${c.style
- ? `<p>🎨 ${c.style}</p>`
- : ""}
-
- <p>💰 Остаток: $${debt}</p>
-
- </div>
- `;
- });
-
- clientList.innerHTML =
- html || "<p>Ничего не найдено</p>";
-
+function renderClients(){
+  let q=(search?.value||"").toLowerCase().trim(),html="";
+  clients.filter(c=>c.status!=="archived").forEach(c=>{
+    let text=`${c.name} ${c.phone} ${c.instagram} ${c.notes}`.toLowerCase();
+    if(!text.includes(q))return;
+    let debt=clientDebt(c.id);
+    html+=`<div class="client clickable" onclick="showClient('${c.id}')"><h2>${c.name}</h2>
+    ${c.instagram?`<p class="instagram">📸 ${c.instagram}</p>`:""}
+    ${c.phone?`<p>📞 ${c.phone}</p>`:""}
+    <p>💰 Остаток: $${debt}</p></div>`;
+  });
+  clientList.innerHTML=html||"<p>Ничего не найдено</p>";
 }
-
-
-function showClient(index){
-
- currentClient = index;
-
- let c = clients[index];
-
- let debt =
- Number(c.price || 0) -
- Number(c.paid || 0);
-
-
- let next =
- getNextSession(index);
-
-
- profileName.innerText = c.name;
-
- profileInstagram.innerText =
- c.instagram ?
- `📸 ${c.instagram}` : "";
- profilePhone.innerText =
- c.phone ? `📞 ${c.phone}` : "";
-
- profileStyle.innerText =
- c.style ? `🎨 ${c.style}` : "";
-
- profileMoney.innerText =
- `💰 Цена: $${c.price} | Оплачено: $${c.paid} | Остаток: $${debt}`;
-
- profileNextSession.innerText =
- next ? `📅 Следующая запись: ${formatDate(next.date)} ${next.time}` : "";
-
- profileNotes.innerText =
- c.notes ? `📝 ${c.notes}` : "";
-
- openPage("profile");
+function showClient(id){
+  currentClientId=id; let c=clients.find(x=>x.id===id); if(!c)return;
+  profileName.innerText=c.name;
+  profileInstagram.innerText=c.instagram?"📸 "+c.instagram:"";
+  profilePhone.innerText=c.phone?"📞 "+c.phone:"";
+  profileNotes.innerText=c.notes?"📝 "+c.notes:"";
+  renderClientProjects(id);
+  openPage("profile");
 }
-
-
-function getNextSession(clientIndex){
-
- return sessions
- .filter(s => Number(s.clientIndex) === Number(clientIndex))
- .filter(s => new Date(s.date+"T"+s.time) >= new Date())
- .sort((a,b) =>
- new Date(a.date+"T"+a.time) -
- new Date(b.date+"T"+b.time)
- )[0];
-
+function renderClientProjects(id){
+  let ps=projects.filter(p=>p.clientId===id),html="<h2>🎨 Проекты</h2>";
+  if(!ps.length)html+="<p>Проектов пока нет</p>";
+  ps.forEach(p=>{
+    let debt=Number(p.price||0)-Number(p.paid||0);
+    html+=`<div class="dayBox"><h2>${p.name||"Без названия"}</h2>
+    ${p.wishes?`<p>📝 ${p.wishes}</p>`:""}
+    <p>💰 Цена: $${p.price||0} | Получено: $${p.paid||0} | Остаток: $${debt}</p></div>`;
+  });
+  clientProjects.innerHTML=html;
 }
-
-    function openInstagram(){
-
- let c = clients[currentClient];
-
- if(!c.instagram){
-  alert("Instagram не указан");
-  return;
- }
-
- let nick =
- c.instagram
- .replace("@","")
- .trim();
-
- window.open(
- "https://instagram.com/" + nick,
- "_blank"
- );
-
-}
-
-
-function addPayment(){
-
- let amount =
- prompt("Сколько клиент доплатил?");
-
- if(!amount)
- return;
-
-
- clients[currentClient].paid =
- Number(clients[currentClient].paid) +
- Number(amount);
-
-
- saveData();
-
-
- renderAll();
-
-
- showClient(currentClient);
-
-}
-
-
 function editClient(){
-
- let c =
- clients[currentClient];
-
-
- editName.value = c.name;
- editInstagram.value = c.instagram;
- editPhone.value = c.phone;
- editStyle.value = c.style;
- editPrice.value = c.price;
- editPaid.value = c.paid;
- editNotes.value = c.notes;
-
-
- openPage("edit");
-
+  let c=clients.find(x=>x.id===currentClientId);
+  editName.value=c.name; editInstagram.value=c.instagram||""; editPhone.value=c.phone||""; editNotes.value=c.notes||"";
+  openPage("edit");
 }
-
-
 function saveEdit(){
-
- clients[currentClient] = {
-
- name:
- editName.value.trim(),
-
- instagram:
- editInstagram.value.trim(),
-
- phone:
- editPhone.value.trim(),
-
- style:
- editStyle.value.trim(),
-
- price:
- Number(editPrice.value || 0),
-
- paid:
- Number(editPaid.value || 0),
-
- notes:
- editNotes.value.trim()
-
- };
-
-
- saveData();
-
-
- renderAll();
-
-
- showClient(currentClient);
-
+  let c=clients.find(x=>x.id===currentClientId);
+  c.name=editName.value.trim(); c.instagram=editInstagram.value.trim(); c.phone=editPhone.value.trim(); c.notes=editNotes.value.trim();
+  saveData(); renderAll(); showClient(currentClientId);
 }
-
-    function deleteCurrentClient(){
-
- if(!confirm(
- "Удалить клиента?"
- ))
- return;
-
-
- let hasSessions =
- sessions.some(s =>
- Number(s.clientIndex) ===
- Number(currentClient)
- );
-
-
- if(hasSessions){
-
-  let answer = confirm(
-  "У этого клиента есть записи. Удалить клиента и все его записи?"
-  );
-
-  if(!answer)
-  return;
-
-
-  sessions =
-  sessions.filter(s =>
-  Number(s.clientIndex) !==
-  Number(currentClient)
-  );
-
- }
-
-
- clients.splice(
- currentClient,
- 1
- );
-
-
- // Обновляем индексы клиентов
- sessions.forEach(s => {
-
-  if(s.clientIndex >
-  currentClient){
-
-   s.clientIndex--;
-
-  }
-
- });
-
-
- saveData();
-
- renderAll();
-
- openPage("clients");
-
-}
-
-
+function archiveClient(){if(confirm("Архивировать клиента?")){clients.find(c=>c.id===currentClientId).status="archived";saveData();openPage("clients")}}
 
 function renderClientOptions(){
+  let html=`<option value="new">➕ Новый клиент</option>`+clients.filter(c=>c.status!=="archived").map(c=>`<option value="${c.id}">${c.name}</option>`).join("");
+  sessionClient.innerHTML=html; editSessionClient.innerHTML=html.replace(`<option value="new">➕ Новый клиент</option>`,"");
+  sessionClient.onchange=()=>newClientQuick.classList.toggle("hidden",sessionClient.value!=="new");
+}
+function setHours(h){sessionHours.value=h;document.querySelectorAll(".hourBtn").forEach(b=>b.classList.remove("active"));[...document.querySelectorAll(".hourBtn")].find(b=>b.innerText===h+"ч")?.classList.add("active")}
+function toggleSessionForm(){sessionForm.classList.toggle("hidden");sessionDate.value=selectedDate;newClientQuick.classList.toggle("hidden",sessionClient.value!=="new")}
 
- let selects = [
- sessionClient,
- editSessionClient
- ];
-
-
- selects.forEach(select => {
-
-  if(!select)
-  return;
-
-
-  let current =
-  select.value;
-
-
-  let html =
- `<option value="new">
- ➕ Новый клиент
- </option>`;
-
-
- clients.forEach((c,index)=>{
-
- html += `
- <option value="${index}">
- ${c.name}
- </option>
- `;
-
- });
-
-
- select.innerHTML =
- html;
-
-
- if(current &&
- current !== "new"){
-
- select.value =
- current;
-
- }
-
- });
-
-
- if(sessionClient){
-
- sessionClient.onchange =
- function(){
-
- toggleQuickClient();
-
- };
-
- }
-
+function findOrCreateProject(clientId){
+  let name=(projectName.value.trim()||"Без названия");
+  let p=projects.find(x=>x.clientId===clientId && x.name.toLowerCase()===name.toLowerCase());
+  if(!p){
+    p={id:makeId("pr"),clientId,name,wishes:projectWishes.value.trim(),price:Number(projectPrice.value||0),paid:Number(projectDeposit.value||0),status:"active"};
+    projects.push(p);
+  }else{
+    if(projectWishes.value.trim())p.wishes=projectWishes.value.trim();
+    if(projectPrice.value)p.price=Number(projectPrice.value);
+    if(projectDeposit.value)p.paid=Number(p.paid||0)+Number(projectDeposit.value);
+  }
+  return p.id;
+}
+function hasConflict(date,time,hours,ignoreId=null){
+  let start=new Date(date+"T"+time),end=new Date(start);end.setHours(end.getHours()+Number(hours||0));
+  return sessions.find(s=>{
+    if(s.id===ignoreId||s.date!==date)return false;
+    let a=new Date(s.date+"T"+s.time),b=new Date(a);b.setHours(b.getHours()+Number(s.hours||0));
+    return start<b && end>a;
+  });
+}
+function addSession(){
+  let clientId=sessionClient.value==="new"?createQuickClient():sessionClient.value; if(!clientId)return;
+  if(!sessionDate.value||!sessionTime.value){alert("Введите дату и время");return}
+  let projectId=findOrCreateProject(clientId);
+  let conflict=hasConflict(sessionDate.value,sessionTime.value,sessionHours.value);
+  if(conflict&&!confirm(`⚠️ Пересечение с записью:\n${conflict.clientName} ${conflict.time}\nСохранить всё равно?`))return;
+  let client=clients.find(c=>c.id===clientId);
+  sessions.push({id:makeId("ss"),clientId,projectId,clientName:client.name,date:sessionDate.value,time:sessionTime.value,hours:Number(sessionHours.value||0),idea:sessionIdea.value.trim()});
+  ["quickName","quickInstagram","quickPhone","projectName","projectWishes","projectPrice","projectDeposit","sessionTime","sessionHours","sessionIdea"].forEach(id=>document.getElementById(id).value="");
+  sessionForm.classList.add("hidden"); saveData(); renderAll(); alert("Запись добавлена ✅");
 }
 
-    function editSession(index){
-
- currentSession = index;
-
- let s = sessions[index];
-
-
- editSessionClient.value =
- s.clientIndex;
-
-
- editSessionDate.value =
- s.date;
-
-
- editSessionTime.value =
- s.time;
-
-
- editSessionHours.value =
- s.hours;
-
-
- editSessionIdea.value =
- s.idea;
-
-
- openPage("editSession");
-
-}
-
-
+function editSession(id){currentSessionId=id;let s=sessions.find(x=>x.id===id);editSessionClient.value=s.clientId;editSessionDate.value=s.date;editSessionTime.value=s.time;editSessionHours.value=s.hours;editSessionIdea.value=s.idea;openPage("editSession")}
 function saveSessionEdit(){
-
- let clientIndex =
- Number(editSessionClient.value);
-
-
- let client =
- clients[clientIndex];
-
-
- sessions[currentSession] = {
-
- clientIndex,
- clientName: client.name,
-
- date:
- editSessionDate.value,
-
- time:
- editSessionTime.value,
-
- hours:
- Number(
- editSessionHours.value || 0
- ),
-
- idea:
- editSessionIdea.value.trim()
-
- };
-
-
- saveData();
-
-
- renderAll();
-
-
- openPage("sessions");
-
+  let s=sessions.find(x=>x.id===currentSessionId),client=clients.find(c=>c.id===editSessionClient.value);
+  let conflict=hasConflict(editSessionDate.value,editSessionTime.value,editSessionHours.value,currentSessionId);
+  if(conflict&&!confirm("⚠️ Есть пересечение. Сохранить всё равно?"))return;
+  s.clientId=client.id;s.clientName=client.name;s.date=editSessionDate.value;s.time=editSessionTime.value;s.hours=Number(editSessionHours.value||0);s.idea=editSessionIdea.value.trim();
+  saveData();renderAll();openPage("sessions");
 }
+function deleteSession(id){if(confirm("Удалить запись?")){sessions=sessions.filter(s=>s.id!==id);saveData();renderAll();openPage("sessions")}}
 
-
-
-function deleteSession(index){
-
- if(!confirm(
- "Удалить эту запись?"
- ))
- return;
-
-
- sessions.splice(index,1);
-
-
- saveData();
-
-
- renderAll();
-
-
- openPage("sessions");
-
-}
-
-    function renderSessions(){
-
- let html = "";
-
- sessions
- .map((s,index)=>({...s,realIndex:index}))
- .sort((a,b)=>new Date(a.date+"T"+a.time)-new Date(b.date+"T"+b.time))
- .forEach(s=>{
-
-  let client = clients[s.clientIndex];
-  let debt = client ? Number(client.price||0) - Number(client.paid||0) : 0;
-
-  html += `
-   <div class="session clickable" onclick="showClient(${s.clientIndex})">
-    <div class="smallDate">${formatDate(s.date)} · ${s.time}</div>
-    <h2>${s.clientName}</h2>
-    ${s.idea ? `<p>🎨 ${s.idea}</p>` : ""}
-    ${s.hours ? `<p>⏱ ${s.hours} часов</p>` : ""}
-    <p>💰 Остаток клиента: $${debt}</p>
-    <button class="gray" onclick="event.stopPropagation(); editSession(${s.realIndex})">✏️ Редактировать</button>
-    <button class="red" onclick="event.stopPropagation(); deleteSession(${s.realIndex})">Удалить</button>
-   </div>
-  `;
- });
-
- sessionList.innerHTML = html || "<p>Записей пока нет</p>";
-}
-
-    function renderMoney(){
-
- let totalPrice =
- clients.reduce((sum,c)=>
- sum + Number(c.price || 0),0);
-
- let totalPaid =
- clients.reduce((sum,c)=>
- sum + Number(c.paid || 0),0);
-
- let totalDebt =
- totalPrice - totalPaid;
-
-
- moneyTotalPrice.innerText =
- "$" + totalPrice;
-
- moneyTotalPaid.innerText =
- "$" + totalPaid;
-
- moneyTotalDebt.innerText =
- "$" + totalDebt;
-
- moneyTotalClients.innerText =
- clients.length;
-
- moneyTotalSessions.innerText =
- sessions.length;
-
-}
-
-
-
-function openDebtList(){
-
- let debtors =
- clients
- .map((c,index)=>({
- ...c,
- index,
- debt:
- Number(c.price || 0) -
- Number(c.paid || 0)
- }))
- .filter(c=>c.debt > 0)
- .sort((a,b)=>b.debt-a.debt);
-
-
- let html = "";
-
-
- debtors.forEach(c=>{
-
- html += `
- <div class="client clickable"
- onclick="showClient(${c.index})">
-
- <h2>${c.name}</h2>
-
- ${c.style ?
- `<p>🎨 ${c.style}</p>` :
- ""}
-
- <p>
- 💰 Должен:
- $${c.debt}
- </p>
-
- </div>
- `;
-
- });
-
-
- debtListContent.innerHTML =
- html || "<p>🎉 Должников нет</p>";
-
-
- openPage("debtList");
-
-}
-
-    function changeMonth(step){
-
- calendarMonth += step;
-
- if(calendarMonth < 0){
-  calendarMonth = 11;
-  calendarYear--;
- }
-
- if(calendarMonth > 11){
-  calendarMonth = 0;
-  calendarYear++;
- }
-
- renderCalendar();
-
-}
-
-
-
-function goToday(){
-
- let d = new Date();
-
- calendarYear = d.getFullYear();
- calendarMonth = d.getMonth();
-
- selectedDate =
- d.toISOString().split("T")[0];
-
- renderAll();
-
-}
-
-
-
+function changeMonth(step){calendarMonth+=step;if(calendarMonth<0){calendarMonth=11;calendarYear--}if(calendarMonth>11){calendarMonth=0;calendarYear++}renderCalendar()}
+function goToday(){let d=new Date();calendarYear=d.getFullYear();calendarMonth=d.getMonth();selectedDate=localDate();renderAll()}
 function renderCalendar(){
-
- let monthDate =
- new Date(
- calendarYear,
- calendarMonth,
- 1
- );
-
-
- calendarTitle.innerText =
- monthDate.toLocaleDateString(
- "ru-RU",
- {
- month:"long",
- year:"numeric"
- });
-
-
- let firstDay =
- new Date(
- calendarYear,
- calendarMonth,
- 1
- ).getDay();
-
-
- let daysInMonth =
- new Date(
- calendarYear,
- calendarMonth+1,
- 0
- ).getDate();
-
-
- let html = "";
-
-
- let offset =
- firstDay === 0 ? 6 : firstDay-1;
-
-
- for(let i=0;i<offset;i++){
-
- html += "<div></div>";
-
- }
-
-
- for(let day=1; day<=daysInMonth; day++){
-
- let date =
- `${calendarYear}-${
- String(calendarMonth+1)
- .padStart(2,"0")
- }-${
- String(day)
- .padStart(2,"0")
- }`;
-
-
- let count =
- sessions.filter(
- s => s.date === date
- ).length;
-
-
- let cls = "day";
-
-
- if(date === selectedDate)
- cls += " selected";
-
-
- if(count === 1)
- cls += " busy";
-
-
- if(count > 1)
- cls += " more";
-
-
- html += `
- <div
- class="${cls}"
- onclick="selectDate('${date}')">
-
- ${day}
- <br>
-
- ${
- count
- ?
- "•".repeat(
- Math.min(count,3)
- )
- :
- ""
- }
-
- </div>
- `;
-
- }
-
-
- calendar.innerHTML = html;
-
+  let m=new Date(calendarYear,calendarMonth,1);calendarTitle.innerText=m.toLocaleDateString("ru-RU",{month:"long",year:"numeric"});
+  let first=new Date(calendarYear,calendarMonth,1).getDay(),days=new Date(calendarYear,calendarMonth+1,0).getDate(),offset=first===0?6:first-1,html="";
+  for(let i=0;i<offset;i++)html+="<div></div>";
+  for(let d=1;d<=days;d++){
+    let date=`${calendarYear}-${String(calendarMonth+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`,count=sessions.filter(s=>s.date===date).length,cls="day";
+    if(date===localDate())cls+=" today"; if(date===selectedDate)cls+=" selected"; if(count===1)cls+=" busy"; if(count>1)cls+=" more";
+    html+=`<div class="${cls}" onclick="selectDate('${date}')">${d}<br>${count?"•".repeat(Math.min(count,3)):""}</div>`;
+  }
+  calendar.innerHTML=html;
+}
+function selectDate(d){selectedDate=d;sessionDate.value=d;renderCalendar();renderSelectedDay()}
+function renderSelectedDay(){
+  selectedDayTitle.innerText="📌 "+formatDate(selectedDate);
+  let list=sessions.filter(s=>s.date===selectedDate).sort((a,b)=>a.time.localeCompare(b.time));
+  selectedDayList.innerHTML=list.map(s=>`<div class="dayBox clickable" onclick="showClient('${s.clientId}')"><div class="smallDate">${s.time}</div><h2>${s.clientName}</h2>${s.idea?`<p>🎨 ${s.idea}</p>`:""}${s.hours?`<p>⏱ ${s.hours} часов</p>`:""}<button class="gray" onclick="event.stopPropagation();editSession('${s.id}')">✏️ Редактировать</button></div>`).join("")||"<p>На этот день записей нет</p>";
+}
+function renderSessions(){
+  sessionList.innerHTML=sessions.sort((a,b)=>new Date(a.date+"T"+a.time)-new Date(b.date+"T"+b.time)).map(s=>`<div class="session clickable" onclick="showClient('${s.clientId}')"><div class="smallDate">${formatDate(s.date)} · ${s.time}</div><h2>${s.clientName}</h2>${s.idea?`<p>🎨 ${s.idea}</p>`:""}${s.hours?`<p>⏱ ${s.hours} часов</p>`:""}<button class="gray" onclick="event.stopPropagation();editSession('${s.id}')">✏️ Редактировать</button></div>`).join("")||"<p>Записей пока нет</p>";
 }
 
-
-
-function selectDate(date){
-
- selectedDate = date;
-
-
- sessionDate.value =
- date;
-
-
- renderCalendar();
-
-
- renderSelectedDay();
-
+function projectDebt(p){return Number(p.price||0)-Number(p.paid||0)}
+function clientDebt(id){return projects.filter(p=>p.clientId===id).reduce((s,p)=>s+projectDebt(p),0)}
+function renderMoney(){
+  let price=projects.reduce((s,p)=>s+Number(p.price||0),0),paid=projects.reduce((s,p)=>s+Number(p.paid||0),0);
+  moneyTotalPrice.innerText="$"+price;moneyTotalPaid.innerText="$"+paid;moneyTotalDebt.innerText="$"+(price-paid);
+  moneyTotalClients.innerText=clients.filter(c=>c.status!=="archived").length;moneyTotalSessions.innerText=sessions.length;
 }
-
-    function renderSelectedDay(){
-
- selectedDayTitle.innerText =
- "📌 " + formatDate(selectedDate);
-
-
- let list =
- sessions
- .map((s,index)=>({
-  ...s,
-  realIndex:index
- }))
- .filter(s =>
- s.date === selectedDate)
- .sort((a,b)=>
- a.time.localeCompare(b.time));
-
-
- selectedDayList.innerHTML =
- list.map(s=>`
-
- <div class="dayBox clickable"
- onclick="showClient(${s.clientIndex})">
-
- <div class="smallDate">
- ${s.time}
- </div>
-
- <h2>
- ${s.clientName}
- </h2>
-
- ${s.idea ?
- `<p>🎨 ${s.idea}</p>` :
- ""}
-
-
- ${s.hours ?
- `<p>⏱ ${s.hours} часов</p>` :
- ""}
-
-
- <button class="gray"
- onclick="event.stopPropagation();
- editSession(${s.realIndex})">
-
- ✏️ Редактировать
-
- </button>
-
- </div>
-
- `).join("")
-
- || "<p>На этот день записей нет</p>";
-
+function openDebtList(){
+  let rows=projects.map(p=>({...p,debt:projectDebt(p),client:clients.find(c=>c.id===p.clientId)})).filter(p=>p.debt>0).sort((a,b)=>b.debt-a.debt);
+  debtListContent.innerHTML=rows.map(p=>`<div class="client clickable" onclick="showClient('${p.clientId}')"><h2>${p.client?.name||"Клиент"}</h2><p>🎨 ${p.name}</p><p>💰 Должен: $${p.debt}</p></div>`).join("")||"<p>🎉 Должников нет</p>";
+  openPage("debtList");
 }
-
-
-
-function quickAddSession(date){
-
- selectedDate = date;
-
-
- openPage("sessions");
-
-
- sessionForm.classList.remove(
- "hidden");
-
-
- sessionDate.value = date;
-
-
- renderCalendar();
-
-
- renderSelectedDay();
-
-}
-
-
+function quickAddSession(d){selectedDate=d;openPage("sessions");sessionForm.classList.remove("hidden");sessionDate.value=d}
 
 function renderHome(){
-
- if(homeMode==="today")
- renderHomeToday();
-
-
- if(homeMode==="week")
- renderHomeWeek();
-
-
- if(homeMode==="month")
- renderHomeMonth();
-
-
- renderAttention();
-
+  if(homeMode==="today")renderHomeToday();
+  if(homeMode==="week")renderHomeWeek();
+  if(homeMode==="month")renderHomeMonth();
+  renderAttention();
 }
-
-    function renderHomeToday(){
-
- homeTitle.innerText =
- "☀️ Сегодня";
-
-
- let today =
- new Date()
- .toISOString()
- .split("T")[0];
-
-
- let list =
- sessions
- .filter(s => s.date === today)
- .sort((a,b)=>
- a.time.localeCompare(b.time)
- );
-
-
- homeContent.innerHTML =
- list.map(s=>`
-
- <div class="dayBox clickable"
- onclick="showClient(${s.clientIndex})">
-
- <div class="smallDate">
- ${s.time}
- </div>
-
- <h2>
- ${s.clientName}
- </h2>
-
- ${s.idea ?
- `<p>🎨 ${s.idea}</p>` :
- ""}
-
- ${s.hours ?
- `<p>⏱ ${s.hours} часов</p>` :
- ""}
-
- </div>
-
- `).join("")
- ||
- "<p>Сегодня записей нет</p>";
-
+function renderHomeToday(){
+  homeTitle.innerText="☀️ Сегодня";
+  let list=sessions.filter(s=>s.date===localDate()).sort((a,b)=>a.time.localeCompare(b.time));
+  homeContent.innerHTML=list.map(s=>`<div class="dayBox clickable" onclick="showClient('${s.clientId}')"><div class="smallDate">${s.time}</div><h2>${s.clientName}</h2>${s.idea?`<p>🎨 ${s.idea}</p>`:""}</div>`).join("")||"<p>Сегодня записей нет</p>";
 }
-
-
-
 function renderHomeWeek(){
-
- homeTitle.innerText =
- "📅 Ближайшие 7 дней";
-
-
- let html = "";
- let start = new Date();
-
-
- for(let i=0;i<7;i++){
-
-  let d = new Date(start);
-  d.setDate(start.getDate()+i);
-
-  let date =
-  d.toISOString().split("T")[0];
-
-
-  let list =
-  sessions
-  .filter(s => s.date === date)
-  .sort((a,b)=>
-  a.time.localeCompare(b.time)
-  );
-
-
-  html += `
-
-  <div class="dayBox clickable"
-  onclick="quickAddSession('${date}')">
-
-  <div class="smallDate">
-  ${formatDate(date)}
-  </div>
-
-  `;
-
-
-  if(list.length === 0){
-
-   html += `
-   <p class="success">
-   🟢 Свободно
-   </p>
-
-   <span class="badge">
-   ➕ Записать клиента
-   </span>
-   `;
-
-  } else {
-
-   list.forEach(s=>{
-
-    html += `
-    <p>
-    ${s.time} — ${s.clientName}
-    ${s.idea ? " · " + s.idea : ""}
-    </p>
-    `;
-
-   });
-
-
-   html += `
-   <span class="badge">
-   ➕ Добавить ещё запись
-   </span>
-   `;
-
+  homeTitle.innerText="📅 Ближайшие 7 дней";let html="";
+  for(let i=0;i<7;i++){let d=new Date();d.setDate(d.getDate()+i);let date=localDate(d),list=sessions.filter(s=>s.date===date).sort((a,b)=>a.time.localeCompare(b.time));
+    html+=`<div class="dayBox clickable" onclick="quickAddSession('${date}')"><div class="smallDate">${formatDate(date)}</div>`;
+    html+=list.length?list.map(s=>`<p>${s.time} — ${s.clientName}${s.idea?" · "+s.idea:""}</p>`).join("")+`<span class="badge">➕ Добавить ещё запись</span>`:`<p class="success">🟢 Свободно</p><span class="badge">➕ Записать клиента</span>`;
+    html+="</div>";
   }
-
-
-  html += `
-  </div>
-  `;
-
- }
-
-
- homeContent.innerHTML = html;
-
+  homeContent.innerHTML=html;
 }
-
-    function renderHomeMonth(){
-
- homeTitle.innerText =
- "📊 Этот месяц";
-
-
- let now = new Date();
-
-
- let monthSessions =
- sessions.filter(s=>{
-
- let d =
- new Date(s.date+"T"+s.time);
-
- return d.getMonth() === now.getMonth()
- &&
- d.getFullYear() === now.getFullYear();
-
- });
-
-
- let hours =
- monthSessions.reduce(
- (sum,s)=>
- sum + Number(s.hours || 0),
- 0
- );
-
-
- homeContent.innerHTML = `
-
- <div class="grid2">
-
- <div class="moneyBox">
- <h2>${monthSessions.length}</h2>
- <p>Сеансов</p>
- </div>
-
- <div class="moneyBox">
- <h2>${hours}</h2>
- <p>Часов</p>
- </div>
-
- <div class="moneyBox">
- <h2>${clients.length}</h2>
- <p>Клиентов</p>
- </div>
-
- <div class="moneyBox">
- <h2>${
- clients.reduce((sum,c)=>
- sum +
- Number(c.price || 0) -
- Number(c.paid || 0),
- 0)
- }</h2>
-
- <p>Осталось получить</p>
- </div>
-
- </div>
-
- `;
-
+function renderHomeMonth(){
+  homeTitle.innerText="📊 Этот месяц";
+  let d=new Date(),ms=sessions.filter(s=>{let x=new Date(s.date+"T"+s.time);return x.getMonth()===d.getMonth()&&x.getFullYear()===d.getFullYear()}),h=ms.reduce((s,x)=>s+Number(x.hours||0),0);
+  homeContent.innerHTML=`<div class="grid2"><div class="moneyBox"><h2>${ms.length}</h2><p>Сеансов</p></div><div class="moneyBox"><h2>${h}</h2><p>Часов</p></div><div class="moneyBox"><h2>${clients.length}</h2><p>Клиентов</p></div><div class="moneyBox"><h2>$${projects.reduce((s,p)=>s+projectDebt(p),0)}</h2><p>Осталось</p></div></div>`;
 }
-
-
-
 function renderAttention(){
-
- let withoutSession =
- clients.filter((c,index)=>
-
- !sessions.some(s=>
- Number(s.clientIndex)
- === index)
-
- ).length;
-
-
- let next =
- sessions
-
- .filter(s=>
- new Date(
- s.date+"T"+s.time
- ) >= new Date())
-
- .sort((a,b)=>
-
- new Date(a.date+"T"+a.time)
- -
- new Date(b.date+"T"+b.time)
-
- )[0];
-
-
- attentionList.innerHTML = `
-
- <div class="infoLine clickable"
- onclick="openPage('clients')">
-
- <span>
- ⚠️ Без записи
- </span>
-
- <strong>
- ${withoutSession}
- </strong>
-
- </div>
-
-
- <div class="infoLine clickable"
- onclick="openDebtList()">
-
- <span>
- 💰 Нужно получить
- </span>
-
- <strong>
- $${clients.reduce(
- (sum,c)=>
- sum + Number(c.price || 0)
- - Number(c.paid || 0),
- 0)}
- </strong>
-
- </div>
-
-
- <div class="infoLine">
-
- <span>
- 📅 Следующий сеанс
- </span>
-
- <strong>
-
- ${
- next
- ?
- formatDate(next.date)
- + " " +
- next.time
- :
- "Нет"
- }
-
- </strong>
-
- </div>
-
- `;
-
+  let without=clients.filter(c=>c.status!=="archived"&&!sessions.some(s=>s.clientId===c.id)).length,next=sessions.filter(s=>new Date(s.date+"T"+s.time)>=new Date()).sort((a,b)=>new Date(a.date+"T"+a.time)-new Date(b.date+"T"+b.time))[0];
+  attentionList.innerHTML=`<div class="infoLine clickable" onclick="openPage('clients')"><span>⚠️ Без записи</span><strong>${without}</strong></div><div class="infoLine clickable" onclick="openDebtList()"><span>💰 Нужно получить</span><strong>$${projects.reduce((s,p)=>s+projectDebt(p),0)}</strong></div><div class="infoLine"><span>📅 Следующий сеанс</span><strong>${next?formatDate(next.date)+" "+next.time:"Нет"}</strong></div>`;
 }
-
-
 
 renderAll();
-
 </script>
-
 </body>
-
 </html>
