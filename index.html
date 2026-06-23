@@ -30,6 +30,9 @@ textarea{min-height:90px;resize:none}
 .fullImg{width:100%;border-radius:18px;margin-top:10px}
 .recordTop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
 .recordArrow{font-size:18px;color:#888}
+.actions{margin-top:12px}
+.actions button{margin-top:0;min-height:58px;font-size:15px}
+.smallBtn{font-size:15px;padding:13px}
 </style>
 </head>
 <body>
@@ -88,13 +91,16 @@ textarea{min-height:90px;resize:none}
 <h2>📝 Заметка</h2>
 <p id="clientNote" class="small">Пока нет</p>
 
-<button onclick="addPayment()">💵 Добавить оплату</button>
-<button onclick="openSketchPage()">🎨 Эскиз</button>
-<button onclick="openEditClient()">✏️ Редактировать клиента</button>
-<button onclick="addNote()">📝 Добавить заметку</button>
-<button onclick="openRecordForClient()">📅 Записать дату</button>
-<button class="red" onclick="deleteClient()">🗑 Удалить клиента</button>
-<button class="gray" onclick="openPage('clients')">← Назад</button>
+<div class="grid2 actions">
+<button onclick="addPayment()">💵<br>Оплата</button>
+<button onclick="openRecordForClient()">📅<br>Запись</button>
+<button onclick="openSketchPage()">🎨<br>Эскиз</button>
+<button onclick="openEditClient()">✏️<br>Изменить</button>
+</div>
+
+<button class="gray smallBtn" onclick="addNote()">📝 Заметка</button>
+<button class="red smallBtn" onclick="deleteClient()">🗑 Удалить клиента</button>
+<button class="gray smallBtn" onclick="openPage('clients')">← Назад</button>
 </div>
 </div>
 
