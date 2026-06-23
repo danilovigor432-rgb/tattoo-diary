@@ -56,7 +56,7 @@ textarea{min-height:90px;resize:none}
 
 <div id="today" class="page show">
 <h1>☀️ Сегодня</h1>
-<div class="card">
+<div class="card click" onclick="openTodayAction()">
 <h2>📅 Записи на сегодня</h2>
 <div id="todayList"><p class="small">Сегодня свободно</p></div>
 </div>
@@ -271,6 +271,17 @@ function openPage(id){
  renderAll();
 }
 
+function openTodayAction(){
+ let todayRecords=records.filter(r=>r.date===localDate());
+ selectedDate=localDate();
+
+ if(todayRecords.length===0){
+  openRecord();
+ }else{
+  openPage("calendar");
+ }
+}
+
 function renderAll(){
  renderToday();
  renderCalendar();
@@ -283,7 +294,7 @@ function renderToday(){
  todayList.innerHTML=list.map(r=>{
   let c=clientById(r.clientId);
   if(!c)return "";
-  return `<div class="item click" onclick="openClient('${c.id}')">
+  return `<div class="item click" onclick="event.stopPropagation();openClient('${c.id}')">
    <h2>${r.time} — ${c.name}</h2>
    <p>${r.plan||c.idea}</p>
    <p class="moneyLine">💰 Осталось $${left(c)}</p>
