@@ -13,7 +13,7 @@ p{line-height:1.35}.small{color:#888;font-size:14px}
 .card{background:#111;border-radius:22px;padding:18px;margin-top:14px}
 .item{background:#181818;border-radius:16px;padding:15px;margin-top:10px}
 .item p{color:#bbb;margin-top:5px}
-button{width:100%;border:none;border-radius:16px;padding:15px;margin-top:12px;font-size:17px;color:white;background:#2563eb}
+button{width:100%;border:none;border-radius:16px;padding:13px;margin-top:10px;font-size:15px;color:white;background:#2563eb}
 button.gray{background:#2a2a2a}button.green{background:#15803d}button.red{background:#991b1b}
 input,textarea,select{width:100%;max-width:100%;min-width:0;background:#1d1d1d;color:white;border:none;border-radius:14px;padding:14px;margin-top:10px;font-size:16px}
 input[type="date"]{width:100%;max-width:100%;-webkit-appearance:none;appearance:none}
@@ -31,8 +31,17 @@ textarea{min-height:90px;resize:none}
 .recordTop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
 .recordArrow{font-size:18px;color:#888}
 .actions{margin-top:12px}
-.actions button{margin-top:0;min-height:58px;font-size:15px}
-.smallBtn{font-size:15px;padding:13px}
+.actions button{margin-top:0;min-height:46px;font-size:15px}
+.smallBtn{font-size:15px;padding:12px}
+.clientTitle{font-size:36px;font-weight:800;letter-spacing:-1px;margin-bottom:4px}
+.sectionLabel{font-size:13px;color:#888;text-transform:uppercase;letter-spacing:.7px;margin-top:18px;margin-bottom:7px}
+.debtBox{background:#181818;border-radius:20px;padding:18px;margin-top:14px}
+.debtLabel{color:#888;font-size:13px;text-transform:uppercase;letter-spacing:.7px}
+.debtAmount{font-size:38px;font-weight:800;margin-top:4px}
+.moneyDetails{color:#aaa;font-size:14px;margin-top:6px}
+.noteBox{background:#181818;border-radius:16px;padding:14px;margin-top:8px;color:#bbb}
+.sketchCount{color:#bbb;margin-top:6px}
+.moneyLine{color:#4ade80!important;font-weight:600}
 </style>
 </head>
 <body>
@@ -75,30 +84,35 @@ textarea{min-height:90px;resize:none}
 </div>
 
 <div id="clientPage" class="page">
-<h1 id="clientNameView">Клиент</h1>
+<h1 id="clientNameView" class="clientTitle">Клиент</h1>
 <div class="card">
 <p id="clientContact" class="small"></p>
 
-<h2>🎨 Что хочет</h2>
-<p id="clientIdea"></p>
-
-<h2>💰 Деньги</h2>
-<p id="clientMoney"></p>
-
-<h2>📅 Следующая запись</h2>
-<p id="clientNext"></p>
-
-<h2>📝 Заметка</h2>
-<p id="clientNote" class="small">Пока нет</p>
-
-<div class="grid2 actions">
-<button onclick="addPayment()">💵<br>Оплата</button>
-<button onclick="openRecordForClient()">📅<br>Запись</button>
-<button onclick="openSketchPage()">🎨<br>Эскиз</button>
-<button onclick="openEditClient()">✏️<br>Изменить</button>
+<div class="debtBox">
+<div class="debtLabel">Осталось</div>
+<div id="clientLeftBig" class="debtAmount">$0</div>
+<div id="clientMoneyDetails" class="moneyDetails"></div>
 </div>
 
-<button class="gray smallBtn" onclick="addNote()">📝 Заметка</button>
+<div class="sectionLabel">Что хочет</div>
+<p id="clientIdea"></p>
+
+<div class="sectionLabel">Эскизы</div>
+<p id="clientSketchCount" class="sketchCount">🎨 Эскизов: 0</p>
+
+<div class="sectionLabel">Следующая запись</div>
+<p id="clientNext"></p>
+
+<div class="sectionLabel">Заметка</div>
+<div id="clientNoteBox" class="noteBox click" onclick="addNote()">Пока нет</div>
+
+<div class="grid2 actions">
+<button onclick="addPayment()">💵 Оплата</button>
+<button onclick="openRecordForClient()">📅 Запись</button>
+<button onclick="openSketchPage()">🎨 Эскиз</button>
+<button onclick="openEditClient()">✏️ Изменить</button>
+</div>
+
 <button class="red smallBtn" onclick="deleteClient()">🗑 Удалить клиента</button>
 <button class="gray smallBtn" onclick="openPage('clients')">← Назад</button>
 </div>
@@ -218,6 +232,7 @@ function saveData(){
 function clientById(id){return clients.find(c=>c.id===id)}
 function paid(id){return payments.filter(p=>p.clientId===id).reduce((s,p)=>s+Number(p.amount||0),0)}
 function left(c){return Number(c.price||0)-paid(c.id)}
+function sketchCount(id){return sketches.filter(s=>s.clientId===id).length}
 
 function setupTime(){
  recordHour.innerHTML="";
@@ -251,7 +266,7 @@ function renderToday(){
   return `<div class="item click" onclick="openClient('${c.id}')">
    <h2>${r.time} — ${c.name}</h2>
    <p>${r.plan||c.idea}</p>
-   <p>💰 Осталось $${left(c)}</p>
+   <p class="moneyLine">💰 Осталось $${left(c)}</p>
   </div>`;
  }).join("")||`<p class="small">Сегодня свободно</p>`;
 }
@@ -286,6 +301,7 @@ function renderCalendar(){
      <div>
       <h2>${r.time} — ${c.name}</h2>
       <p>${r.plan||c.idea}</p>
+      <p class="moneyLine">💰 Осталось $${left(c)}</p>
      </div>
      <div class="recordArrow">${isOpen?"▲":"▼"}</div>
     </div>
@@ -406,7 +422,7 @@ function renderClients(){
  let q=(clientSearch.value||"").toLowerCase();
  clientList.innerHTML=clients.filter(c=>(c.name+" "+c.phone+" "+c.instagram+" "+c.idea).toLowerCase().includes(q)).map(c=>
  `<div class="item click" onclick="openClient('${c.id}')">
-  <h2>${c.name}</h2><p>${c.idea}</p><p>💰 Осталось $${left(c)}</p>
+  <h2>${c.name}</h2><p>${c.idea}</p><p class="moneyLine">💰 Осталось $${left(c)}</p>
  </div>`).join("")||`<p class="small">Клиентов пока нет</p>`;
 }
 function openClient(id){
@@ -415,10 +431,12 @@ function openClient(id){
  clientNameView.innerText=c.name;
  clientContact.innerText=[c.phone,c.instagram].filter(Boolean).join(" • ");
  clientIdea.innerText=c.idea;
- clientMoney.innerText=`Цена $${c.price} / Заплатил $${paid(c.id)} / Осталось $${left(c)}`;
+ clientMoneyDetails.innerText=`Цена $${c.price} • Заплатил $${paid(c.id)}`;
+ clientLeftBig.innerText="$"+left(c);
+ clientSketchCount.innerText="🎨 Эскизов: "+sketchCount(c.id);
  let next=records.filter(r=>r.clientId===id && r.date>=localDate()).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time))[0];
  clientNext.innerText=next?`${next.date} ${next.time} — ${next.plan||c.idea}`:"Не назначена";
- clientNote.innerText=c.note||"Пока нет";
+ clientNoteBox.innerText=c.note||"Пока нет";
  openPage("clientPage");
 }
 
