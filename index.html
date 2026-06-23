@@ -31,7 +31,7 @@ textarea{min-height:90px;resize:none}
 .recordTop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
 .recordArrow{font-size:18px;color:#888}
 .actions{margin-top:12px}
-.actions button{margin-top:0;min-height:46px;font-size:15px}
+.actions button{margin-top:0;min-height:44px;font-size:15px}
 .smallBtn{font-size:15px;padding:12px}
 .clientTitle{font-size:36px;font-weight:800;letter-spacing:-1px;margin-bottom:4px}
 .sectionLabel{font-size:13px;color:#888;text-transform:uppercase;letter-spacing:.7px;margin-top:18px;margin-bottom:7px}
@@ -42,6 +42,14 @@ textarea{min-height:90px;resize:none}
 .noteBox{background:#181818;border-radius:16px;padding:14px;margin-top:8px;color:#bbb}
 .sketchCount{color:#bbb;margin-top:6px}
 .moneyLine{color:#4ade80!important;font-weight:600}
+.topBack{display:inline-block;color:#888;font-size:15px;margin-bottom:10px}
+.clientRow{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.clientInfo{min-width:0}
+.clientInfo h2{margin-bottom:4px}
+.clientIdeaSmall{color:#bbb;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:210px}
+.clientDebt{text-align:right;font-weight:700;white-space:nowrap;color:#4ade80}
+.clientDebt.owe{color:#facc15}
+.clientDebt.bigOwe{color:#f87171}
 </style>
 </head>
 <body>
@@ -84,6 +92,7 @@ textarea{min-height:90px;resize:none}
 </div>
 
 <div id="clientPage" class="page">
+<div class="topBack click" onclick="openPage('clients')">← Клиенты</div>
 <h1 id="clientNameView" class="clientTitle">Клиент</h1>
 <div class="card">
 <p id="clientContact" class="small"></p>
@@ -114,11 +123,11 @@ textarea{min-height:90px;resize:none}
 </div>
 
 <button class="red smallBtn" onclick="deleteClient()">🗑 Удалить клиента</button>
-<button class="gray smallBtn" onclick="openPage('clients')">← Назад</button>
 </div>
 </div>
 
 <div id="editClientPage" class="page">
+<div class="topBack click" onclick="openClient(currentClientId)">← Клиент</div>
 <h1>✏️ Клиент</h1>
 <div class="card">
 <input id="editName" placeholder="Имя клиента">
@@ -233,6 +242,17 @@ function clientById(id){return clients.find(c=>c.id===id)}
 function paid(id){return payments.filter(p=>p.clientId===id).reduce((s,p)=>s+Number(p.amount||0),0)}
 function left(c){return Number(c.price||0)-paid(c.id)}
 function sketchCount(id){return sketches.filter(s=>s.clientId===id).length}
+
+function debtText(c){
+ let l=left(c);
+ return l<=0?"PAID":"$"+l;
+}
+function debtClass(c){
+ let l=left(c);
+ if(l<=0)return "clientDebt";
+ if(l>=1000)return "clientDebt bigOwe";
+ return "clientDebt owe";
+}
 
 function setupTime(){
  recordHour.innerHTML="";
@@ -422,7 +442,13 @@ function renderClients(){
  let q=(clientSearch.value||"").toLowerCase();
  clientList.innerHTML=clients.filter(c=>(c.name+" "+c.phone+" "+c.instagram+" "+c.idea).toLowerCase().includes(q)).map(c=>
  `<div class="item click" onclick="openClient('${c.id}')">
-  <h2>${c.name}</h2><p>${c.idea}</p><p class="moneyLine">💰 Осталось $${left(c)}</p>
+  <div class="clientRow">
+   <div class="clientInfo">
+    <h2>${c.name}</h2>
+    <div class="clientIdeaSmall">${c.idea||"Без описания"}</div>
+   </div>
+   <div class="${debtClass(c)}">${debtText(c)}</div>
+  </div>
  </div>`).join("")||`<p class="small">Клиентов пока нет</p>`;
 }
 function openClient(id){
